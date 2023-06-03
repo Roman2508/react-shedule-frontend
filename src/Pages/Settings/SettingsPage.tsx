@@ -10,20 +10,20 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 
 import './SettingsPage.scss'
 import { useAppDispatch } from '../../redux/store'
-import collagePhoto from '../../assets/collage_photo.jpg'
+import AlertMessage from '../../component/AlertMessage'
+import { selectAlerts } from '../../redux/appSelectors'
+import logo from '../../assets/blue-logo.png'
+import { setShowError } from '../../redux/alerts/alertsSlise'
+import createAlertMessage from '../../utils/createAlertMessage'
 import { logout } from '../../redux/accountInfo/accountInfoSlice'
 import CircularPreloader from '../../component/CircularPreloader'
-import { MaterialUISwitch, StyledClosedButton, StyledDatePicker } from '../../theme'
 import ColorPicker from '../../component/SettingPickers/ColorPicker'
 import { selectAuthData } from '../../redux/accountInfo/accountInfoSelector'
 import TimePickerViews from '../../component/SettingPickers/TimePickerViews'
-import { updateCurrentShowedYear, updateTermsOfStudy } from '../../redux/accountInfo/accountInfoAsyncActions'
+import { MaterialUISwitch, StyledClosedButton, StyledDatePicker } from '../../theme'
 import CurrentEducationTime from '../../component/SettingPickers/CurrentEducationTime'
 import { CallScheduleAndTermsOfStudyType, TermsOfStudyType } from '../../redux/accountInfo/accountInfoTypes'
-import AlertMessage from '../../component/AlertMessage'
-import { setShowError } from '../../redux/alerts/alertsSlise'
-import { selectAlerts } from '../../redux/appSelectors'
-import createAlertMessage from '../../utils/createAlertMessage'
+import { updateCurrentShowedYear, updateTermsOfStudy } from '../../redux/accountInfo/accountInfoAsyncActions'
 
 moment.updateLocale('en', {
   months: [
@@ -187,7 +187,7 @@ const SettingsPage: React.FC<SettingsPagePropsType> = ({ colorMode }) => {
           <Paper className="settings-page__account-wrapper">
             <div className="settings-page__account-row">
               <div className="settings-page__account-info">
-                <img src={collagePhoto} />
+                <img src={logo} />
                 <Typography variant="h5">{institution.name}</Typography>
               </div>
               <div className="settings-page__logout-btn">

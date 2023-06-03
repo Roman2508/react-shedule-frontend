@@ -135,3 +135,57 @@ backend
 3. Замість костилів зробити { new: true }, Щоб повертався оновлений об'єкт
 4. При видаленні групи - потрібно видаляти її ід в спеціальності specialties
 */
+
+/* 
+//  distributedloadsubjects  //
+_id
+groupId
+institutionId
+currentShowedYear
+name
+semester
+specialization
+lectures
+laboratory_1
+laboratory_2
+
+//  subjectslists  //
+_id
+planId
+name
+totalHour
+institutionId
+semester_1
+semester_2
+semester_3
+semester_4
+semester_5
+semester_6
+semester_7
+semester_8
+semester_9
+semester_10
+semester_11
+semester_12
+createdAt
+updatedAt
+
+
+//  lessons  //
+_id
+groupId
+name
+groupName
+hours
+students
+subjectType
+teacher
+auditory
+remark
+stream
+semester
+date
+subjectNumber
+institutionId
+userId
+*/

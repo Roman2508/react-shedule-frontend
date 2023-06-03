@@ -21,6 +21,12 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import FilterListIcon from '@mui/icons-material/FilterList'
 import { visuallyHidden } from '@mui/utils'
 import { StyledTableCellBorder } from '../../theme'
+import { selectLessons } from '../../redux/lessons/lessonsSelector'
+import { useSelector } from 'react-redux'
+import { useAppDispatch } from '../../redux/store'
+import { selectAuthData } from '../../redux/accountInfo/accountInfoSelector'
+import { getLessonsById } from '../../redux/lessons/lessonsAsyncActions'
+import { getDistributedTeacherLoad } from '../../redux/distributedLoad/distributedLoadAsyncAction'
 
 interface Data {
   name: string
@@ -253,7 +259,7 @@ interface EnhancedTableProps {
 }
 
 function EnhancedTableHead(props: EnhancedTableProps) {
-  const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props
+  const { order, orderBy, onRequestSort } = props
   const createSortHandler = (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
     onRequestSort(event, property)
   }
@@ -261,17 +267,6 @@ function EnhancedTableHead(props: EnhancedTableProps) {
   return (
     <TableHead>
       <TableRow>
-        {/* <TableCell padding="checkbox" rowSpan={2}>
-          <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{
-              'aria-label': 'select all desserts',
-            }}
-          />
-        </TableCell> */}
         {headCells.map((headCell) => (
           <>
             <StyledTableCellBorder
@@ -327,12 +322,24 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 }
 
 const LoadDistributionControlGroup = () => {
+  const dispatch = useAppDispatch()
+
   const [order, setOrder] = React.useState<Order>('asc')
   const [orderBy, setOrderBy] = React.useState<keyof Data>('semester')
   const [selected, setSelected] = React.useState<readonly string[]>([])
   const [page, setPage] = React.useState(0)
-  const [dense, setDense] = React.useState(true)
   const [rowsPerPage, setRowsPerPage] = React.useState(5)
+
+  const { lessons } = useSelector(selectLessons)
+  const { institution } = useSelector(selectAuthData)
+
+  React.useEffect(() => {
+    if (institution) {
+      const teacherId = '6434461d5868e4755f398741'
+
+      dispatch(getDistributedTeacherLoad({ currentShowedYear: '2023', teacher: teacherId }))
+    }
+  }, [institution])
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof Data) => {
     const isAsc = orderBy === property && order === 'asc'
@@ -375,10 +382,6 @@ const LoadDistributionControlGroup = () => {
     setPage(0)
   }
 
-  const handleChangeDense = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDense(event.target.checked)
-  }
-
   const isSelected = (name: string) => selected.indexOf(name) !== -1
 
   // Avoid a layout jump when reaching the last page with empty rows.
@@ -388,7 +391,7 @@ const LoadDistributionControlGroup = () => {
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
         <TableContainer>
-          <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size={dense ? 'small' : 'medium'}>
+          <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size={'small'}>
             {/* table head */}
 
             <EnhancedTableHead
@@ -418,7 +421,7 @@ const LoadDistributionControlGroup = () => {
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
-                    key={row.name}
+                    key={index}
                     selected={isItemSelected}>
                     <StyledTableCellBorder component="th" id={labelId} scope="row" /* padding="none" */>
                       {row.name}
@@ -436,10 +439,7 @@ const LoadDistributionControlGroup = () => {
                 )
               })}
               {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}>
+                <TableRow style={{ height: 33 * emptyRows }}>
                   <TableCell colSpan={6} />
                 </TableRow>
               )}

@@ -6,50 +6,73 @@ import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
+import LoadDistributionFilter from './LoadDistributionFilter'
+import { IDistributedLoadSortParams, IDistributedLoadSortType } from './load-distribution.interface'
+import { useSelector } from 'react-redux'
+import { selectFaculties } from '../../redux/faculties/facultiesSelectors'
+import { selectGroups } from '../../redux/group/groupSelector'
+import { selectTeachersAndDepartments } from '../../redux/teachersAndDepartment/teachersAndDepartmentSelector'
+import { selectAuthData } from '../../redux/accountInfo/accountInfoSelector'
+import { useAppDispatch } from '../../redux/store'
+import { getAllDepartments } from '../../redux/teachersAndDepartment/teachersAndDepartmentAsyncAction'
+import { getAllFaculties } from '../../redux/faculties/facultiesAsyncAction'
+import { getAllFacultyGroups } from '../../redux/group/groupAsyncAction'
+
+const sortParamsInitialData = {
+  mainItemName: '',
+  mainItemId: '',
+  secondaryItemName: '',
+  secondaryItemId: '',
+  currentSemester: '1',
+}
 
 const LoadDistributionControl = () => {
-  const [expanded, setExpanded] = React.useState<string | false>(false)
-  const [currentFaculty, setCurrentFaculty] = React.useState('10')
-  const [currentGroup, setCurrentGroup] = React.useState('')
-  const [groupList, setGroupList] = React.useState<String[]>([])
+  const dispatch = useAppDispatch()
 
-  const handleChange = (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
-    setExpanded(isExpanded ? panel : false)
-  }
+  const { faculties } = useSelector(selectFaculties)
+  const { institution } = useSelector(selectAuthData)
+  const { fullTimeGroups, partTimeGroups } = useSelector(selectGroups)
+  const { departments } = useSelector(selectTeachersAndDepartments)
 
-  const handleChangeFaculty = (event: SelectChangeEvent) => {
-    setCurrentFaculty(event.target.value as string)
-  }
+  const [sortType, setSortType] = React.useState<IDistributedLoadSortType>({ value: 'Група', type: 'group' })
+  const [sortParams, setSortParams] = React.useState<IDistributedLoadSortParams>(sortParamsInitialData)
 
-  const handleChangeGroup = (event: SelectChangeEvent) => {
-    setCurrentGroup(event.target.value as string)
-  }
+  React.useEffect(() => {
+    const fetchData = async () => {
+      if (institution) {
+        dispatch(getAllDepartments(institution._id))
+        const faculties = await dispatch(getAllFaculties(institution._id))
+        const groups = await dispatch(getAllFacultyGroups(faculties.payload[0]._id))
+
+        setSortParams((prev) => {
+          return {
+            ...prev,
+            mainItemName: faculties.payload[0].name,
+            mainItemId: faculties.payload[0]._id,
+            secondaryItemName: groups.payload[0].name,
+            secondaryItemId: groups.payload[0]._id,
+          }
+        })
+      }
+    }
+
+    fetchData()
+  }, [institution])
+
+  React.useEffect(() => {}, [])
 
   return (
     <div className="load-distribution-control__wrapper">
       <Paper className="load-distribution-control__top">
-        <div className="schedule-page__selects">
-          <FormControl sx={{ width: '380px' }} fullWidth>
-            <InputLabel>Факультет</InputLabel>
-            <Select className="schedule-page__select" value={currentFaculty} label="Age" onChange={handleChangeFaculty}>
-              <MenuItem value={30}>Агрономічний факультет</MenuItem>
-              <MenuItem value={20}>Факультет ветеринарної медицини</MenuItem>
-              <MenuItem value={10}>Факультет інформаційних технологій, обліку та фінансів</MenuItem>
-            </Select>
-          </FormControl>
-
-          <FormControl sx={{ width: '180px', marginLeft: '16px' }} fullWidth>
-            <InputLabel id="demo-simple-select-label">Група</InputLabel>
-            <Select className="schedule-page__select" value={currentGroup} label="Age" onChange={handleChangeGroup}>
-              {/* groupList?.map((el) => (
-                <MenuItem value={String(el)}>{el}</MenuItem>
-              )) */}
-              <MenuItem value={'Ф-22-1'}>Ф-22-1</MenuItem>
-              <MenuItem value={'Ф-21-1'}>Ф-21-1</MenuItem>
-              <MenuItem value={'Ф-20-1'}>Ф-20-1</MenuItem>
-            </Select>
-          </FormControl>
-        </div>
+        <LoadDistributionFilter
+          faculties={faculties}
+          departments={departments}
+          sortParams={sortParams}
+          sortType={sortType}
+          setSortParams={setSortParams}
+          setSortType={setSortType}
+          groups={[...(fullTimeGroups || []), ...(partTimeGroups || [])]}
+        />
       </Paper>
       <LoadDistributionControlGroup />
     </div>

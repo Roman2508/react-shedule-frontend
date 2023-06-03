@@ -373,8 +373,7 @@ export const distributedLoadAPI = {
   updateDistributedLoad(payload: UpdateDistributedLoadType) {
     return instanse.patch('/distributed-load', payload)
   },
-  getDistributedLoad(payload: GetDistributedLoadType) {
-    const { groupId, userId } = payload
+  getDistributedLoad({ groupId, userId }: GetDistributedLoadType) {
     return instanse.get(`/distributed-load/${userId}/${groupId}`)
   },
   getDistributedTeacherLoad(payload: { teacher: string; currentShowedYear: string }) {
