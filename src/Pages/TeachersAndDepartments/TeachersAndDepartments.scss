@@ -1,0 +1,62 @@
+.teachers-and-departments {
+  max-width: 1032px !important;
+  padding: 8px 16px 0 !important;
+  margin: 0 auto !important;
+
+  &__title {
+    padding: 8px 16px;
+    font-weight: 500 !important;
+    text-transform: uppercase;
+  }
+
+  &__box {
+    padding: 0 16px 16px;
+  }
+
+  &__input {
+    margin: 12px 0 !important;
+    width: 46% !important;
+    padding: 5px 0;
+  }
+
+  &__input + &__input {
+    margin-left: 36px !important;
+  }
+
+  &__building-input {
+    width: 100%;
+    margin: 12px 0 !important;
+  }
+  &__teacher-input {
+    margin: 8px 0 !important;
+    width: 46% !important;
+    padding: 5px 0 !important;
+  }
+  &__select {
+    margin-top: 8px !important;
+    width: 46%;
+  }
+  &__select + &__select {
+    margin-left: 36px;
+  }
+  &__teacher-select {
+    margin-top: 4px !important;
+    width: 46%;
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  &__buttons-box {
+    margin-top: 20px;
+    display: flex;
+    justify-content: end;
+  }
+}
+
+.department-modal-inputs input {
+  width: 300px !important;
+}

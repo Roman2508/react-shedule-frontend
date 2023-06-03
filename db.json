@@ -1,0 +1,1473 @@
+{
+  "educationalYears": {
+    "2022-2023": {
+      "_id": 0,
+      "": [],
+      "groupLoad": ""
+    },
+    "2023-2024": {
+      "": []
+    }
+  },
+  "streams": [
+    {
+      "_id": "324234234324",
+      "name": "О-Ф-22",
+      "components": [
+        {
+          "_id": "3443535345",
+          "name": "345345350",
+          "groupLoad": "1111f8e177339ff1a3f31111"
+        },
+        {
+          "_id": "4554535765",
+          "name": "234122335",
+          "groupLoad": "1111f8e177339ff1a3f32222"
+        }
+      ],
+      "details": [
+        {
+          "_id": "23324234234",
+          "name": "Фінанси",
+          "semester": "1",
+          "type": "lectures"
+        }
+      ]
+    }
+  ],
+  "finalLoad": [
+    {
+      "id": 0,
+      "name": "Ф-22-1",
+      "yearOfAdmission": "2022",
+      "courseNumber": 1,
+      "students": 16,
+      "formOfEducations": "Денна",
+      "EducationPlanId": 5646345346565,
+      "departmentId": 3545354353434,
+      "groupLoad": [
+        {
+          "_id": 44342467434389,
+          "name": "Фізичне виховання",
+          "typeOfSubject": "ПЗ",
+          "details": {
+            "hours": 36,
+            "teacher": {
+              "id": 0,
+              "firstName": "Павло",
+              "middleName": "Петрович",
+              "lastName": "Ткаченко",
+              "departmentId": 1
+            },
+            "subgroupsNumber": null,
+            "stream": null,
+            "specializationsId": null
+          }
+        },
+        {
+          "_id": 343424434234324,
+          "name": "Фінансовий моніторинг",
+          "typeOfSubject": "ЛК",
+          "details": {
+            "hours": 24,
+            "teacher": {
+              "id": 0,
+              "firstName": "Лариса",
+              "middleName": "Василівна",
+              "lastName": "Недільська",
+              "departmentId": 0
+            },
+            "subgroupsNumber": null,
+            "stream": 34234242343243,
+            "specializationsId": 8566342432432447
+          }
+        },
+        {
+          "_id": 863423434234324,
+          "name": "Фінансовий моніторинг",
+          "typeOfSubject": "ПЗ",
+          "details": {
+            "hours": 36,
+            "teacher": {
+              "id": 0,
+              "firstName": "Ірина",
+              "middleName": "В'ячеславівна",
+              "lastName": "Абрамова",
+              "departmentId": 0
+            },
+            "subgroupsNumber": 1,
+            "stream": null,
+            "specializationsId": 8566342432432447
+          }
+        },
+        {
+          "_id": 653424434234324,
+          "name": "Ділова іноземна мова (за професійним спрямуванням)",
+          "typeOfSubject": "ПЗ",
+          "details": {
+            "hours": 36,
+            "teacher": {
+              "id": 0,
+              "firstName": "Галина",
+              "middleName": "Василівна",
+              "lastName": "Хант",
+              "departmentId": 0
+            },
+            "subgroupsNumber": null,
+            "stream": null,
+            "specializationsId": null
+          }
+        },
+        {
+          "_id": 3453453454354354,
+          "name": "Фінансовий моніторинг",
+          "typeOfSubject": "ЕКЗ",
+          "details": {
+            "hours": 2,
+            "teacher": {
+              "id": 0,
+              "firstName": "Лариса",
+              "middleName": "Василівна",
+              "lastName": "Недільська",
+              "departmentId": 0
+            },
+            "subgroupsNumber": 2,
+            "stream": null,
+            "specializationsId": 8566342432432447
+          }
+        }
+      ],
+      "specializations": {
+        "_id": 0,
+        "list": [
+          {
+            "_id": 4234342432432423,
+            "name": "Ф-22-ФБ"
+          },
+          {
+            "_id": 8566342432432447,
+            "name": "Ф-22-ФК"
+          }
+        ]
+      }
+    },
+    {
+      "id": 1,
+      "name": "Ф-21-1",
+      "yearOfAdmission": "2021",
+      "courseNumber": 2,
+      "students": 20,
+      "formOfEducations": "Денна",
+      "EducationPlanId": 56463453465333,
+      "departmentId": 3545354353434,
+      "groupLoad": [
+        {
+          "_id": 343424434234324,
+          "name": "Фінанси",
+          "typeOfSubject": "ЛК",
+          "details": {
+            "hours": 24,
+            "teacher": {
+              "id": 0,
+              "firstName": "Лариса",
+              "middleName": "Василівна",
+              "lastName": "Недільська",
+              "departmentId": 0
+            },
+            "subgroupsNumber": null,
+            "stream": 34234242343243,
+            "specializationsId": 4234342432432423
+          }
+        },
+        {
+          "_id": 863423434234324,
+          "name": "Фінанси",
+          "typeOfSubject": "ПЗ",
+          "details": {
+            "hours": 36,
+            "teacher": {
+              "id": 0,
+              "firstName": "Ірина",
+              "middleName": "В'ячеславівна",
+              "lastName": "Абрамова",
+              "departmentId": 0
+            },
+            "subgroupsNumber": null,
+            "stream": null,
+            "specializationsId": null
+          }
+        },
+        {
+          "_id": 653424434234324,
+          "name": "Ділова іноземна мова (за професійним спрямуванням)",
+          "typeOfSubject": "ЛАБ",
+          "details": {
+            "hours": 36,
+            "teacher": {
+              "id": 0,
+              "firstName": "Галина",
+              "middleName": "Василівна",
+              "lastName": "Хант",
+              "departmentId": 0
+            },
+            "subgroupsNumber": 2,
+            "stream": null,
+            "specializationsId": null
+          }
+        },
+        {
+          "_id": 3453453454354354,
+          "name": "Фінансова діяльність суб'єктів господарювання",
+          "typeOfSubject": "ЛАБ",
+          "details": {
+            "hours": 36,
+            "teacher": {
+              "id": 0,
+              "firstName": "Ірина",
+              "middleName": "В'ячеславівна",
+              "lastName": "Абрамова",
+              "departmentId": 0
+            },
+            "subgroupsNumber": 2,
+            "stream": null,
+            "specializationsId": 8566342432432447
+          }
+        }
+      ],
+      "specializations": {
+        "_id": 0,
+        "list": [
+          {
+            "_id": 4234342432432423,
+            "name": "Ф-21-1спец"
+          },
+          {
+            "_id": 8566342432432447,
+            "name": "Ф-21-2спец"
+          }
+        ]
+      }
+    }
+  ],
+  "finalLoad2222": [
+    {
+      "_id": 0,
+      "name": "Ф-22-1",
+      "yearOfAdmission": "2022",
+      "courseNumber": 1,
+      "students": 16,
+      "formOfEducations": "Денна",
+      "EducationPlanId": 0,
+      "groupLoad__Variant_1": [
+        {
+          "_id": 343424434234324,
+          "name": "Фінансовий моніторинг",
+          "lectures": {
+            "hours": 24,
+            "teacher": 12323213244334,
+            "subgroupsNumber": null,
+            "stream": 34234242343243,
+            "specializationsId": 4234342432432423
+          }
+        },
+        {
+          "_id": 863423434234324,
+          "name": "Фінансовий моніторинг",
+          "practical": {
+            "hours": 36,
+            "teacher": 2323323213244334,
+            "subgroupsNumber": 1,
+            "stream": null,
+            "specializationsId": 4234342432432423
+          }
+        },
+        {
+          "_id": 653424434234324,
+          "name": "Фінансовий моніторинг",
+          "practical": {
+            "hours": 36,
+            "teacher": 2323323213244334,
+            "subgroupsNumber": 2,
+            "stream": null,
+            "specializationsId": 4234342432432423
+          }
+        }
+      ],
+      "groupLoad__Variant_2": [
+        {
+          "_id": 343424434234324,
+          "name": "Фінансовий моніторинг",
+          "lectures": {
+            "hours": 24,
+            "teacherId": 3423423423,
+            "subgroupsNumber": null,
+            "streamId1": 34234242343243,
+            "streamId": {
+              "_id": 21321232132,
+              "name": "233232",
+              "groupsId": [24343332, 234, 324234]
+            },
+            "specializationsId": 4234342432432423
+          },
+          "practical": {
+            "hours": 36,
+            "teacherId": 2323323213244334,
+            "subgroupsCount": [1, 2],
+            "streamId": null,
+            "specializationsId": 4234342432432423
+          }
+        },
+        {
+          "_id": 586124434234324,
+          "name": "Іноземна мова за професійним спрямуванням",
+          "laboratory": {
+            "hours": 36,
+            "teacherId": 9569923213244334,
+            "subgroupsCount": [1, 2],
+            "streamId": null,
+            "specializationsId": null
+          }
+        },
+        {
+          "_id": 987124434234324,
+          "name": "Німецька мова",
+          "laboratory": {
+            "hours": 28,
+            "teacherId": 5968923213244334,
+            "subgroupsCount": null,
+            "streamId": 32665443442765,
+            "specializationsId": null
+          }
+        }
+      ],
+      "streams": [
+        {
+          "_id": 845485385834,
+          "name": "Ф-22",
+          "groupComposition": [845485385834, 343545434534545, 6454356667767]
+        }
+      ],
+      "subgroups": [
+        {
+          "_id": 0,
+          "name": "Фінансовий моніторинг",
+          "quantity": [1, 2]
+        }
+      ],
+      "specializations": {
+        "_id": 0,
+        "name": "Ф-22-1",
+        "specializationsList": [
+          {
+            "_id": 0,
+            "name": "Ф-22-ФБ"
+          },
+          {
+            "_id": 1,
+            "name": "Ф-22-ФК"
+          }
+        ],
+        "specializationsSubjects": [
+          {
+            "_id": 0,
+            "name": "Фінансова безпека",
+            "specializationId": 0,
+            "typeOfSubject": {
+              "semester_1": {
+                "lectures": 24,
+                "practical": 36,
+                "exams": 2
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "groups": [
+    {
+      "_id": 0,
+      "name": "Ф-22-1",
+      "yearOfAdmission": "2022",
+      "courseNumber": 1,
+      "students": 16,
+      "formOfEducations": "Денна",
+      "EducationPlanId": 0,
+      "streams": [],
+      "subgroups": [
+        {
+          "_id": 0,
+          "groupId": "0",
+          "name": "Фінансовий моніторинг",
+          "quantity": [1, 2]
+        }
+      ],
+      "specializations": {
+        "_id": 0,
+        "name": "Ф-22-1",
+        "specializationsList": [
+          {
+            "_id": 0,
+            "name": "Ф-22-ФБ"
+          },
+          {
+            "_id": 1,
+            "name": "Ф-22-ФК"
+          }
+        ],
+        "specializationsSubjects": [
+          {
+            "_id": 0,
+            "name": "Фінансова безпека",
+            "specializationId": 0,
+            "typeOfSubject": {
+              "semester_1": {
+                "lectures": 24,
+                "practical": 36,
+                "exams": 2
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "groups22222": [
+    {
+      "_id": 0,
+      "name": "Ф-22-1",
+      "yearOfAdmission": "2022",
+      "courseNumber": 1,
+      "students": 16,
+      "formOfEducations": "Денна",
+      "EducationPlanId": 0,
+      "streams": [],
+      "subgroups": [
+        {
+          "_id": 0,
+          "groupId": "0",
+          "name": "Фінансовий моніторинг",
+          "quantity": [1, 2]
+        },
+        {
+          "_id": "63931870cdbc39dbbd1eb203",
+          "groupId": "597605943259630493639310",
+          "name": "Фінанси",
+          "semester": "2",
+          "lectures": null,
+          "practical": null,
+          "laboratory": 2,
+          "seminars": null,
+          "exams": 2
+        }
+      ],
+      "specializations": {
+        "_id": 0,
+        "name": "Ф-22-1",
+        "specializationsList": [
+          {
+            "_id": 0,
+            "name": "Ф-22-ФБ"
+          },
+          {
+            "_id": 1,
+            "name": "Ф-22-ФК"
+          }
+        ],
+        "specializationsSubjects": [
+          {
+            "_id": 0,
+            "semester": "1",
+            "name": "Фінансова безпека",
+            "specializationId": 0,
+            "exams": 0,
+            "inPlan": 150,
+            "individual": 76,
+            "laboratory": 0,
+            "lectures": 34,
+            "practical": 40,
+            "seminars": 0,
+            "termPaper": false,
+            "zalik": 2
+          },
+          {
+            "_id": "6368d9f6b5e0736eee3c7049",
+            "groupId": "636cf8e177339ff1a3f390b6",
+            "specialization": {
+              "name": "F-22-FK",
+              "_id": "63931870cdbc39dbbd1eb203"
+            },
+            "name": "Фінанси",
+            "semester": "2",
+            "lectures": 20,
+            "practical": 40,
+            "laboratory": 0,
+            "seminars": 0,
+            "termPaper": false,
+            "individual": 60,
+            "inPlan": 120,
+            "exams": 2,
+            "zalik": 0
+          }
+        ]
+      }
+    }
+  ],
+  "educationPlans": [
+    {
+      "id": 0,
+      "categoryId": 0,
+      "name": "201 Агрономія. Бакалавр 2022",
+      "subjects": [
+        {
+          "id": 0,
+          "name": "Рослинництво",
+          "totalHour": 150,
+          "semester_1": {
+            "lectures": 24,
+            "practical": 36,
+            "laboratory": 0,
+            "seminars": 0,
+            "exams": 2,
+            "zalik": 0,
+            "termPaper": true,
+            "individual": 55,
+            "inPlan": 120
+          },
+          "semester_2": {},
+          "semester_3": {},
+          "semester_4": {},
+          "semester_5": {},
+          "semester_6": {},
+          "semester_7": {},
+          "semester_8": {},
+          "semester_9": {},
+          "semester_10": {},
+          "semester_11": {},
+          "semester_12": {}
+        },
+        {
+          "id": 1,
+          "name": "Селекція і насінництво польових культур",
+          "totalHour": 120,
+          "semester_1": {},
+          "semester_2": {},
+          "semester_3": {
+            "lectures": 24,
+            "practical": 36,
+            "laboratory": 0,
+            "seminars": 0,
+            "exams": 0,
+            "zalik": 2,
+            "termPaper": false,
+            "individual": 60,
+            "inPlan": 120
+          },
+          "semester_4": {},
+          "semester_5": {},
+          "semester_6": {},
+          "semester_7": {},
+          "semester_8": {},
+          "semester_9": {},
+          "semester_10": {},
+          "semester_11": {},
+          "semester_12": {}
+        },
+        {
+          "id": 2,
+          "name": "Технічні культури",
+          "totalHour": 120,
+          "semester_1": {
+            "lectures": 24,
+            "practical": 36,
+            "laboratory": 0,
+            "seminars": 0,
+            "exams": 0,
+            "zalik": 2,
+            "termPaper": false,
+            "individual": 60,
+            "inPlan": 120
+          },
+          "semester_2": {
+            "lectures": 22,
+            "practical": 38,
+            "laboratory": 0,
+            "seminars": 0,
+            "exams": 2,
+            "zalik": 0,
+            "termPaper": false,
+            "individual": 60,
+            "inPlan": 120
+          },
+          "semester_3": {},
+          "semester_4": {},
+          "semester_5": {},
+          "semester_6": {},
+          "semester_7": {},
+          "semester_8": {},
+          "semester_9": {},
+          "semester_10": {},
+          "semester_11": {},
+          "semester_12": {}
+        }
+      ]
+    }
+  ],
+  "educationPlansGroup": [
+    {
+      "_id": 0,
+      "name": "Агрономічний факультет",
+      "plans": [
+        {
+          "_id": 0,
+          "categoryId": 0,
+          "name": "201 Агрономія. Бакалавр 2022"
+        },
+        {
+          "_id": 1,
+          "categoryId": 0,
+          "name": "201 Агрономія. Бакалавр 2021"
+        },
+        {
+          "_id": 2,
+          "categoryId": 0,
+          "name": "202 Захист і карантин рослин. Бакалавр 2022"
+        }
+      ]
+    },
+    {
+      "_id": 1,
+      "name": "Ветеринарний факультет",
+      "plans": [
+        {
+          "_id": 3,
+          "categoryId": 1,
+          "name": "211 Ветеринарна медицина. Магістер 2022"
+        },
+        {
+          "_id": 4,
+          "categoryId": 10,
+          "name": "211 Ветеринарна медицина. Магістер 2021"
+        },
+        {
+          "_id": 5,
+          "categoryId": 1,
+          "name": "211 Ветеринарна медицина. Магістер 2020"
+        },
+        {
+          "_id": 6,
+          "categoryId": 1,
+          "name": "211 Ветеринарна медицина. Магістер 2019"
+        },
+        {
+          "_id": 7,
+          "categoryId": 1,
+          "name": "211 Ветеринарна медицина. Магістер 2018"
+        }
+      ]
+    },
+    {
+      "_id": 2,
+      "name": "Факультет інформаційних технологій, обліку та фінансів",
+      "plans": [
+        {
+          "_id": 8,
+          "categoryId": 2,
+          "name": "072 Фінанси, банківська справа та страхування. Бакалавр 2022"
+        },
+        {
+          "_id": 8,
+          "categoryId": 2,
+          "name": "072 Фінанси, банківська справа та страхування. Бакалавр 2021"
+        },
+        {
+          "_id": 10,
+          "categoryId": 2,
+          "name": "072 Фінанси, банківська справа та страхування. Бакалавр 2020"
+        }
+      ]
+    }
+  ],
+  "subjectsList": [
+    {
+      "id": 0,
+      "name": "Рослинництво",
+      "totalHour": 150,
+      "semester_1": {
+        "lectures": 30,
+        "practical": 30,
+        "laboratory": 0,
+        "seminars": 0,
+        "zalik": 0,
+        "exams": 2,
+        "inPlan": 120,
+        "individual": 60,
+        "termPaper": true
+      },
+      "semester_2": {},
+      "semester_3": {},
+      "semester_4": {},
+      "semester_5": {},
+      "semester_6": {},
+      "semester_7": {},
+      "semester_8": {},
+      "semester_9": {},
+      "semester_10": {},
+      "semester_11": {},
+      "semester_12": {}
+    },
+    {
+      "id": 1,
+      "name": "Селекція і насінництво польових культур",
+      "totalHour": 120,
+      "semester_1": {},
+      "semester_2": {},
+      "semester_3": {
+        "lectures": 30,
+        "practical": 30,
+        "laboratory": 0,
+        "seminars": 0,
+        "zalik": 2,
+        "exams": 0,
+        "inPlan": 120,
+        "individual": 60,
+        "termPaper": false
+      },
+      "semester_4": {},
+      "semester_5": {},
+      "semester_6": {},
+      "semester_7": {},
+      "semester_8": {},
+      "semester_9": {},
+      "semester_10": {},
+      "semester_11": {},
+      "semester_12": {}
+    },
+    {
+      "id": 2,
+      "name": "Технічні культури",
+      "totalHour": 120,
+      "semester_1": {
+        "lectures": 24,
+        "practical": 36,
+        "laboratory": 0,
+        "seminars": 0,
+        "exams": 0,
+        "zalik": 2,
+        "termPaper": false,
+        "individual": 60,
+        "inPlan": 120
+      },
+      "semester_2": {
+        "lectures": 22,
+        "practical": 38,
+        "laboratory": 0,
+        "seminars": 0,
+        "exams": 2,
+        "zalik": 0,
+        "termPaper": false,
+        "individual": 60,
+        "inPlan": 120
+      },
+      "semester_3": {},
+      "semester_4": {},
+      "semester_5": {},
+      "semester_6": {},
+      "semester_7": {},
+      "semester_8": {},
+      "semester_9": {},
+      "semester_10": {},
+      "semester_11": {},
+      "semester_12": {}
+    }
+  ],
+  "departments": [
+    {
+      "id": 0,
+      "name": "Облік та оподаткування",
+      "departmentNumber": 11,
+      "teachers": [
+        {
+          "id": 0,
+          "firstName": "Юлія",
+          "middleName": "Юзефівна",
+          "lastName": "Мороз",
+          "formOfWork": "Штатний",
+          "departmentId": 0
+        },
+        {
+          "id": 1,
+          "firstName": "Ольга",
+          "middleName": "Миколаївна",
+          "lastName": "Дмитренко",
+          "formOfWork": "Штатний",
+          "departmentId": 0
+        },
+        {
+          "id": 2,
+          "firstName": "Наталія",
+          "middleName": "Олександрівна",
+          "lastName": "Ярмолюк",
+          "formOfWork": "Сумісник",
+          "departmentId": 0
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Фінанси, банківська справа та страхування",
+      "departmentNumber": 12,
+      "teachers": [
+        {
+          "id": 1,
+          "firstName": "Лариса",
+          "middleName": "Василівна",
+          "lastName": "Недільська",
+          "formOfWork": "Штатний",
+          "departmentId": 1
+        },
+        {
+          "id": 1,
+          "firstName": "Ольга",
+          "middleName": "Миколаївна",
+          "lastName": "Дмитренко",
+          "formOfWork": "Штатний",
+          "departmentId": 1
+        },
+        {
+          "id": 2,
+          "firstName": "Наталія",
+          "middleName": "Олександрівна",
+          "lastName": "Ярмолюк",
+          "formOfWork": "Сумісник",
+          "departmentId": 1
+        }
+      ]
+    }
+  ],
+  "teachers": [
+    {
+      "id": 0,
+      "firstName": "Лариса",
+      "middleName": "Василівна",
+      "lastName": "Недільська",
+      "departmentId": 0
+    },
+    {
+      "id": 1,
+      "firstName": "Ірина",
+      "middleName": "В'ячеславівна",
+      "lastName": "Абрамова",
+      "departmentId": 0
+    }
+  ],
+  "buildings": [
+    {
+      "id": 0,
+      "name": "1",
+      "auditoriums": [
+        {
+          "_id": 0,
+          "name": "47",
+          "building": "1",
+          "type": "Спеціалізована",
+          "seatsNumber": 22
+        },
+        {
+          "_id": 1,
+          "name": "60",
+          "building": "1",
+          "type": "Комп'ютерна",
+          "seatsNumber": 16
+        },
+        {
+          "_id": 2,
+          "name": "75",
+          "building": "1",
+          "type": "Лекційна",
+          "seatsNumber": 60
+        },
+        {
+          "_id": 3,
+          "name": "78",
+          "building": "1",
+          "type": "Спеціалізована",
+          "seatsNumber": 30
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "2",
+      "auditoriums": [
+        {
+          "_id": 4,
+          "name": "111",
+          "building": "2",
+          "type": "Лекційна",
+          "seatsNumber": 70
+        },
+        {
+          "_id": 5,
+          "name": "106",
+          "building": "2",
+          "type": "Комп'ютерна",
+          "seatsNumber": 30
+        },
+        {
+          "_id": 6,
+          "name": "112",
+          "building": "2",
+          "type": "Лекційна",
+          "seatsNumber": 55
+        },
+        {
+          "_id": 7,
+          "name": "100",
+          "building": "2",
+          "type": "Спеціалізована",
+          "seatsNumber": 30
+        }
+      ]
+    },
+    {
+      "name": "4",
+      "auditoriums": [],
+      "id": 2
+    }
+  ],
+  "auditoriums": [
+    {
+      "id": 0,
+      "name": "47",
+      "building": "1",
+      "buildingId": 123213222,
+      "type": "Спеціалізована",
+      "_id": 0
+    },
+    {
+      "id": 1,
+      "name": "60",
+      "building": "1",
+      "buildingId": 543213268,
+      "type": "Лекційна",
+      "_id": 1
+    }
+  ],
+  "lessons": [
+    {
+      "id": 0,
+      "groupId": "0",
+      "name": "Вступ до спеціальності",
+      "subjectType": "ЛАБ",
+      "teacher": {
+        "id": 1,
+        "firstName": "Ірина",
+        "middleName": "В'ячеславівна",
+        "lastName": "Абрамова",
+        "formOfWork": "Штатний",
+        "departmentId": 0
+      },
+      "auditory": "203в.ф.",
+      "remark": "Зб.гр. Вм-17нтн2",
+      "date": 1665405956,
+      "subjectNumber": 2
+    },
+    {
+      "name": "Фінансовий моніторинг",
+      "teacher": {
+        "id": 0,
+        "firstName": "Ірина",
+        "middleName": "В'ячеславівна",
+        "lastName": "Абрамова",
+        "departmentId": 0
+      },
+      "auditory": "100",
+      "remark": "Ф-22-ФК",
+      "date": "1672696800",
+      "subjectNumber": 1,
+      "subjectType": "ПЗ",
+      "groupId": "0",
+      "id": 4
+    },
+    {
+      "name": "Фінансовий моніторинг",
+      "teacher": {
+        "id": 0,
+        "firstName": "Ірина",
+        "middleName": "В'ячеславівна",
+        "lastName": "Абрамова",
+        "departmentId": 0
+      },
+      "auditory": "106",
+      "remark": "Ф-22-ФК",
+      "date": "1672783200",
+      "subjectNumber": 1,
+      "subjectType": "ПЗ",
+      "groupId": "0",
+      "id": 5
+    },
+    {
+      "name": "Фінансовий моніторинг",
+      "teacher": {
+        "id": 0,
+        "firstName": "Лариса",
+        "middleName": "Василівна",
+        "lastName": "Недільська",
+        "departmentId": 0
+      },
+      "auditory": "106",
+      "remark": "Потік Ф-22",
+      "date": "1672610400",
+      "subjectNumber": 1,
+      "subjectType": "ЛК",
+      "groupId": "0",
+      "id": 6
+    }
+  ],
+  "distributedGroupLoad__variant__1": [
+    {
+      "_id": 0,
+      "groupId": "213121232131",
+      "name": "Фінансова безпека",
+      "specialization": {
+        "_id": "2323223231122",
+        "name": "Ф-22-ФБ"
+      },
+      "subgroups": {
+        "_id": "63a0d41aee30fe6be4f64f1b",
+        "groupId": "636cf8e177339ff1a3f390b6",
+        "name": "Фінансова безпека",
+        "semester": "2",
+        "lectures": null,
+        "practical": 2,
+        "laboratory": null,
+        "seminars": null,
+        "exams": null
+      },
+      "stream": null,
+      "streamDetails": [],
+      "lectures": {
+        "teacher": "3432423423433",
+        "hours": 34
+      },
+      "practical": {
+        "teacher": "3244324232423",
+        "hours": 40
+      },
+      "laboratory": {
+        "teacher": null,
+        "hours": 0
+      },
+      "seminars": {
+        "teacher": null,
+        "hours": 0
+      },
+      "exams": {
+        "teacher": null,
+        "hours": 0
+      },
+      "inPlan": 150,
+      "individual": 76,
+      "semester": "1",
+      "termPaper": false,
+      "zalik": 2
+    }
+  ],
+  "distributedGroupLoad__variant__2": [
+    {
+      "_id": "",
+      "load": [
+        {
+          "_id": 0,
+          "semester": "1",
+          "groupId": "213121232131",
+          "name": "Фінансова безпека",
+          "streamDetails": [],
+          "lectures": {
+            "type": "Лекції",
+            "teacher": "3432423423433",
+            "hours": 34,
+            "stream": {
+              "streamId": "2323223231122",
+              "name": "Ф-22-ФБ",
+              "groups": ["54445454554", "345344355"]
+            },
+            "subgroupNumber": 1,
+            "specializations": null
+          },
+          "practical": {
+            "type": "Практичні",
+            "teacher": "3244324232423",
+            "hours": 40,
+            "stream": null,
+            "subgroups": null,
+            "specializations": {
+              "_id": "2323223231122",
+              "name": "Ф-22-ФБ"
+            }
+          },
+          "laboratory": {
+            "type": "Лабораторні",
+            "teacher": null,
+            "hours": 48,
+            "stream": null,
+            "subgroups": {
+              "subgroup_1": {
+                "teacher": "3244324232423",
+                "hours": 40
+              },
+              "subgroup_2": {
+                "teacher": "3244324232423",
+                "hours": 40
+              }
+            },
+            "specializations": null
+          },
+          "laboratory_1": {
+            "type": "Лабораторні",
+            "teacher": null,
+            "hours": 48,
+            "stream": null,
+            "specializations": null,
+            "subgroupNumber": 1
+          },
+          "laboratory_2": {
+            "type": "Лабораторні",
+            "teacher": "324323443",
+            "hours": 48,
+            "stream": null,
+            "specializations": null,
+            "subgroupNumber": 2
+          },
+          "seminars": {
+            "type": "Семінари",
+            "teacher": null,
+            "hours": 0,
+            "stream": null,
+            "subgroups": null,
+            "specializations": null
+          },
+          "exams": {
+            "type": "Екзамени",
+            "teacher": null,
+            "hours": 0,
+            "stream": null,
+            "subgroups": null,
+            "specializations": null
+          },
+          "inPlan": 150,
+          "individual": 76,
+          "termPaper": false,
+          "zalik": 2
+        }
+      ]
+    }
+  ],
+  "teachersShedule": [],
+  "classroomsShedule": [],
+  "faculties": [
+    {
+      "_id": "1",
+      "name": "Факультет обліку та фінансів",
+      "shortName": "ФОФ",
+      "specialties": [
+        {
+          "_id": "0",
+          "facultieId": "1",
+          "name": "Облік і оподаткування",
+          "shortName": "О",
+          "groups": [
+            {
+              "_id": "1",
+              "specialtieId": "0",
+              "name": "О-22-1",
+              "yearOfAdmission": "2022",
+              "courseNumber": 1,
+              "students": 22,
+              "formOfEducations": "Денна",
+              "EducationPlanId": 0,
+              "streams": [],
+              "subgroups": [
+                {
+                  "_id": 0,
+                  "name": "Фінансовий моніторинг",
+                  "quantity": [1, 2]
+                }
+              ],
+              "specializationsList": [
+                {
+                  "_id": 0,
+                  "name": "Ф-22-ФБ"
+                },
+                {
+                  "_id": 1,
+                  "name": "Ф-22-ФК"
+                }
+              ],
+              "specializationsSubjects": [
+                {
+                  "_id": 0,
+                  "name": "Фінансова безпека",
+                  "specializationId": 0,
+                  "typeOfSubject": {
+                    "semester_1": {
+                      "lectures": 24,
+                      "practical": 36,
+                      "exams": 2
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "_id": "2",
+              "specialtieId": "0",
+              "name": "О-22з",
+              "yearOfAdmission": "2022",
+              "courseNumber": 1,
+              "students": 10,
+              "formOfEducations": "Заочна",
+              "EducationPlanId": 0,
+              "streams": [],
+              "subgroups": [
+                {
+                  "_id": 0,
+                  "name": "Фінансовий моніторинг",
+                  "quantity": [1, 2]
+                }
+              ],
+              "specializationsList": [
+                {
+                  "_id": 0,
+                  "name": "Ф-22-ФБ"
+                },
+                {
+                  "_id": 1,
+                  "name": "Ф-22-ФК"
+                }
+              ],
+              "specializationsSubjects": [
+                {
+                  "_id": 0,
+                  "name": "Фінансова безпека",
+                  "specializationId": 0,
+                  "typeOfSubject": {
+                    "semester_1": {
+                      "lectures": 24,
+                      "practical": 36,
+                      "exams": 2
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_id": "1",
+          "facultieId": "1",
+          "name": "Фінанси банківська справа та страхування",
+          "shortName": "Ф",
+          "groups": [
+            {
+              "_id": "3",
+              "specialtieId": "1",
+              "name": "Ф-22-1",
+              "yearOfAdmission": "2022",
+              "courseNumber": 1,
+              "students": 16,
+              "formOfEducations": "Денна",
+              "EducationPlanId": 0,
+              "streams": [],
+              "subgroups": [
+                {
+                  "_id": 0,
+                  "name": "Фінансовий моніторинг",
+                  "quantity": [1, 2]
+                }
+              ],
+              "specializationsList": [
+                {
+                  "_id": 0,
+                  "name": "Ф-22-ФБ"
+                },
+                {
+                  "_id": 1,
+                  "name": "Ф-22-ФК"
+                }
+              ],
+              "specializationsSubjects": [
+                {
+                  "_id": 0,
+                  "name": "Фінансова безпека",
+                  "specializationId": 0,
+                  "typeOfSubject": {
+                    "semester_1": {
+                      "lectures": 24,
+                      "practical": 36,
+                      "exams": 2
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "_id": "4",
+              "specialtieId": "1",
+              "name": "Ф-21-1",
+              "yearOfAdmission": "2021",
+              "courseNumber": 2,
+              "students": 22,
+              "formOfEducations": "Денна",
+              "EducationPlanId": 0,
+              "streams": [],
+              "subgroups": [
+                {
+                  "_id": 0,
+                  "name": "Фінансовий моніторинг",
+                  "quantity": [1, 2]
+                }
+              ],
+              "specializationsList": [
+                {
+                  "_id": 0,
+                  "name": "Ф-22-ФБ"
+                },
+                {
+                  "_id": 1,
+                  "name": "Ф-22-ФК"
+                }
+              ],
+              "specializationsSubjects": [
+                {
+                  "_id": 0,
+                  "name": "Фінансова безпека",
+                  "specializationId": 0,
+                  "typeOfSubject": {
+                    "semester_1": {
+                      "lectures": 24,
+                      "practical": 36,
+                      "exams": 2
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "_id": "5",
+              "specialtieId": "1",
+              "name": "Ф-22з",
+              "yearOfAdmission": "2022",
+              "courseNumber": 1,
+              "students": 14,
+              "formOfEducations": "Заочна",
+              "EducationPlanId": 0,
+              "streams": [],
+              "subgroups": [
+                {
+                  "_id": 0,
+                  "name": "Фінансовий моніторинг",
+                  "quantity": [1, 2]
+                }
+              ],
+              "specializationsList": [
+                {
+                  "_id": 0,
+                  "name": "Ф-22-ФБ"
+                },
+                {
+                  "_id": 1,
+                  "name": "Ф-22-ФК"
+                }
+              ],
+              "specializationsSubjects": [
+                {
+                  "_id": 0,
+                  "name": "Фінансова безпека",
+                  "specializationId": 0,
+                  "typeOfSubject": {
+                    "semester_1": {
+                      "lectures": 24,
+                      "practical": 36,
+                      "exams": 2
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_id": "2",
+          "facultieId": "1",
+          "name": "Інформаційні системи та технології",
+          "shortName": "ІСТ",
+          "groups": []
+        },
+        {
+          "_id": "3",
+          "facultieId": "1",
+          "name": "Комп’ютерні науки",
+          "shortName": "КН",
+          "groups": []
+        }
+      ]
+    },
+    {
+      "_id": "2",
+      "name": "Факультет ветеринарної медицини",
+      "shortName": "ФОФ",
+      "specialties": [
+        {
+          "_id": "4",
+          "facultieId": "2",
+          "name": "Ветеринарна медицина",
+          "shortName": "ВМ",
+          "groups": []
+        },
+        {
+          "_id": "5",
+          "facultieId": "2",
+          "name": "Ветеринарна гігієна та санітарна експертиза",
+          "shortName": "ВГСЕ",
+          "groups": []
+        }
+      ]
+    }
+  ],
+  "groupLoad": {
+    "_id": "1",
+    "name": "Ф-21-1",
+    "load": [
+      {
+        "id": 0,
+        "name": "Рослинництво",
+        "totalHour": 150,
+        "semester_1": {
+          "lectures": 30,
+          "practical": 30,
+          "laboratory": 0,
+          "seminars": 0,
+          "zalik": 0,
+          "exams": 2,
+          "inPlan": 120,
+          "individual": 60,
+          "termPaper": true
+        },
+        "semester_2": {},
+        "semester_3": {},
+        "semester_4": {},
+        "semester_5": {},
+        "semester_6": {},
+        "semester_7": {},
+        "semester_8": {},
+        "semester_9": {},
+        "semester_10": {},
+        "semester_11": {},
+        "semester_12": {}
+      },
+      {}
+    ]
+  }
+}

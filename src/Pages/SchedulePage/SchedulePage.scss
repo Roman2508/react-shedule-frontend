@@ -1,0 +1,268 @@
+.schedule-page {
+  max-width: 1850px !important;
+  margin: 0 auto !important;
+  padding: 16px 8px 0;
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    overflow-x: auto !important;
+  }
+
+  &__selects {
+    display: flex;
+
+    .MuiInputLabel-root {
+      background-color: transparent;
+    }
+  }
+
+  &__select {
+    div {
+      padding: 10px 30px 10px 8px !important;
+    }
+  }
+
+  &__week {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0 20px;
+  }
+
+  &__week-btn + &__week-btn {
+    margin-left: 10px;
+  }
+
+  &__current-week {
+    position: relative;
+    left: 28px;
+  }
+
+  &__week-btn {
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.23);
+    // padding: 2px 4px;
+    padding: 8.7px 7px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.1s ease-in-out;
+    outline: unset;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.082);
+    }
+    svg {
+      opacity: 0.3;
+    }
+  }
+
+  &__week-btn:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  &__week-btn.today-btn {
+    opacity: 0.8;
+    padding: 6.5px 16px;
+    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  &__schedule-type {
+    display: flex;
+    justify-content: end;
+  }
+
+  &__wrapper {
+    padding-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &__subjects {
+    width: 31%;
+  }
+  &__schedule-box {
+    margin-left: 8px;
+    width: 69%;
+    display: flex;
+    overflow-x: auto !important;
+  }
+  &__schedule {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 40px 1fr;
+    gap: 2px;
+  }
+  &__day-item {
+    padding: 5px;
+    margin: 1px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  &__copy-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 100px;
+    // left: 120px;
+    // bottom: 26px;
+  }
+
+  .current-day {
+    background-color: rgba(0, 0, 0, 0.082);
+  }
+
+  &__lesson-number-box {
+    margin-top: 42px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% + 10px);
+  }
+
+  &__lesson-number {
+    padding: 5px;
+    margin: 1px;
+    height: 85.2px;
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__day-wrapper {
+    display: grid;
+    gap: 2px;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(7, 85.2px);
+  }
+
+  &__schedule-item {
+    background-color: rgb(255, 255, 255) !important; // empty schedule-item
+    // background-color: rgb(215, 215, 210) !important; // empty schedule-item
+    color: rgb(242, 242, 242) !important;
+    margin: 1px;
+    cursor: pointer;
+    overflow: hidden;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /*  &__lesson {
+    // 85,19
+    padding: 5px;
+    background-color: rgb(255, 255, 255);
+    color: #000;
+    height: 100%;
+    height: 42.595px;
+    overflow: hidden;
+    width: 100%;
+    font-size: 12.5px;
+    line-height: 1.3;
+    // border-bottom: 1px solid #000;
+  } */
+  &__lesson {
+    // 85,19
+    padding: 5px;
+    background-color: rgb(255, 255, 255);
+    color: #000;
+    height: 100%;
+    width: 100%;
+    font-size: 12.5px;
+    line-height: 1.3;
+  }
+
+  &__lesson--light {
+    background-color: rgb(255, 255, 255);
+    color: #000;
+  }
+
+  &__lesson--dark {
+    background-color: rgb(5, 5, 5);
+    color: #fff;
+  }
+
+  &__two-lessons {
+    // 85,19
+    padding: 5px;
+    background-color: rgb(255, 255, 255);
+    color: #000;
+    height: 100%;
+    height: 42.595px;
+    overflow: hidden;
+    width: 100%;
+    font-size: 11.4px;
+    line-height: 1.3;
+  }
+
+  &__two-lessons + &__two-lessons {
+    border-top: 1px solid rgb(0, 0, 0);
+  }
+
+  &__three-lessons {
+    // 85,19
+    padding: 2.5px 5px;
+    background-color: rgb(255, 255, 255);
+    color: #000;
+    height: 100%;
+    height: 28.396px;
+    overflow: hidden;
+    width: 100%;
+    font-size: 10.8px;
+    line-height: 1.2;
+  }
+
+  &__three-lessons + &__three-lessons {
+    border-top: 1px solid #000;
+  }
+
+  &__four-lessons {
+    // 85,19
+    padding: 5px;
+    background-color: rgb(255, 255, 255);
+    color: #000;
+    height: 100%;
+    height: 21.297px;
+    overflow: hidden;
+    width: 100%;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  &__four-lessons + &__four-lessons {
+    border-top: 1px solid #000;
+  }
+
+  &__lesson + &__lesson {
+    border-top: 1px solid #000;
+  }
+
+  &__selected {
+    border: 2px solid #000;
+    padding: 3px;
+  }
+
+  &__lesson-lab {
+    // background-color: rgb(44, 91, 179);
+    background-color: rgb(43, 163, 185) !important;
+  }
+  &__lesson-lec {
+    background-color: rgb(232, 255, 82) !important;
+    // background-color: rgb(200, 220, 78);
+  }
+  &__lesson-prac {
+    background-color: rgb(24, 176, 71) !important;
+  }
+  &__lesson-exam {
+    background-color: rgb(176, 24, 24) !important;
+  }
+  // &__lesson-sem {
+  // }
+  // &__lesson-zal {
+  // }
+}

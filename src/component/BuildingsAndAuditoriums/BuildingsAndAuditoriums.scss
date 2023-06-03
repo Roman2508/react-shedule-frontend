@@ -1,0 +1,13 @@
+.buildings-and-auditoriums {
+  &__text-field {
+    .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+      height: 56px;
+    }
+    label {
+      top: 0 !important;
+    }
+    &.css-14usnb2-MuiFormLabel-root-MuiInputLabel-root {
+      top: 0 !important;
+    }
+  }
+}

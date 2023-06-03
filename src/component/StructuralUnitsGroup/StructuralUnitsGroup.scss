@@ -1,0 +1,12 @@
+.structural-units-group {
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+  }
+}
+
+.structural-units-add-button {
+  white-space: nowrap;
+}

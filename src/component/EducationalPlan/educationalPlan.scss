@@ -1,0 +1,70 @@
+.educational-plan {
+  max-width: 1850px;
+  margin: 0 auto;
+  padding: 16px 16px 0;
+  &__main-title {
+    font-weight: 700 !important;
+    padding: 10px;
+    border-bottom: 1px solid rgba(224, 224, 224, 1);
+  }
+  &__empty-wrapper {
+    position: relative;
+  }
+  &__empty-bg {
+    height: 360px;
+  }
+  &__empty-box {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -44%);
+    position: absolute;
+    text-align: center;
+  }
+
+  &__empty-img {
+    width: 240px !important;
+  }
+  &__empty-text {
+    margin-top: 10px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+    text-align: center;
+  }
+
+  &__table-cell {
+    border-right: 1px solid rgb(219, 219, 219);
+    cursor: pointer;
+    padding: 0 !important;
+  }
+  &__subject-name {
+    min-width: 100px !important;
+    display: flex !important;
+    justify-content: space-between;
+    p {
+      max-width: 440px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    &:hover .educational-plan__icons-wrapper {
+      opacity: 1;
+    }
+  }
+
+  &__icons-wrapper {
+    opacity: 0;
+    padding-left: 8px;
+    display: flex;
+    justify-content: space-between;
+    button + button {
+      margin-left: 10px;
+    }
+  }
+
+  &__icon-button {
+    padding: 2px !important;
+  }
+}

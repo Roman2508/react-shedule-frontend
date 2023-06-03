@@ -1,0 +1,73 @@
+.schedule-add-modal {
+  &__audience-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0;
+  }
+  &__audience-box-item {
+    padding: 10px 20px;
+    min-width: 200px;
+    max-height: 400px;
+    overflow: hidden auto;
+    flex-wrap: nowrap !important;
+  }
+
+  &__title {
+    padding: 8px;
+    text-align: center;
+    font-weight: 500 !important;
+    text-transform: uppercase;
+    border-left: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  /* main */
+  &__main-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__lesson-info {
+    display: flex;
+    justify-content: space-between;
+    // align-items: center;
+  }
+
+  &__several-subjects {
+    background-color: rgba(0, 0, 0, 0.02) !important;
+    border: 1px dashed rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    padding: 10px;
+    width: 250px;
+    margin-bottom: 10px;
+    &:hover {
+      transition: all 0.3s ease-in-out;
+      background-color: rgba(0, 0, 0, 0.07) !important;
+    }
+  }
+
+  &__several-subjects--new {
+    background-color: rgba(0, 0, 0, 0.02) !important;
+    border: 1px dashed rgba(0, 0, 0, 0.4);
+    text-align: center;
+    cursor: pointer;
+    padding: 10px;
+    width: 250px;
+    &:hover {
+      transition: all 0.3s ease-in-out;
+      background-color: rgba(0, 0, 0, 0.07) !important;
+    }
+  }
+
+  &__empty-auditories-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.6;
+    height: 100% !important;
+  }
+}
+
+.audience-box-item-right {
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+}

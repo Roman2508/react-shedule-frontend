@@ -1,0 +1,15 @@
+.burger-menu {
+  &__item:hover {
+    color: #0288d1;
+  }
+
+  &__controls {
+    display: flex;
+    flex-direction: column;
+    margin: auto 0 10px;
+  }
+
+  &__color-mode-button {
+    margin: 8px 10px;
+  }
+}

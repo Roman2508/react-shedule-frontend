@@ -1,0 +1,96 @@
+.streams {
+  max-width: 1850px !important;
+  margin: 0 auto !important;
+  padding: 0 32px 0 0;
+  &__title {
+    padding: 8px 16px;
+    font-weight: 500 !important;
+    text-transform: uppercase;
+  }
+  &__title-group {
+    min-width: 150px;
+  }
+  &__left {
+  }
+  &__right {
+  }
+  &__top-box {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  &__stream-list {
+    width: 50%;
+    padding-bottom: 8px;
+  }
+  &__list-box {
+    max-height: 160px;
+    min-height: 160px;
+    overflow: auto;
+  }
+  &__group-composition-box {
+    max-height: 196px;
+    overflow: auto;
+  }
+  &__group-composition {
+    width: 50%;
+  }
+  &__list-controls {
+    opacity: 0;
+  }
+  &__list-item:hover &__list-controls {
+    opacity: 1;
+  }
+  &__subjects-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+  }
+  &__input-box {
+    position: relative;
+
+    div {
+      margin: 0;
+    }
+    input {
+      padding-left: 40px;
+    }
+  }
+  &__input-icon {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.5;
+  }
+
+  /* table */
+
+  &__table--empty {
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+  }
+  &__table--empty img {
+    width: 240px;
+  }
+  &__table-bottom {
+    margin-left: 10px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+  }
+
+  &__table-cell--name {
+    white-space: nowrap;
+    max-width: 250px !important;
+    width: 250px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &__table-cell {
+    white-space: nowrap;
+  }
+}

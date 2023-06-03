@@ -1,0 +1,101 @@
+.settings-page {
+  &__wrapper {
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 16px;
+  }
+
+  &__paper {
+    padding: 20px;
+  }
+
+  &__section {
+    margin-bottom: 20px;
+  }
+
+  &__section-title {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  /* account */
+  &__account-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px;
+  }
+  &__account-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+  &__account-info {
+    max-width: 60%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    img {
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+    }
+  }
+  /* // account */
+
+  /* Розклад дзвінків */
+  &__call-schedule-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__call-schedule-item {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  &__call-schedule-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+  }
+
+  /* current block */
+  &__current-wrapper {
+    margin-bottom: 30px;
+  }
+  &__current-title {
+    text-align: center;
+    margin-bottom: 10px !important;
+  }
+  &__current-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  /* // current block */
+
+  /* select colors */
+  &__select-colors {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  &__select-colors:not(:last-of-type) {
+    margin-bottom: 20px;
+  }
+  /* // select colors */
+
+  /* account */
+  &__logout-btn {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    // margin-bottom: 20px;
+  }
+  /* // account */
+}

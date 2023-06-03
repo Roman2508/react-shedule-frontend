@@ -1,0 +1,225 @@
+.signIn {
+  height: 100vh;
+
+  display: flex;
+
+  &__bg {
+    flex: 0 0 50%;
+    position: relative;
+    overflow: hidden;
+    background-image: url('../../assets/login-bg.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      g {
+        path {
+          // fill: #fff;
+        }
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 0 0 50%;
+    padding: 20px;
+    max-width: 720px;
+
+    svg {
+      // width: 45px;
+      // height: 57px;
+
+      path {
+        // fill: rgb(255, 255, 255);
+        // fill: rgb(29, 155, 240);
+      }
+    }
+
+    button {
+      width: 100%;
+      border-radius: 9999px;
+
+      &:first-of-type:hover {
+        background-color: darken(rgb(29, 155, 240), 4%);
+      }
+    }
+  }
+
+  &__btn-wrapper {
+    max-width: 300px;
+  }
+
+  &__btn-text {
+    padding: 5px 0;
+    position: relative;
+    text-align: center;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: calc(50% - 20px);
+      height: 1px;
+      background-color: rgb(220, 227, 228);
+      left: 0;
+      top: 50%;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: calc(50% - 20px);
+      height: 1px;
+      background-color: rgb(220, 227, 228);
+      right: 0;
+      top: 50%;
+    }
+  }
+}
+
+/* register block */
+.registerPopup {
+  padding: 0 60px;
+
+  h2 {
+    font-weight: 700;
+  }
+
+  svg:first-child {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    cursor: pointer;
+  }
+}
+
+.birthDay-block {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 60px;
+}
+
+// .MuiOutlinedInput-input {
+//   margin: 0;
+// }
+
+// .css-ypiqx9-MuiDialogContent-root {
+//   padding: 20px 0;
+// }
+
+/* //register block */
+
+/* login block */
+.loginPopup {
+  padding: 0 100px;
+
+  h2 {
+    font-weight: 700;
+  }
+
+  svg:first-child {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    cursor: pointer;
+  }
+
+  &__text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+
+    & p + p {
+      margin-left: 5px;
+    }
+
+    & p:last-child {
+      cursor: pointer;
+    }
+  }
+}
+
+.login-logo {
+  left: 50% !important;
+  top: 0 !important;
+  transform: translateX(-50%) !important;
+  position: relative !important;
+  width: 60px !important;
+  height: 60px !important;
+
+  path {
+    fill: rgb(29, 155, 240);
+  }
+}
+
+.login {
+  &__btn-wrapper {
+    margin-top: 20px;
+
+    button {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+/* //login block */
+
+/* form */
+.loginPopup__form div + div {
+  margin-top: 20px;
+}
+
+.inputs-wrapper {
+  margin-bottom: 20px;
+}
+
+.registerPopup h6 {
+  margin-top: 20px;
+}
+
+.registerPopup form {
+  padding-bottom: 10px;
+}
+
+/* //form */
+
+.auth-page {
+  &__white-logo {
+    position: absolute;
+    width: 360px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease-in-out;
+  }
+  &__white-logo:hover {
+    width: 370px !important;
+  }
+  &__already-is {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin: 15px 0 20px;
+  }
+  &__password-wrapper {
+    position: relative;
+  }
+  &__password-visible-icon {
+    opacity: 0.6;
+    cursor: pointer;
+    position: absolute;
+    transform: translateY(-50%);
+    top: 25px;
+    right: 16px;
+  }
+}

@@ -1,0 +1,43 @@
+.schedule-subjects {
+  &__table-row {
+    cursor: pointer;
+  }
+
+  &__table-cell {
+    font-size: 12px !important;
+    padding: 5px 0 5px 6px !important;
+    // padding: 5px 0 5px 10px !important;
+    max-width: 60px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  &__table-row--disabled {
+    opacity: 0.4;
+    // pointer-events: none;
+  }
+
+  &__table-cell:first-child {
+    padding: 5px 0 5px 6px !important;
+  }
+
+  &__table-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  &__table-copy-btn {
+    margin: 0 0 10px 0 !important;
+  }
+
+  &__table--empty {
+    top: 50%;
+    left: 50%;
+    transform: translate(-55%, -44%);
+    position: absolute;
+    width: 50%;
+  }
+}

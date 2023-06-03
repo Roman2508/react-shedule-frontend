@@ -1,0 +1,65 @@
+// #174ea6
+
+body {
+  margin: 0;
+  font-family: 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: auto;
+  position: relative;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box !important;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 0;
+  background-color: transparent;
+  text-decoration: none;
+  color: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(187, 187, 187);
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(164, 164, 164);
+}
+
+.app-wrapper {
+  background-color: rgba(0, 0, 0, 0.02);
+  min-height: calc(100vh - 64px); // ???????????????????????????/ з хедером
+  min-height: 100vh; // ???????????????????????????/ без хедера
+  overflow: hidden;
+}
+
+.css-1veezu6-MuiFormLabel-root-MuiInputLabel-root {
+  top: -7px !important;
+}
+
+.css-1hgdth3-MuiFormLabel-root-MuiInputLabel-root {
+  top: -7px !important;
+}
+
+.PrivateSwipeArea-root {
+  display: none;
+}

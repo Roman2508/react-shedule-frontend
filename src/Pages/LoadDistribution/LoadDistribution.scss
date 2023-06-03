@@ -1,0 +1,138 @@
+.load-distribution {
+  max-width: 1850px !important;
+  margin: 0 auto !important;
+  padding: 8px 32px 0 0;
+
+  &__title {
+    padding: 16px;
+  }
+
+  &__groups-top {
+    position: relative;
+  }
+
+  &__groups-filter {
+    position: absolute !important;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    svg path {
+      fill: rgba(0, 0, 0, 0.7);
+    }
+  }
+
+  &__icons-box {
+    display: flex;
+    justify-content: center;
+    padding: 8px;
+
+    button + button {
+      margin-left: 20px;
+    }
+
+    svg path {
+      fill: rgba(0, 0, 0, 0.7);
+    }
+  }
+
+  &__block {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__inputs-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+
+    svg path {
+      fill: rgba(0, 0, 0, 0.7);
+    }
+  }
+
+  &__input {
+    margin-bottom: 16px !important;
+    width: 66%;
+  }
+
+  &__student-count-input {
+    width: 30%;
+    input {
+      text-align: center;
+    }
+  }
+  &__student-count-update-btn {
+    margin-left: 16px !important;
+  }
+
+  &__row-box {
+    margin: 0 16px 16px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__subjects-box {
+    margin-top: -20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    margin-right: 20px;
+  }
+
+  &__subjects-type:last-child {
+    margin-bottom: -6px !important;
+  }
+
+  &__input-button {
+    margin-left: 10px !important;
+  }
+
+  &__table-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__groups--empty {
+    padding: 60px 50px;
+    display: flex;
+    justify-content: center;
+    & img {
+      max-width: 55%;
+    }
+  }
+
+  /* filter modal */
+
+  &__select-box {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    gap: 20px;
+    .css-w0nrn8-MuiFormControl-root {
+      margin: 20px 0 0;
+      width: 100%;
+    }
+    .css-14usnb2-MuiFormLabel-root-MuiInputLabel-root {
+      top: 0 !important;
+    }
+    .css-1izf6b2-MuiFormLabel-root-MuiInputLabel-root {
+      z-index: 999;
+      background-color: #ffffff;
+    }
+  }
+}
+@media (max-width: 1300px) {
+  .load-distribution__student-count-input {
+    width: 50%;
+  }
+}
+@media (max-width: 1100px) {
+  .load-distribution__student-count-input {
+    width: 60%;
+  }
+}

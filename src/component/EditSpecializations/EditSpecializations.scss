@@ -1,0 +1,62 @@
+.edit-specializations {
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 0 !important;
+  }
+
+  &__add-item {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__add-input {
+    min-height: 36px;
+    max-width: 60%;
+    height: 100%;
+  }
+
+  &__add-button {
+    text-transform: none;
+    min-width: 35% !important;
+  }
+
+  &__table-bottom {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__button-group {
+    display: flex !important;
+    justify-content: space-between !important;
+    padding: 0 25px 20px !important;
+  }
+
+  &__subject-name {
+    max-width: 240px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__row:hover &__actions {
+    opacity: 1;
+  }
+
+  &__actions {
+    opacity: 0;
+    position: absolute;
+    transform: translateY(9%);
+    right: 40px;
+  }
+}
+
+.css-1hgf8cx-MuiInputBase-root-MuiOutlinedInput-root,
+.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+  min-height: 36px !important;
+}
+
+.css-14usnb2-MuiFormLabel-root-MuiInputLabel-root {
+  top: -10px !important;
+}

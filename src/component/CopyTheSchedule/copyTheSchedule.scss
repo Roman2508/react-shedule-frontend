@@ -1,0 +1,12 @@
+.copy-the-schedule {
+  &__content {
+    padding: 0 !important;
+  }
+  &__tab {
+    min-width: 200px !important;
+    width: 50% !important;
+  }
+  &__tab-panel {
+    padding: 0 24px;
+  }
+}

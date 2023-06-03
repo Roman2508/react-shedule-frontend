@@ -1,0 +1,68 @@
+.educational-plan-edit {
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+      padding: 16px 24px;
+      font-weight: 700;
+    }
+  }
+
+  &__title {
+    max-width: 380px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-right: 0 !important;
+  }
+
+  &__box {
+    display: flex;
+    justify-content: space-between;
+    min-width: 500px;
+    padding-top: 10px !important;
+  }
+  &__input-names {
+    min-width: 50%;
+    margin-top: 15px;
+  }
+  &__input-names p {
+    margin-bottom: 24px;
+  }
+
+  &__form-box {
+    display: flex;
+    flex-direction: column;
+  }
+  &__input-box {
+    display: flex;
+    align-items: center;
+    svg {
+      cursor: pointer;
+    }
+    svg path {
+      opacity: 0.5;
+    }
+  }
+  &__input {
+    margin-right: 10px !important;
+    max-width: 80px;
+  }
+  &__select-list {
+    margin-top: 14px;
+    margin-bottom: 6px;
+    max-height: 33px;
+    min-width: 140px;
+  }
+  &__select-list div {
+    padding: 10px;
+  }
+
+  &__remove-btn {
+    position: absolute !important;
+    left: 24px;
+    bottom: 28px;
+  }
+}
