@@ -224,6 +224,11 @@ export const StyledTableCellBorder = styled(TableCell)(({ theme }) => ({
   borderLeft: '1px solid rgba(224, 224, 224, 1)',
   borderRight: '1px solid rgba(224, 224, 224, 1)',
 }))
+export const StyledTableForDistributedLoad = styled(TableCell)(({ theme }) => ({
+  borderLeft: '1px solid rgba(224, 224, 224, 1)',
+  borderRight: '1px solid rgba(224, 224, 224, 1)',
+  padding: '6px',
+}))
 
 export const StyledAuthDialog = styled(Dialog)(({ theme }) => ({
   '.css-1t1j96h-MuiPaper-root-MuiDialog-paper': {
@@ -256,6 +261,19 @@ export const StyledDatePicker = styled(DatePicker)(({ theme }) => ({
   },
   '.css-14usnb2-MuiFormLabel-root-MuiInputLabel-root': {
     top: '-3px !important',
+  },
+}))
+
+export const StyledDistributedLoadDatePicker = styled(DatePicker)(({ theme }) => ({
+  '.css-co0kx7-MuiInputBase-root-MuiOutlinedInput-root': {
+    marginRight: '16px',
+    maxWidth: '150px',
+  },
+  '.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input': {
+    padding: '21px 20px',
+  },
+  '.css-14usnb2-MuiFormLabel-root-MuiInputLabel-root': {
+    top: '-6px !important',
   },
 }))
 

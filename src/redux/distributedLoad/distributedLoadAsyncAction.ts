@@ -2,10 +2,12 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { distributedLoadAPI } from '../../api/api'
 import {
   AttachTeacherPayload,
+  GetDistributedLoadBySemesterType,
   GetDistributedLoadType,
   UpdateDistributedLoadType,
   UpdateStudentsCountType,
 } from '../../api/apiTypes'
+import { DistributedLoadSubjectsType } from './distributedLoadTypes'
 
 export const updateDistributedLoad = createAsyncThunk(
   'distributedLoad/updateDistributedLoad',
@@ -30,6 +32,14 @@ export const getDistributedTeacherLoad = createAsyncThunk(
     return data
   },
 )
+
+export const getDistributedLoadBySemester = createAsyncThunk<
+  DistributedLoadSubjectsType[],
+  GetDistributedLoadBySemesterType
+>('distributedLoad/getDistributedLoadBySemester', async (payload) => {
+  const { data } = await distributedLoadAPI.getDistributedLoadBySemester(payload)
+  return data
+})
 
 export const attachTeacher = createAsyncThunk(
   'distributedLoad/attachTeacher',

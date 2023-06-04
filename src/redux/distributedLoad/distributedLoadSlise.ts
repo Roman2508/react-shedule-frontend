@@ -3,6 +3,7 @@ import { AppLoadingStatusTypes } from '../appTypes'
 import {
   attachTeacher,
   getDistributedLoad,
+  getDistributedLoadBySemester,
   getDistributedTeacherLoad,
   updateDistributedLoad,
   updateStudentsCount,
@@ -12,12 +13,14 @@ import { DistributedLoadSubjectsType, DistributedLoadType } from './distributedL
 type DistributedLoadInitialStateType = {
   load: DistributedLoadType | null
   teacherLoad: DistributedLoadSubjectsType[] | null
+  distributedSemesterLoad: DistributedLoadSubjectsType[] | null
   loadingStatus: AppLoadingStatusTypes
 }
 
 const initialState: DistributedLoadInitialStateType = {
   load: null,
   teacherLoad: null,
+  distributedSemesterLoad: null,
   loadingStatus: AppLoadingStatusTypes.NEVER,
 }
 
@@ -62,9 +65,22 @@ const distributedLoadSlise = createSlice({
     })
     builder.addCase(getDistributedTeacherLoad.fulfilled, (state, action) => {
       state.teacherLoad = action.payload
+      state.distributedSemesterLoad = action.payload
       state.loadingStatus = AppLoadingStatusTypes.SUCCESS
     })
     builder.addCase(getDistributedTeacherLoad.rejected, (state) => {
+      state.loadingStatus = AppLoadingStatusTypes.ERROR
+    })
+
+    /* getDistributedLoadBySemester */
+    builder.addCase(getDistributedLoadBySemester.pending, (state) => {
+      state.loadingStatus = AppLoadingStatusTypes.LOADING
+    })
+    builder.addCase(getDistributedLoadBySemester.fulfilled, (state, { payload }) => {
+      state.distributedSemesterLoad = payload
+      state.loadingStatus = AppLoadingStatusTypes.SUCCESS
+    })
+    builder.addCase(getDistributedLoadBySemester.rejected, (state) => {
       state.loadingStatus = AppLoadingStatusTypes.ERROR
     })
 

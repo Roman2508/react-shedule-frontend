@@ -343,6 +343,12 @@ export type UpdateStudentsCountType = {
   students: string
 }
 
+export type GetDistributedLoadBySemesterType = {
+  sortType: string
+  selectedSemester: string
+  id: string
+}
+
 /* // distributedLoad */
 
 /* addLessonType */

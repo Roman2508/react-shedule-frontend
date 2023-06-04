@@ -1,13 +1,16 @@
 import * as React from 'react'
-import './LoadDistributionControl.scss'
-import LoadDistributionControlGroup from '../../component/LoadDistributionControlGroup/LoadDistributionControlGroup'
+import '../../component/LoadDistributionControl/LoadDistributionControl.scss'
+// import LoadDistributionControlGroup from '../../component/LoadDistributionControlGroup/LoadDistributionControlGroup'
 import Paper from '@mui/material/Paper/Paper'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
-import LoadDistributionFilter from './LoadDistributionFilter'
-import { IDistributedLoadSortParams, IDistributedLoadSortType } from './load-distribution.interface'
+// import LoadDistributionFilter from '../../component/LoadDistributionControl/useDisributionLoadFilter'
+import {
+  IDistributedLoadSortParams,
+  IDistributedLoadSortType,
+} from '../../component/LoadDistributionControl/load-distribution.interface'
 import { useSelector } from 'react-redux'
 import { selectFaculties } from '../../redux/faculties/facultiesSelectors'
 import { selectGroups } from '../../redux/group/groupSelector'
@@ -17,6 +20,9 @@ import { useAppDispatch } from '../../redux/store'
 import { getAllDepartments } from '../../redux/teachersAndDepartment/teachersAndDepartmentAsyncAction'
 import { getAllFaculties } from '../../redux/faculties/facultiesAsyncAction'
 import { getAllFacultyGroups } from '../../redux/group/groupAsyncAction'
+import moment from 'moment'
+import LoadDistributionControlGroup from '../../component/LoadDistributionControl/LoadDistributionControlGroup'
+import LoadDistributionFilter from '../../component/LoadDistributionControl/LoadDistributionFilter'
 
 const sortParamsInitialData = {
   mainItemName: '',
@@ -24,6 +30,7 @@ const sortParamsInitialData = {
   secondaryItemName: '',
   secondaryItemId: '',
   currentSemester: '1',
+  currentYear: moment(new Date().getFullYear(), 'YYYY'),
 }
 
 const LoadDistributionControl = () => {
@@ -59,7 +66,28 @@ const LoadDistributionControl = () => {
     fetchData()
   }, [institution])
 
-  React.useEffect(() => {}, [])
+  React.useEffect(() => {
+    const fetchData = async () => {
+      if (institution && sortParams.mainItemId) {
+        if (sortType.type === 'group') {
+          const groups = await dispatch(getAllFacultyGroups(sortParams.mainItemId))
+
+          setSortParams((prev) => {
+            return {
+              ...prev,
+              secondaryItemName: groups.payload[0].name,
+              secondaryItemId: groups.payload[0]._id,
+            }
+          })
+        }
+
+        if (sortType.type === 'teacher') {
+        }
+      }
+    }
+
+    fetchData()
+  }, [sortParams.mainItemId, institution])
 
   return (
     <div className="load-distribution-control__wrapper">
@@ -74,7 +102,7 @@ const LoadDistributionControl = () => {
           groups={[...(fullTimeGroups || []), ...(partTimeGroups || [])]}
         />
       </Paper>
-      <LoadDistributionControlGroup />
+      <LoadDistributionControlGroup sortParams={sortParams} />
     </div>
   )
 }

@@ -1,6 +1,5 @@
 import './LoadDistributionControl.scss'
 import Button from '@mui/material/Button'
-import Paper from '@mui/material/Paper/Paper'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
@@ -9,9 +8,18 @@ import { GroupType } from '../../redux/group/groupTypes'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { FacultyType } from '../../redux/faculties/facultiesTypes'
 import { IDistributedLoadSortParams, IDistributedLoadSortType } from './load-distribution.interface'
-import LoadDistributionControlGroup from '../../component/LoadDistributionControlGroup/LoadDistributionControlGroup'
 import CircularPreloader from '../../component/CircularPreloader'
 import { DepartmentType, TeacherType } from '../../redux/teachersAndDepartment/teachersAndDepartmentTypes'
+import { useAppDispatch } from '../../redux/store'
+import {
+  getDistributedLoadBySemester,
+  getDistributedTeacherLoad,
+} from '../../redux/distributedLoad/distributedLoadAsyncAction'
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import moment from 'moment'
+import { StyledDistributedLoadDatePicker } from '../../theme'
+import { ukUA } from '@mui/x-date-pickers'
 
 interface ILoadDistributionFilterProps {
   faculties: FacultyType[]
@@ -32,13 +40,16 @@ const LoadDistributionFilter: React.FC<ILoadDistributionFilterProps> = ({
   setSortParams,
   departments,
 }) => {
+  const dispatch = useAppDispatch()
+
   const [teachers, setTeachers] = React.useState<TeacherType[]>([])
 
   React.useEffect(() => {
-    if (departments && departments.length) {
-      setTeachers(departments[0].teachers)
+    if (departments && departments.length && sortType.type === 'teacher') {
+      const teachers = departments.find((d) => String(d._id) === sortParams.mainItemId)?.teachers
+      if (teachers) setTeachers(teachers)
     }
-  }, [departments])
+  }, [departments, sortParams])
 
   const handleChange = (event: SelectChangeEvent, type: string, sortMode: string) => {
     const value = event.target.value as string
@@ -80,15 +91,25 @@ const LoadDistributionFilter: React.FC<ILoadDistributionFilterProps> = ({
 
   const handleChangeMainItem = (event: SelectChangeEvent) => {
     handleChange(event, 'mainItemId', 'params')
+
     let currentMainItem: DepartmentType | FacultyType | undefined
+    let secondaryItem: any
 
     if (sortType.type === 'teacher' && departments) {
       currentMainItem = departments.find((el) => String(el._id) === event.target.value)
+      secondaryItem = currentMainItem?.teachers[0]
     }
     if (sortType.type === 'group') {
       currentMainItem = faculties.find((el) => el._id === event.target.value)
     }
     if (currentMainItem) setSortParams((prev) => ({ ...prev, mainItemName: currentMainItem?.name as string }))
+    if (secondaryItem) {
+      setSortParams((prev) => ({
+        ...prev,
+        secondaryItemId: secondaryItem?._id,
+        secondaryItemName: secondaryItem?.name,
+      }))
+    }
   }
 
   const handleChangeSecondaryItem = (event: SelectChangeEvent) => {
@@ -102,6 +123,23 @@ const LoadDistributionFilter: React.FC<ILoadDistributionFilterProps> = ({
 
       const currentSecondatyItem = groups.find((el) => el._id === event.target.value)
       if (currentSecondatyItem) setSortParams((prev) => ({ ...prev, secondaryItemName: currentSecondatyItem.name }))
+    }
+  }
+
+  const onSubmit = () => {
+    if (sortType.type === 'teacher') {
+      const currentShowedYear = moment(sortParams.currentYear).format('YYYY')
+      dispatch(getDistributedTeacherLoad({ teacher: sortParams.secondaryItemId, currentShowedYear }))
+    }
+
+    if (sortType.type === 'group') {
+      dispatch(
+        getDistributedLoadBySemester({
+          sortType: sortType.type,
+          selectedSemester: sortParams.currentSemester,
+          id: sortParams.secondaryItemId,
+        }),
+      )
     }
   }
 
@@ -119,20 +157,39 @@ const LoadDistributionFilter: React.FC<ILoadDistributionFilterProps> = ({
         </Select>
       </FormControl>
 
-      <FormControl sx={{ width: '120px', marginRight: '16px' }} fullWidth>
-        <InputLabel>Семестр</InputLabel>
-        <Select
-          className="schedule-page__select"
-          value={sortParams.currentSemester}
-          label="semester"
-          onChange={(e) => handleChange(e, 'currentSemester', 'params')}>
-          {['1', '2', '3', '4', '5', '6', '7', '8'].map((el) => (
-            <MenuItem key={el} value={String(el)}>
-              {el}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      {sortType.type === 'teacher' && (
+        <LocalizationProvider
+          dateAdapter={AdapterMoment}
+          localeText={ukUA.components.MuiLocalizationProvider.defaultProps.localeText}
+          adapterLocale="de">
+          <StyledDistributedLoadDatePicker
+            label={'Виберіть рік'}
+            value={sortParams.currentYear}
+            onChange={(value: any) => setSortParams((prev) => ({ ...prev, currentYear: value }))}
+            minDate={moment('2018', 'YYYY')}
+            maxDate={moment('2041', 'YYYY')}
+            format="YYYY"
+            views={['year']}
+          />
+        </LocalizationProvider>
+      )}
+
+      {sortType.type === 'group' && (
+        <FormControl sx={{ width: '120px', marginRight: '16px' }} fullWidth>
+          <InputLabel>Семестр</InputLabel>
+          <Select
+            className="schedule-page__select"
+            value={sortParams.currentSemester}
+            label="semester"
+            onChange={(e) => handleChange(e, 'currentSemester', 'params')}>
+            {['1', '2', '3', '4', '5', '6', '7', '8'].map((el) => (
+              <MenuItem key={el} value={String(el)}>
+                {el}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      )}
 
       {sortType.type === 'teacher' && (
         <>
@@ -214,7 +271,9 @@ const LoadDistributionFilter: React.FC<ILoadDistributionFilterProps> = ({
         </>
       )}
 
-      <Button variant="outlined">Пошук</Button>
+      <Button variant="outlined" onClick={onSubmit}>
+        Пошук
+      </Button>
     </div>
   )
 }

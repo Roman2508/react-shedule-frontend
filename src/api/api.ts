@@ -26,6 +26,7 @@ import {
   CreateStreamPayloadType,
   CreateSubgroupsType,
   FetchNewBuildingType,
+  GetDistributedLoadBySemesterType,
   GetDistributedLoadType,
   onCreateAuditoryType,
   onRemoveAuditoryType,
@@ -379,6 +380,10 @@ export const distributedLoadAPI = {
   getDistributedTeacherLoad(payload: { teacher: string; currentShowedYear: string }) {
     const { teacher, currentShowedYear } = payload
     return instanse.get(`/distributed-load/teacher/${currentShowedYear}/${teacher}`)
+  },
+  getDistributedLoadBySemester(payload: GetDistributedLoadBySemesterType) {
+    const { sortType, selectedSemester, id } = payload
+    return instanse.get(`/distributed-semester-load/${sortType}/${selectedSemester}/${id}`)
   },
   attachTeacher(payload: AttachTeacherPayload) {
     // const id = payload[0]._id
