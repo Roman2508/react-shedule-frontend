@@ -7,6 +7,7 @@ import { selectLessons } from '../../redux/lessons/lessonsSelector'
 import { useSelector } from 'react-redux'
 import { LessonsListItemType, SelectedDistributedLoadType } from '../../redux/distributedLoad/distributedLoadTypes'
 import { setDublicatedLessonItems } from '../../utils/setDublicatedLessonItems'
+import { useLocalStorage } from '../../utils/useLocalStorage'
 
 type DayItemType = {
   data: moment.Moment
@@ -52,6 +53,7 @@ const ScheduleItem: React.FC<ScheduleItemPropsType> = ({
   setOpenSeveralSubjectsModal,
 }) => {
   const [lessonsList, setLessonsList] = React.useState<LessonsListType[]>([])
+  const colorMode = useLocalStorage('colorMode')
 
   const { currentAuditoryLessons, currentGroupLessons, currentTeacherLessons } = useSelector(selectLessons)
 
@@ -192,7 +194,9 @@ const ScheduleItem: React.FC<ScheduleItemPropsType> = ({
               return (
                 <Paper
                   key={index}
-                  className={`schedule-page__schedule-item schedule-page__schedule-item--light`}
+                  className={`schedule-page__schedule-item schedule-page__schedule-item--${
+                    colorMode === 'light' ? 'light' : 'dark'
+                  }`}
                   onClick={() => onClickEmptyItem(item.start, index + 1, item)}>
                   <>
                     {lessonsList
@@ -218,7 +222,12 @@ const ScheduleItem: React.FC<ScheduleItemPropsType> = ({
                                         onClickScheduleItem({ ...el, type: lessonInfo.type }, item.start, index + 1)
                                       }
                                       className={`schedule-page__lesson ${lessonInfo.lessonSubjectTypeClass} ${
-                                        isItemSelected ? 'schedule-page__selected' : ''
+                                        isItemSelected && colorMode === 'light'
+                                          ? 'schedule-page__selected'
+                                          : isItemSelected && colorMode === 'dark'
+                                          ? 'schedule-page__selected--dark'
+                                          : ''
+                                        // isItemSelected  ? 'schedule-page__selected' : ''
                                       }`}>
                                       {/*  */}
 

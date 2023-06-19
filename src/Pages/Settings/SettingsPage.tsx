@@ -82,6 +82,8 @@ const SettingsPage: React.FC<SettingsPagePropsType> = ({ colorMode }) => {
   const { userData, institution } = useSelector(selectAuthData)
   const alertInfo = useSelector(selectAlerts)
 
+  console.log(colorMode)
+
   const [currentTermsOfStudy, setCurrentTermsOfStudy] = React.useState<TermsOfStudyType>(initialCurrentTermsOfStudyData)
   const [showYear, setShowYear] = React.useState(moment(new Date().getFullYear(), 'YYYY'))
 

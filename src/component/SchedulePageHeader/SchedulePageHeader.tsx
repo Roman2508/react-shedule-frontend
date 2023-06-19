@@ -36,6 +36,7 @@ import { updateUserSemester } from '../../redux/accountInfo/accountInfoAsyncActi
 import { selectAuthData } from '../../redux/accountInfo/accountInfoSelector'
 import { calcCurrentSemester } from '../../utils/calcCurrentSemester'
 import { changeFilterType } from '../../redux/lessons/lessonsSlice'
+import { useLocalStorage } from '../../utils/useLocalStorage'
 
 const MenuProps = {
   PaperProps: {
@@ -106,6 +107,8 @@ const SchedulePageHeader: React.FC<SchedulePageHeaderPropsType> = ({
 
   const { fullTimeGroups, partTimeGroups } = useSelector(selectGroups)
   const { institution } = useSelector(selectAuthData)
+
+  const colorMode = useLocalStorage('colorMode')
 
   const [selectSemesterValue, setSelectSemesterValue] = React.useState<'1' | '2'>('1')
 
@@ -237,7 +240,7 @@ const SchedulePageHeader: React.FC<SchedulePageHeaderPropsType> = ({
           label="Семестр"
           MenuProps={MenuProps}
           value={selectSemesterValue}
-          sx={{ minWidth: '90px !important' }}
+          sx={{ minWidth: '90px !important', height: '43px' }}
           onChange={handleChangeSelectedSemester}>
           <MenuItem value={'1'}>
             <span className="schedule-page__current-week">1</span>
@@ -263,7 +266,7 @@ const SchedulePageHeader: React.FC<SchedulePageHeaderPropsType> = ({
           size="small"
           value={currentWeekNumber + 1}
           label="Номер тижня"
-          sx={{ minWidth: '100px !important' }}
+          sx={{ minWidth: '100px !important', height: '43px' }}
           MenuProps={MenuProps}
           onChange={(val: any) => setCurrentWeekNumber(Number(val.target.value - 1))}>
           {[...Array(totalWeeksCount)].map((_, index) => (

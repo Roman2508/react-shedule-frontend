@@ -34,6 +34,15 @@ export const getDesignTokens: any = (mode: PaletteMode) => ({
         },
       },
     },
+    // MuiSvgIcon: {
+    //   styleOverrides: {
+    //     root: {
+    //       '& path': {
+    //         fill: 'rgba(255, 255, 255, 0.7)',
+    //       },
+    //     },
+    //   },
+    // },
   },
   // .css-mnn31
   // shadows: {
@@ -345,13 +354,6 @@ export const StyledSelectWeek = styled(Select)(({ theme }) => ({
         top: '-6px !important',
       },
     },
-  '.css-1kg84sp-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input': {
-    // paddingRight: '80px !important',
-    height: '43px !important',
-  },
-  // '.css-p1b17n.css-p1b17n.css-p1b17n': {
-  //   minWidth: '90px !imprtant',
-  // },
 
   '.css-yjsfm1, .css-14lo706': {
     position: 'relative',
