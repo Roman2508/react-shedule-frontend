@@ -234,9 +234,10 @@ const SchedulePageHeader: React.FC<SchedulePageHeaderPropsType> = ({
       <div>
         <StyledSelectWeek
           size="small"
-          value={selectSemesterValue}
           label="Семестр"
           MenuProps={MenuProps}
+          value={selectSemesterValue}
+          sx={{ minWidth: '90px !important' }}
           onChange={handleChangeSelectedSemester}>
           <MenuItem value={'1'}>
             <span className="schedule-page__current-week">1</span>
@@ -262,6 +263,7 @@ const SchedulePageHeader: React.FC<SchedulePageHeaderPropsType> = ({
           size="small"
           value={currentWeekNumber + 1}
           label="Номер тижня"
+          sx={{ minWidth: '100px !important' }}
           MenuProps={MenuProps}
           onChange={(val: any) => setCurrentWeekNumber(Number(val.target.value - 1))}>
           {[...Array(totalWeeksCount)].map((_, index) => (
