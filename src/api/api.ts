@@ -1,4 +1,5 @@
 import axios from 'axios'
+// require('dotenv')
 import { AuditoriumsType } from '../redux/buildingsAndAuditoriums/buildingsAndAuditoriumsTypes'
 import {
   EducationalPlanGroupsType,
@@ -60,7 +61,7 @@ import {
 import { LoginDataType, RegisterDataType } from '../redux/accountInfo/accountInfoTypes'
 
 const instanse = axios.create({
-  baseURL: 'http://localhost:4444/',
+  baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:4444/' : 'https://timetable-server.onrender.com/',
 })
 
 // Якщо є токен, вшиваю його в конфігурацію axios
