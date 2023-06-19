@@ -349,6 +349,10 @@ export const StyledSelectWeek = styled(Select)(({ theme }) => ({
     paddingRight: '80px !important',
     height: '43px !important',
   },
+  '.css-p1b17n.css-p1b17n.css-p1b17n': {
+    minWidth: '90px !imprtant',
+  },
+
   '.css-yjsfm1, .css-14lo706': {
     position: 'relative',
     top: '-6px',
