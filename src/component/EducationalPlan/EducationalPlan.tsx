@@ -48,48 +48,6 @@ interface Data {
   eighthSemester: number | string
 }
 
-function createData(
-  name: string,
-  totalHour: string,
-  firstSemester: number | string,
-  secondSemester: number | string,
-  thirdSemester: number | string,
-  fourthSemester: number | string,
-  fifthSemester: number | string,
-  sixthSemester: number | string,
-  seventhSemester: number | string,
-  eighthSemester: number | string,
-): Data {
-  return {
-    name,
-    totalHour,
-    firstSemester,
-    secondSemester,
-    thirdSemester,
-    fourthSemester,
-    fifthSemester,
-    sixthSemester,
-    seventhSemester,
-    eighthSemester,
-  }
-}
-
-const rows = [
-  createData('Філософія', '120/120', 120, '', '', '', '', '', '', ''),
-  createData('Біологія', '150/150', 120, '', '', '', '', '', '', ''),
-  createData('Хімія', '120/120', 120, 120, '', '', '', '', '', ''),
-  createData('Математика', '150/150', 120, '', '', '', '', '', '', ''),
-  createData('Англійська', '120/120', 120, 120, '', '', '', '', '', ''),
-  createData('Фізичне виховання', '180/180', 120, '', '', '', '', '', '', ''),
-  createData('Економ. теорія', '150/150', 120, 120, '', '', '', '', '', ''),
-  createData('Географія', '120/120', 120, '', '', '', 120, '', '', ''),
-  createData('Історія України', '120/120', 120, '', '', 120, '', '', '', ''),
-  createData('Всесвітня історія', '120/120', 120, '', '', '', 150, 120, '', ''),
-  createData('Зарубіжна література', '150/150', 120, '', '', '', '', 120, '', ''),
-  createData('Українська література', '180/180', 120, '', '', '', '', '', 120, ''),
-  createData('Фізика', '120/120', 120, '', '', '', '', '', '', ''),
-]
-
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
     return -1
@@ -290,10 +248,6 @@ const EducationalPlan = () => {
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10))
     setPage(0)
-  }
-
-  const handleChangeDense = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDense(event.target.checked)
   }
 
   const handleOpenModal = (hours: SubjectType, name: string, id: number, semester: string) => {

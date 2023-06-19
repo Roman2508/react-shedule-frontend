@@ -80,6 +80,10 @@
 
   &__date-picker {
     position: relative;
+
+    input {
+      padding: 12.5px 14px;
+    }
   }
 
   &__date-picker--error {
@@ -140,12 +144,4 @@
     width: 100%;
     margin: 0 auto;
   }
-
-  // .css-14usnb2-MuiFormLabel-root-MuiInputLabel-root {
-  //   top: -5px !important;
-  // }
-
-  // .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
-  //   min-height: 42px !important;
-  // }
 }

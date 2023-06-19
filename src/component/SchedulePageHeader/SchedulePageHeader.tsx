@@ -233,8 +233,7 @@ const SchedulePageHeader: React.FC<SchedulePageHeaderPropsType> = ({
       {/* select semester */}
       <div>
         <StyledSelectWeek
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+          size="small"
           value={selectSemesterValue}
           label="Семестр"
           MenuProps={MenuProps}
@@ -260,8 +259,7 @@ const SchedulePageHeader: React.FC<SchedulePageHeaderPropsType> = ({
           today {currentWeekNumber + 1}
         </button> */}
         <StyledSelectWeek
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+          size="small"
           value={currentWeekNumber + 1}
           label="Номер тижня"
           MenuProps={MenuProps}

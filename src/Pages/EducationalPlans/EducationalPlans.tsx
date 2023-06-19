@@ -1,14 +1,11 @@
 import React from 'react'
 import './EducationalPlans.scss'
-import SearchIcon from '@mui/icons-material/SearchOutlined'
 import DeleteIcon from '@mui/icons-material/DeleteOutlined'
 import EditIcon from '@mui/icons-material/ModeEditOutlined'
 import { Link } from 'react-router-dom'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
-import Divider from '@mui/material/Divider'
-import { StyledAccordionDetails, StyledButton } from '../../theme'
 import Paper from '@mui/material/Paper'
 import IconButton from '@mui/material/IconButton'
 import AddEducationalPlanModal from './AddEducationalPlanModal'
@@ -20,12 +17,7 @@ import {
 } from '../../redux/educationalPlan/educationalPlanAsyncAction'
 import { useSelector } from 'react-redux'
 import { selectEducationalPlans } from '../../redux/educationalPlan/educationalPlanSelector'
-import LinearProgress from '@mui/material/LinearProgress'
-import Skeleton from '@mui/material/Skeleton'
-import Stack from '@mui/material/Stack'
-import { AppLoadingStatusTypes } from '../../redux/appTypes'
 import { EducationalPlanGroupsType, EducationalPlanType } from '../../redux/educationalPlan/educationalPlanTypes'
-import RemoveIcon from '@mui/icons-material/DeleteOutlined'
 import PlanIcon from '@mui/icons-material/StickyNote2Outlined'
 import ArrowIcon from '@mui/icons-material/ExpandMore'
 import Button from '@mui/material/Button'
@@ -40,7 +32,7 @@ const style = {
 
 const EducationalPlans = () => {
   const dispatch = useAppDispatch()
-  const { plans, loadingStatus } = useSelector(selectEducationalPlans)
+  const { plans } = useSelector(selectEducationalPlans)
   const { institution } = useSelector(selectAuthData)
 
   const [openEducationalPlanModal, setEducationalPlanModal] = React.useState(false)

@@ -13,8 +13,6 @@ import { SubjectType } from '../../redux/educationalPlan/educationalPlanTypes'
 import { useForm } from 'react-hook-form'
 import { useAppDispatch } from '../../redux/store'
 import { fetchChangeSubjectHours, removeSubjectSemester } from '../../redux/educationalPlan/educationalPlanAsyncAction'
-import { useSelector } from 'react-redux'
-import { selectEducationalPlan } from '../../redux/educationalPlan/educationalPlanSelector'
 import createAlertMessage from '../../utils/createAlertMessage'
 // import * as yup from 'yup'
 // import { yupResolver } from '@hookform/resolvers/yup'
@@ -249,6 +247,7 @@ const EducationalPlanEdit: React.FC<EducationalPlanEditPropsType> = ({
         <form className="educational-plan-edit__form-box" onSubmit={handleSubmit(onCreateNewSemester)}>
           {disciplinesForm.map((el) => (
             <TextField
+              size="small"
               className="educational-plan-edit__input"
               key={el.id}
               margin="dense"
@@ -271,6 +270,7 @@ const EducationalPlanEdit: React.FC<EducationalPlanEditPropsType> = ({
           {/* individual */}
           <div className="educational-plan-edit__input-box">
             <TextField
+              size="small"
               className="educational-plan-edit__input"
               margin="dense"
               id="name"
@@ -286,6 +286,7 @@ const EducationalPlanEdit: React.FC<EducationalPlanEditPropsType> = ({
           {/* inPlan */}
           <div className="educational-plan-edit__input-box">
             <TextField
+              size="small"
               className="educational-plan-edit__input"
               margin="dense"
               id="name"

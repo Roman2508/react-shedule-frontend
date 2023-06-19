@@ -297,7 +297,7 @@ const Streams = () => {
 
               <div className="streams__input-box">
                 <SearchIcon className="streams__input-icon" />
-                <TextField id="standard-bare" placeholder="Пошук…" margin="normal" />
+                <TextField id="standard-bare" placeholder="Пошук…" margin="normal" size="small" />
               </div>
 
               <FormGroup>

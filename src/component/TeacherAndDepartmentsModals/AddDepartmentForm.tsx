@@ -31,6 +31,8 @@ const AddDepartmentForm: React.FC<AddDepartmentFormPropsType> = ({ departments, 
     departmentNumber: '',
   })
 
+  const isSaveButtonDisabled = Object.entries(formValues).every((el) => el[1])
+
   const {
     register,
     handleSubmit,
@@ -102,7 +104,7 @@ const AddDepartmentForm: React.FC<AddDepartmentFormPropsType> = ({ departments, 
           </Button>
 
           <Stack spacing={2} direction="row" className="teachers-and-departments__buttons-box">
-            <Button variant="outlined" type="submit">
+            <Button variant="outlined" type="submit" disabled={!isSaveButtonDisabled}>
               Зберегти
             </Button>
             <StyledClosedButton variant="outlined" onClick={onClearFormValues}>

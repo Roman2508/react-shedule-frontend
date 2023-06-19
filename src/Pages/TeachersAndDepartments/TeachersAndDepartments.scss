@@ -16,7 +16,7 @@
   &__input {
     margin: 12px 0 !important;
     width: 46% !important;
-    padding: 5px 0;
+    // padding: 5px 0;
   }
 
   &__input + &__input {
@@ -28,9 +28,14 @@
     margin: 12px 0 !important;
   }
   &__teacher-input {
-    margin: 8px 0 !important;
+    margin: 10px 0 !important;
     width: 46% !important;
-    padding: 5px 0 !important;
+
+    // padding: 5px 0 !important;
+  }
+  &__teacher-select {
+    margin-top: 12px !important;
+    width: 46%;
   }
   &__select {
     margin-top: 8px !important;
@@ -38,10 +43,6 @@
   }
   &__select + &__select {
     margin-left: 36px;
-  }
-  &__teacher-select {
-    margin-top: 4px !important;
-    width: 46%;
   }
 
   &__bottom {

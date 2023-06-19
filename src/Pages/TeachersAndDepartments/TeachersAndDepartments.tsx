@@ -18,7 +18,7 @@ import { selectAuthData } from '../../redux/accountInfo/accountInfoSelector'
 const TeachersAndDepartments = () => {
   const dispatch = useAppDispatch()
 
-  const { departments, loadingStatus } = useSelector(selectTeachersAndDepartments)
+  const { departments } = useSelector(selectTeachersAndDepartments)
   const { institution } = useSelector(selectAuthData)
 
   React.useEffect(() => {

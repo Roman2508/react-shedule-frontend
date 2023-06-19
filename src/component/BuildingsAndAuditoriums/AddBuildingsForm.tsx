@@ -87,7 +87,7 @@ const AddBuildingsForm: React.FC<AddBuildingsFormPropsType> = ({ institutionId }
           </Button>
 
           <Stack spacing={2} direction="row" className="teachers-and-departments__buttons-box">
-            <Button variant="outlined" type="submit">
+            <Button variant="outlined" type="submit" disabled={!formValues.name}>
               Зберегти
             </Button>
             <StyledClosedButton variant="outlined" onClick={onClearInputValue}>
