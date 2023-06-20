@@ -274,11 +274,10 @@ const EducationalPlanEdit: React.FC<EducationalPlanEditPropsType> = ({
           {/*  */}
           <div className="educational-plan-edit__input-box">
             <FormControl sx={{ marginTop: '6px' }} fullWidth>
-              <InputLabel>Кафедра</InputLabel>
               <Select
                 size="small"
                 value={selectedDepartmentId}
-                label="Age"
+                placeholder="Кафедра"
                 onChange={(e) => setSelectedDepartmentId(e.target.value as string)}
                 className="educational-plan-edit__select"
               >
