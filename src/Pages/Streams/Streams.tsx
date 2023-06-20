@@ -99,7 +99,7 @@ const Streams = () => {
     if (activeStream && activeStreamComponent) {
       if (
         window.confirm(
-          `Ви дійсно хочете видалити групу ${activeStreamComponent.name} з складу потоку ${activeStream.name}?`,
+          `Ви дійсно хочете видалити групу ${activeStreamComponent.name} з складу потоку ${activeStream.name}?`
         )
       ) {
         const removeStreamComponentsPayload = {
@@ -112,7 +112,7 @@ const Streams = () => {
           dispatch,
           payload,
           `Група ${activeStreamComponent.name} видалена з потоку ${activeStream.name}`,
-          'Помилка при видаленні групи з потоку :(',
+          'Помилка при видаленні групи з потоку :('
         )
 
         setActiveStream((prev) => {
@@ -218,7 +218,8 @@ const Streams = () => {
                         selected={activeStream?._id === el._id}
                         onClick={() => setActiveStream(el)}
                         className="structural-units-item streams__list-item"
-                        sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                        sx={{ display: 'flex', justifyContent: 'space-between' }}
+                      >
                         <Typography noWrap={true} variant="subtitle1">
                           {el.name}
                         </Typography>
@@ -228,7 +229,8 @@ const Streams = () => {
                         <div className="streams__list-controls">
                           <IconButton
                             sx={{ minWidth: 'auto', padding: '5px', marginRight: '5px' }}
-                            onClick={onUpdateStream}>
+                            onClick={onUpdateStream}
+                          >
                             <EditIcon />
                           </IconButton>
                           <IconButton sx={{ minWidth: 'auto', padding: '5px' }} onClick={() => onRemoveStream(el._id)}>
@@ -264,7 +266,8 @@ const Streams = () => {
                       selected={activeStreamComponent?._id === component._id}
                       onClick={() => setActiveStreamComponent(component)}
                       className="structural-units-item"
-                      sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                      sx={{ display: 'flex', justifyContent: 'space-between' }}
+                    >
                       <Typography noWrap={true} variant="subtitle1">
                         {component.name}
                       </Typography>
@@ -277,7 +280,8 @@ const Streams = () => {
                             ? { minWidth: 'auto', padding: '5px' }
                             : { minWidth: 'auto', padding: '5px', display: 'none' }
                         }
-                        onClick={() => onRemoveStreamComponent(component)}>
+                        onClick={() => onRemoveStreamComponent(component)}
+                      >
                         <DeleteIcon />
                       </IconButton>
                     </ListItemButton>
@@ -297,7 +301,7 @@ const Streams = () => {
 
               <div className="streams__input-box">
                 <SearchIcon className="streams__input-icon" />
-                <TextField id="standard-bare" placeholder="Пошук…" margin="normal" />
+                <TextField id="standard-bare" placeholder="Пошук…" margin="normal" disabled />
               </div>
 
               <FormGroup>

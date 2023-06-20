@@ -25,6 +25,7 @@ type AddDepartmentFormPropsType = {
 const AddDepartmentForm: React.FC<AddDepartmentFormPropsType> = ({ departments, institutionId }) => {
   const dispatch = useAppDispatch()
 
+  // const [isLoading, setIsLoading] =
   const [openRemoveDepartmentModal, setOpenRemoveDepartmentModal] = React.useState(false)
   const [formValues, setFormValues] = React.useState({
     name: '',
@@ -34,23 +35,26 @@ const AddDepartmentForm: React.FC<AddDepartmentFormPropsType> = ({ departments, 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm()
 
   const onClearFormValues = () => {
     setFormValues({ name: '', departmentNumber: '' })
   }
 
-  const onSubmitDepartments = handleSubmit((_data) => {
-    const data = _data as onSubmitDepartmentsPaylaodTypes
-
-    const payload = {
-      ...data,
-      institutionId,
-      teachers: [],
+  const onSubmitDepartments = handleSubmit(async (_data) => {
+    try {
+      const data = _data as onSubmitDepartmentsPaylaodTypes
+      const payload = {
+        ...data,
+        institutionId,
+        teachers: [],
+      }
+      await dispatch(addDepartment(payload))
+      onClearFormValues()
+    } catch (error) {
+      alert('Не вдалось створити кафедру.')
     }
-    dispatch(addDepartment(payload))
-    onClearFormValues()
   })
 
   const onChangeInputValues = (value: string, type: string) => {
@@ -90,6 +94,7 @@ const AddDepartmentForm: React.FC<AddDepartmentFormPropsType> = ({ departments, 
         <TextField
           className="teachers-and-departments__input"
           label="Шифр кафедри"
+          type="number"
           variant="standard"
           {...register('departmentNumber')}
           value={formValues.departmentNumber}
@@ -102,7 +107,11 @@ const AddDepartmentForm: React.FC<AddDepartmentFormPropsType> = ({ departments, 
           </Button>
 
           <Stack spacing={2} direction="row" className="teachers-and-departments__buttons-box">
-            <Button variant="outlined" type="submit">
+            <Button
+              variant="outlined"
+              type="submit"
+              disabled={isSubmitting || !formValues.departmentNumber || !formValues.name}
+            >
               Зберегти
             </Button>
             <StyledClosedButton variant="outlined" onClick={onClearFormValues}>

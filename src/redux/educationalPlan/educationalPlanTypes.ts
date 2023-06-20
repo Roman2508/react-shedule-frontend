@@ -75,6 +75,7 @@ export interface EducationalPlanSubjectTypes {
 }
 
 export interface SubjectType {
+  departmentId: string // ????
   lectures: number
   practical: number
   laboratory: number

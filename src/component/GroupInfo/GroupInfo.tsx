@@ -46,7 +46,7 @@ const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement
   },
-  ref: React.Ref<unknown>,
+  ref: React.Ref<unknown>
 ) {
   return <Slide direction="up" ref={ref} {...props} />
 })
@@ -174,7 +174,7 @@ const GroupInfo: React.FC<GroupInfoPropsType> = ({
       // @ts-ignore
       const allPlans = [].concat.apply([], plansArray)
       const planObj = allPlans.find(
-        (el: EducationalPlanType) => String(el._id) === String(selectedGroup.EducationPlanId),
+        (el: EducationalPlanType) => String(el._id) === String(selectedGroup.EducationPlanId)
       )
       if (planObj) {
         // @ts-ignore
@@ -270,7 +270,7 @@ const GroupInfo: React.FC<GroupInfoPropsType> = ({
             const allPlans = [].concat.apply([], plansArray)
             // @ts-ignore
             const load = allPlans.find(
-              (el: EducationalPlanType) => String(el._id) === String(groupInfoValues.EducationPlanId),
+              (el: EducationalPlanType) => String(el._id) === String(groupInfoValues.EducationPlanId)
             ).subjects
 
             if (load && selectedGroupId) {
@@ -371,7 +371,8 @@ const GroupInfo: React.FC<GroupInfoPropsType> = ({
 
               <div
                 // variant="outlined"
-                className={`group-item__input-plan ${!!errors.EducationPlanId ? 'group-item__input--error' : ''}`}>
+                className={`group-item__input-plan ${!!errors.EducationPlanId ? 'group-item__input--error' : ''}`}
+              >
                 <input
                   readOnly
                   onClick={() => setOpenEducationPlanModal(true)}
@@ -385,7 +386,8 @@ const GroupInfo: React.FC<GroupInfoPropsType> = ({
               <LocalizationProvider
                 dateAdapter={AdapterMoment}
                 localeText={ukUA.components.MuiLocalizationProvider.defaultProps.localeText}
-                adapterLocale="de">
+                adapterLocale="de"
+              >
                 <StyledGroupAdmissionDatePicker
                   format="YYYY"
                   views={['year']}
@@ -428,7 +430,8 @@ const GroupInfo: React.FC<GroupInfoPropsType> = ({
                 variant="outlined"
                 className="group-item__input"
                 onClick={() => setOpenEditSubgroups(true)}
-                disabled={!selectedGroup}>
+                disabled={!selectedGroup}
+              >
                 Підгрупи
               </StyledGrayButton>
 
@@ -451,7 +454,8 @@ const GroupInfo: React.FC<GroupInfoPropsType> = ({
                 variant="outlined"
                 className="group-item__input"
                 onClick={() => setOpenSpecializations(true)}
-                disabled={!selectedGroup}>
+                disabled={!selectedGroup}
+              >
                 Спеціалізовані підгрупи
               </StyledGrayButton>
 
@@ -464,7 +468,8 @@ const GroupInfo: React.FC<GroupInfoPropsType> = ({
                   {...register('formOfEducations')}
                   error={!!errors.formOfEducations}
                   value={groupInfoValues.formOfEducations}
-                  onChange={(e) => onChangeGroupInfo('formOfEducations', e.target.value)}>
+                  onChange={(e) => onChangeGroupInfo('formOfEducations', e.target.value)}
+                >
                   <MenuItem value={'Денна'}>Денна</MenuItem>
                   <MenuItem value={'Заочна'}>Заочна</MenuItem>
                 </Select>
@@ -474,7 +479,7 @@ const GroupInfo: React.FC<GroupInfoPropsType> = ({
           </Paper>
 
           <Box className="group-item__bottom">
-            <Button variant="outlined" disabled={!selectedGroup}>
+            <Button variant="outlined" disabled={true || !selectedGroup}>
               Переглянути навантаження
             </Button>
 

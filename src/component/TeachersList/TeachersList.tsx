@@ -33,6 +33,7 @@ const TheachersList: React.FC<TheachersListPropsType> = ({ departments, selected
 
   const [mainExpanded, setMainExpanded] = React.useState<string | false>(false)
   const [itemExpanded, setItemExpanded] = React.useState<string | false>(false)
+  const [sortDepartments, setSortDepartments] = React.useState<DepartmentType[]>([])
 
   const [currentTeacher, setCurrentTeacher] = React.useState<TeacherType>()
 
@@ -53,6 +54,17 @@ const TheachersList: React.FC<TheachersListPropsType> = ({ departments, selected
     setCurrentTeacher(teacher)
     setTeacherModalOpen(true)
   }
+
+  React.useEffect(() => {
+    if (departments) {
+      setSortDepartments(() => {
+        const deepCopy: DepartmentType[] = JSON.parse(JSON.stringify(departments))
+        const sortedItems = deepCopy.sort((a, b) => a.departmentNumber - b.departmentNumber)
+
+        return sortedItems
+      })
+    }
+  }, [departments])
 
   if (departments === null || departments === undefined || !institution) {
     return (
@@ -82,11 +94,12 @@ const TheachersList: React.FC<TheachersListPropsType> = ({ departments, selected
       />
 
       <div>
-        {departments.map((dep: DepartmentType) => (
+        {sortDepartments.map((dep: DepartmentType) => (
           <Accordion
             key={dep._id}
             expanded={mainExpanded === `panel${dep._id}`}
-            onChange={handleChange(`panel${dep._id}`)}>
+            onChange={handleChange(`panel${dep._id}`)}
+          >
             <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
               <Typography /* sx={{ whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden', width: '295px' }} */
               >
@@ -102,14 +115,16 @@ const TheachersList: React.FC<TheachersListPropsType> = ({ departments, selected
                       selected={selectedTeacher?._id === item._id}
                       onClick={() => onSelectTeacher(item)}
                       className="structural-units-item"
-                      sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                      sx={{ display: 'flex', justifyContent: 'space-between' }}
+                    >
                       <Typography noWrap={true} variant="subtitle1">
                         {`${item.lastName} ${item.firstName} ${item.middleName}`}
                       </Typography>
                       <div style={{ whiteSpace: 'nowrap' }}>
                         <IconButton
                           sx={{ padding: '5px', marginRight: '5px' }}
-                          onClick={() => onChangeCurrentTeacher(item)}>
+                          onClick={() => onChangeCurrentTeacher(item)}
+                        >
                           <EditIcon />
                         </IconButton>
                         <IconButton sx={{ padding: '5px' }} onClick={() => onRemoveTeacher(dep._id, item._id)}>

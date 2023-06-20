@@ -37,7 +37,7 @@ const AddTeacherFrom: React.FC<AddTeacherFormType> = ({ currentTeacher, departme
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm()
 
   const [newTeacher, setNewTeacher] = React.useState<EditedTeacherType>({
@@ -47,6 +47,7 @@ const AddTeacherFrom: React.FC<AddTeacherFormType> = ({ currentTeacher, departme
     departmentId: '',
     formOfWork: '',
   })
+  const isDisabledAddButton = Object.entries(newTeacher).every((el) => el[1])
 
   React.useEffect(() => {
     if (currentTeacher) {
@@ -147,7 +148,8 @@ const AddTeacherFrom: React.FC<AddTeacherFormType> = ({ currentTeacher, departme
           {...register('departmentId')}
           value={newTeacher.departmentId}
           onChange={(e) => onChangeTeachersInputValues('departmentId', String(e.target.value))}
-          label="educationForm">
+          label="educationForm"
+        >
           {departmentsNumbers?.map((el) => (
             <MenuItem value={el} key={el}>
               {el}
@@ -164,14 +166,15 @@ const AddTeacherFrom: React.FC<AddTeacherFormType> = ({ currentTeacher, departme
           label="educationForm"
           {...register('formOfWork')}
           onChange={(e) => onChangeTeachersInputValues('formOfWork', e.target.value)}
-          value={newTeacher.formOfWork}>
+          value={newTeacher.formOfWork}
+        >
           <MenuItem value={'Штатний'}>Штатний</MenuItem>
           <MenuItem value={'Сумісник'}>Сумісник</MenuItem>
         </Select>
       </FormControl>
 
       <Stack spacing={2} direction="row" className="teachers-and-departments__buttons-box">
-        <Button variant="outlined" type="submit">
+        <Button variant="outlined" type="submit" disabled={isSubmitting || !isDisabledAddButton}>
           Зберегти
         </Button>
         {currentTeacher ? (

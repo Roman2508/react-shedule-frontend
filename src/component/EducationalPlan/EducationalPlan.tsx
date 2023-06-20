@@ -13,14 +13,16 @@ import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Switch from '@mui/material/Switch'
 import { visuallyHidden } from '@mui/utils'
 import { StyledClosedButton } from '../../theme'
 import EducationalPlanEdit from '../EducationalPlanEdit/EducationalPlanEdit'
 import { useParams } from 'react-router-dom'
 import { useAppDispatch } from '../../redux/store'
-import { fetchEducationalPlansById, removeSubject } from '../../redux/educationalPlan/educationalPlanAsyncAction'
+import {
+  fetchEducationalPlans,
+  fetchEducationalPlansById,
+  removeSubject,
+} from '../../redux/educationalPlan/educationalPlanAsyncAction'
 import { selectEducationalPlan } from '../../redux/educationalPlan/educationalPlanSelector'
 import { useSelector } from 'react-redux'
 import { EducationalPlanType, SubjectType } from '../../redux/educationalPlan/educationalPlanTypes'
@@ -34,6 +36,8 @@ import AlertMessage from '../AlertMessage'
 import { setShowError } from '../../redux/alerts/alertsSlise'
 import { selectAlerts } from '../../redux/appSelectors'
 import createAlertMessage from '../../utils/createAlertMessage'
+import { selectAuthData } from '../../redux/accountInfo/accountInfoSelector'
+import { getAllDepartments } from '../../redux/teachersAndDepartment/teachersAndDepartmentAsyncAction'
 
 interface Data {
   name: string
@@ -58,7 +62,7 @@ function createData(
   fifthSemester: number | string,
   sixthSemester: number | string,
   seventhSemester: number | string,
-  eighthSemester: number | string,
+  eighthSemester: number | string
 ): Data {
   return {
     name,
@@ -74,22 +78,6 @@ function createData(
   }
 }
 
-const rows = [
-  createData('Філософія', '120/120', 120, '', '', '', '', '', '', ''),
-  createData('Біологія', '150/150', 120, '', '', '', '', '', '', ''),
-  createData('Хімія', '120/120', 120, 120, '', '', '', '', '', ''),
-  createData('Математика', '150/150', 120, '', '', '', '', '', '', ''),
-  createData('Англійська', '120/120', 120, 120, '', '', '', '', '', ''),
-  createData('Фізичне виховання', '180/180', 120, '', '', '', '', '', '', ''),
-  createData('Економ. теорія', '150/150', 120, 120, '', '', '', '', '', ''),
-  createData('Географія', '120/120', 120, '', '', '', 120, '', '', ''),
-  createData('Історія України', '120/120', 120, '', '', 120, '', '', '', ''),
-  createData('Всесвітня історія', '120/120', 120, '', '', '', 150, 120, '', ''),
-  createData('Зарубіжна література', '150/150', 120, '', '', '', '', 120, '', ''),
-  createData('Українська література', '180/180', 120, '', '', '', '', '', 120, ''),
-  createData('Фізика', '120/120', 120, '', '', '', '', '', '', ''),
-]
-
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
     return -1
@@ -104,7 +92,7 @@ type Order = 'asc' | 'desc'
 
 function getComparator<Key extends keyof any>(
   order: Order,
-  orderBy: Key,
+  orderBy: Key
 ): (a: { [key in Key]: number | string }, b: { [key in Key]: number | string }) => number {
   return order === 'desc'
     ? (a, b) => descendingComparator(a, b, orderBy)
@@ -220,11 +208,13 @@ function EnhancedTableHead(props: EnhancedTableProps) {
             key={headCell.id}
             align={headCell.numeric ? 'center' : 'left'}
             sortDirection={orderBy === headCell.id ? order : false}
-            sx={{ borderRight: '1px solid rgb(219, 219, 219)', whiteSpace: 'nowrap' }}>
+            sx={{ borderRight: '1px solid rgb(219, 219, 219)', whiteSpace: 'nowrap' }}
+          >
             <TableSortLabel
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}>
+              onClick={createSortHandler(headCell.id)}
+            >
               {headCell.label}
               {orderBy === headCell.id ? (
                 <Box component="span" sx={visuallyHidden}>
@@ -250,6 +240,7 @@ const EducationalPlan = () => {
 
   const alertInfo = useSelector(selectAlerts)
   const { plan } = useSelector(selectEducationalPlan)
+  const { institution } = useSelector(selectAuthData)
 
   const [order, setOrder] = React.useState<Order>('asc')
   const [orderBy, setOrderBy] = React.useState<keyof Data>('totalHour')
@@ -275,6 +266,10 @@ const EducationalPlan = () => {
     if (params.id) {
       dispatch(fetchEducationalPlansById(params.id))
     }
+
+    if (institution) {
+      dispatch(getAllDepartments(institution._id))
+    }
   }, [])
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof Data) => {
@@ -290,10 +285,6 @@ const EducationalPlan = () => {
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10))
     setPage(0)
-  }
-
-  const handleChangeDense = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDense(event.target.checked)
   }
 
   const handleOpenModal = (hours: SubjectType, name: string, id: number, semester: string) => {
@@ -370,7 +361,8 @@ const EducationalPlan = () => {
                 sx={{ minWidth: 750 }}
                 aria-labelledby="tableTitle"
                 size={dense ? 'small' : 'medium'}
-                className="educational-plan__empty-wrapper">
+                className="educational-plan__empty-wrapper"
+              >
                 <EnhancedTableHead order={order} orderBy={orderBy} onRequestSort={handleRequestSort} />
                 {!plan.subjects.length ? (
                   <div>
@@ -392,7 +384,7 @@ const EducationalPlan = () => {
                             !el.includes('semester_9') &&
                             !el.includes('semester_10') &&
                             !el.includes('semester_11') &&
-                            !el.includes('semester_12'),
+                            !el.includes('semester_12')
                         )
                         const totalHours = semestersKeysArray
                           .map((el) => {
@@ -407,24 +399,28 @@ const EducationalPlan = () => {
                             onClick={() => setSelected(row.name)}
                             tabIndex={-1}
                             key={row.name}
-                            selected={selected === row.name}>
+                            selected={selected === row.name}
+                          >
                             <TableCell
                               component="th"
                               id={labelId}
                               scope="row"
                               className="educational-plan__subject-name"
-                              sx={{ borderRight: '1px solid rgb(219, 219, 219)' }}>
+                              sx={{ borderRight: '1px solid rgb(219, 219, 219)' }}
+                            >
                               <Typography component="p">{row.name}</Typography>
 
                               <div className="educational-plan__icons-wrapper">
                                 <IconButton
                                   className="educational-plan__icon-button"
-                                  onClick={() => onChangeSubjectName(row.name, row._id)}>
+                                  onClick={() => onChangeSubjectName(row.name, row._id)}
+                                >
                                   <EditIcon className="educational-plan__subject-name-edit" />
                                 </IconButton>
                                 <IconButton
                                   className="educational-plan__icon-button"
-                                  onClick={() => onRemoveSubject(row._id)}>
+                                  onClick={() => onRemoveSubject(row._id)}
+                                >
                                   <RemoveIcon className="educational-plan__subject-name-edit" />
                                 </IconButton>
                               </div>
@@ -440,7 +436,8 @@ const EducationalPlan = () => {
                               <TableCell align="center" className="educational-plan__table-cell" key={el}>
                                 <StyledClosedButton
                                   sx={{ width: '100%', minHeight: '37px' }}
-                                  onClick={() => handleOpenModal(row[el], row.name, row._id, el)}>
+                                  onClick={() => handleOpenModal(row[el], row.name, row._id, el)}
+                                >
                                   {row[el] && row[el].inPlan}
                                 </StyledClosedButton>
                               </TableCell>
