@@ -40,6 +40,7 @@ const LoginPopup: React.FC<LoginPopupType> = ({ setRegisterPopupVisible, loginPo
 
   // const loadingStatus = useSelector(selectUserStateStatus)
   const [showPassword, setShowPassword] = React.useState(false)
+  const [isLoading, setIsLoading] = React.useState(false)
 
   // const openNotificationRef = React.useRef<(text: string, type: AlertColor) => void>(() => {})
 
@@ -56,22 +57,25 @@ const LoginPopup: React.FC<LoginPopupType> = ({ setRegisterPopupVisible, loginPo
   })
 
   const onSubmit = async (data: FormProps) => {
-    // try {
-    const { payload } = await dispatch(login(data))
+    try {
+      setIsLoading(true)
+      const { payload } = await dispatch(login(data))
 
-    createAlertMessage(dispatch, payload, 'Авторизація успішна', 'Не вдалось авторизуватись :(')
+      createAlertMessage(dispatch, payload, 'Авторизація успішна', 'Не вдалось авторизуватись :(')
 
-    if (payload.token) {
-      globalThis.localStorage.setItem('token', payload.token)
+      if (payload.token) {
+        globalThis.localStorage.setItem('token', payload.token)
+      }
+
+      if (payload) {
+        dispatch(fetchInstitution(payload.institutionId))
+      }
+    } catch (error) {
+      console.log(error)
+      // openNotificationRef.current('Не верный логин или пароль :(', 'error')
+    } finally {
+      setIsLoading(false)
     }
-
-    if (payload) {
-      dispatch(fetchInstitution(payload.institutionId))
-    }
-    // } catch (error) {
-    //   console.log(error)
-    //   // openNotificationRef.current('Не верный логин или пароль :(', 'error')
-    // }
   }
 
   const onClickRegister = () => {
@@ -141,8 +145,7 @@ const LoginPopup: React.FC<LoginPopupType> = ({ setRegisterPopupVisible, loginPo
                 variant="contained"
                 fullWidth={true}
                 sx={{ borderRadius: '20px', h: '50px', padding: '10px 0' }}
-                /* disabled={loadingStatus === LoadingState.LOADING} */
-              >
+                disabled={isLoading}>
                 Увійти
               </Button>
 

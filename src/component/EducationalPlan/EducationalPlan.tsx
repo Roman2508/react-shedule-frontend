@@ -52,32 +52,6 @@ interface Data {
   eighthSemester: number | string
 }
 
-function createData(
-  name: string,
-  totalHour: string,
-  firstSemester: number | string,
-  secondSemester: number | string,
-  thirdSemester: number | string,
-  fourthSemester: number | string,
-  fifthSemester: number | string,
-  sixthSemester: number | string,
-  seventhSemester: number | string,
-  eighthSemester: number | string
-): Data {
-  return {
-    name,
-    totalHour,
-    firstSemester,
-    secondSemester,
-    thirdSemester,
-    fourthSemester,
-    fifthSemester,
-    sixthSemester,
-    seventhSemester,
-    eighthSemester,
-  }
-}
-
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
     return -1

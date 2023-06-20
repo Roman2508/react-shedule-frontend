@@ -55,6 +55,7 @@ const RegisterPopup: React.FC<RegisterPopupType> = ({
     password1: false,
     password2: false,
   })
+  const [isLoading, setIsLoading] = React.useState(false)
 
   const handleClickShowPassword = (value: string) => {
     setShowPassword((prev) => ({ ...prev, [value]: !showPassword[value as keyof typeof showPassword] }))
@@ -78,20 +79,27 @@ const RegisterPopup: React.FC<RegisterPopupType> = ({
   })
 
   const onSubmit = async (data: RegisterFormProps) => {
-    const { password2, ...registerData } = data
+    try {
+      setIsLoading(true)
+      const { password2, ...registerData } = data
 
-    const { payload } = await dispatch(registerInstitution(registerData))
+      const { payload } = await dispatch(registerInstitution(registerData))
 
-    createAlertMessage(dispatch, payload, 'Реєстрація успішна', 'Помилка реєстрації :(')
+      createAlertMessage(dispatch, payload, 'Реєстрація успішна', 'Помилка реєстрації :(')
 
-    if (payload) {
-      const loginData = { email: payload.email, password: registerData.password }
+      if (payload) {
+        const loginData = { email: payload.email, password: registerData.password }
 
-      const data = await dispatch(login(loginData))
+        const data = await dispatch(login(loginData))
 
-      if (data.payload.token) {
-        globalThis.localStorage.setItem('token', data.payload.token)
+        if (data.payload.token) {
+          globalThis.localStorage.setItem('token', data.payload.token)
+        }
       }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -100,7 +108,6 @@ const RegisterPopup: React.FC<RegisterPopupType> = ({
     setLoginPopupVisible(true)
   }
 
-  /*  */
   return (
     <StyledAuthDialog open={registerPopupVisible} maxWidth="sm" sx={{ root: { borderRadius: '20px !important' } }}>
       <div className="registerPopup">
@@ -206,8 +213,7 @@ const RegisterPopup: React.FC<RegisterPopupType> = ({
               fullWidth={true}
               sx={{ borderRadius: '20px', h: '50px', padding: '10px 0' }}
               type="submit"
-              // disabled={loadingState === LoadingState.LOADING}
-            >
+              disabled={isLoading}>
               Зареєструватись
             </Button>
           </form>

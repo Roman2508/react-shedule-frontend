@@ -301,7 +301,11 @@ const Streams = () => {
 
               <div className="streams__input-box">
                 <SearchIcon className="streams__input-icon" />
+<<<<<<< HEAD
                 <TextField id="standard-bare" placeholder="Пошук…" margin="normal" disabled />
+=======
+                <TextField id="standard-bare" placeholder="Пошук…" margin="normal" size="small" />
+>>>>>>> 7c08b0220f54baca7be5411d1cd75d3c92b7f87f
               </div>
 
               <FormGroup>

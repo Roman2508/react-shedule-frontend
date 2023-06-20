@@ -41,6 +41,8 @@ const AddAuditoriumsForm: React.FC<AddAuditoriumsFormType> = ({
     seatsNumber: 0,
   })
 
+  const isSaveButtonDisabled = Object.entries(newAuditory).every((el) => el[1])
+
   const onChangeAuditoryInputValues = (type: string, value: string) => {
     setNewAuditory((prev) => {
       return { ...prev, [type]: value }
@@ -166,7 +168,7 @@ const AddAuditoriumsForm: React.FC<AddAuditoriumsFormType> = ({
       </FormControl>
 
       <Stack spacing={2} direction="row" className="teachers-and-departments__buttons-box">
-        <Button variant="outlined" type="submit">
+        <Button variant="outlined" type="submit" disabled={!isSaveButtonDisabled}>
           Зберегти
         </Button>
         {handleClose ? (

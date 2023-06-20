@@ -49,6 +49,9 @@ const AddTeacherFrom: React.FC<AddTeacherFormType> = ({ currentTeacher, departme
   })
   const isDisabledAddButton = Object.entries(newTeacher).every((el) => el[1])
 
+  // Перевіряю чи всі поля заповнені
+  const isSaveButtonDisabled = Object.entries(newTeacher).every((el) => el[1])
+
   React.useEffect(() => {
     if (currentTeacher) {
       const departmentName = departments?.find((el) => el._id === currentTeacher.departmentId)?.departmentNumber
@@ -118,6 +121,7 @@ const AddTeacherFrom: React.FC<AddTeacherFormType> = ({ currentTeacher, departme
         className="teachers-and-departments__teacher-input"
         label="Прізвище"
         variant="standard"
+        sx={{ marginRight: '36px !important' }}
         {...register('lastName')}
         onChange={(e) => onChangeTeachersInputValues('lastName', e.target.value)}
         value={newTeacher.lastName}
@@ -126,7 +130,6 @@ const AddTeacherFrom: React.FC<AddTeacherFormType> = ({ currentTeacher, departme
         className="teachers-and-departments__teacher-input"
         label="Ім’я"
         variant="standard"
-        sx={{ marginLeft: '36px !important' }}
         {...register('firstName')}
         onChange={(e) => onChangeTeachersInputValues('firstName', e.target.value)}
         value={newTeacher.firstName}
@@ -143,8 +146,6 @@ const AddTeacherFrom: React.FC<AddTeacherFormType> = ({ currentTeacher, departme
       <FormControl className="teachers-and-departments__teacher-select" variant="standard">
         <InputLabel>Кафедра</InputLabel>
         <Select
-          // value={educationForm}
-          // onChange={handleChange}
           {...register('departmentId')}
           value={newTeacher.departmentId}
           onChange={(e) => onChangeTeachersInputValues('departmentId', String(e.target.value))}
@@ -161,8 +162,6 @@ const AddTeacherFrom: React.FC<AddTeacherFormType> = ({ currentTeacher, departme
       <FormControl className="teachers-and-departments__teacher-select" variant="standard">
         <InputLabel>Штатний/Сумісник</InputLabel>
         <Select
-          // value={educationForm}
-          // onChange={handleChange}
           label="educationForm"
           {...register('formOfWork')}
           onChange={(e) => onChangeTeachersInputValues('formOfWork', e.target.value)}
