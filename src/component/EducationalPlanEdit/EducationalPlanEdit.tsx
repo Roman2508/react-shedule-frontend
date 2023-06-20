@@ -28,6 +28,52 @@ type EducationalPlanEditPropsType = {
   setOpenEducationalPlanModal: (value: boolean) => void
 }
 
+const disciplinesFormInitialState = [
+  {
+    id: 'lectures',
+    hours: 0,
+    maxLength: 3,
+  },
+  {
+    id: 'practical',
+    hours: 0,
+    maxLength: 3,
+  },
+  {
+    id: 'laboratory',
+    hours: 0,
+    maxLength: 3,
+  },
+  {
+    id: 'seminars',
+    hours: 0,
+    maxLength: 3,
+  },
+  {
+    id: 'zalik',
+    hours: 0,
+    maxLength: 3,
+  },
+  {
+    id: 'exams',
+    hours: 0,
+    maxLength: 3,
+  },
+]
+
+const inputNames = [
+  'Кафедра (циклова комісія)',
+  'Лекції',
+  'Практичні',
+  'Лабораторні',
+  'Семінари',
+  'Заліки',
+  'Екзамени',
+  'Курсова робота',
+  'Самостійна робота',
+  'Загальна кількість годин',
+]
+
 // const EducationalPlanModalSchema = yup.object({
 //   lectures: yup.number(),
 //   practical: yup.number(),
@@ -50,43 +96,12 @@ const EducationalPlanEdit: React.FC<EducationalPlanEditPropsType> = ({
   const dispatch = useAppDispatch()
   const { departments } = useSelector(selectTeachersAndDepartments)
 
+  const [inPlan, setinPlan] = React.useState(0)
+  const [isTermPaper, setTermPaper] = React.useState<boolean>()
+  const [individualWork, setIndividualWork] = React.useState(0)
   const [sortedDepartments, setSortedDepartments] = React.useState<DepartmentType[]>([])
   const [selectedDepartmentId, setSelectedDepartmentId] = React.useState<null | string>(null)
-  const [isTermPaper, setTermPaper] = React.useState<boolean>()
-  const [inPlan, setinPlan] = React.useState(0)
-  const [individualWork, setIndividualWork] = React.useState(0)
-  const [disciplinesForm, setDisciplinesForm] = React.useState([
-    {
-      id: 'lectures',
-      hours: 0,
-      maxLength: 3,
-    },
-    {
-      id: 'practical',
-      hours: 0,
-      maxLength: 3,
-    },
-    {
-      id: 'laboratory',
-      hours: 0,
-      maxLength: 3,
-    },
-    {
-      id: 'seminars',
-      hours: 0,
-      maxLength: 3,
-    },
-    {
-      id: 'zalik',
-      hours: 0,
-      maxLength: 3,
-    },
-    {
-      id: 'exams',
-      hours: 0,
-      maxLength: 3,
-    },
-  ])
+  const [disciplinesForm, setDisciplinesForm] = React.useState(disciplinesFormInitialState)
 
   const {
     register,
@@ -108,19 +123,6 @@ const EducationalPlanEdit: React.FC<EducationalPlanEditPropsType> = ({
     }, 0)
 
   const totalHours = (selectedHours || 0) + individualWork
-
-  const inputNames = [
-    'Кафедра (циклова комісія)',
-    'Лекції',
-    'Практичні',
-    'Лабораторні',
-    'Семінари',
-    'Заліки',
-    'Екзамени',
-    'Курсова робота',
-    'Самостійна робота',
-    'Загальна кількість годин',
-  ]
 
   React.useEffect(() => {
     setTermPaper(isSubject ? selectedSubject?.hours.termPaper : false)
@@ -207,7 +209,7 @@ const EducationalPlanEdit: React.FC<EducationalPlanEditPropsType> = ({
           id: selectedSubject.id,
           payload: changeSubjectHoursPayload,
           semester: selectedSubject.semester,
-        })
+        }),
       )
 
       createAlertMessage(dispatch, payload, 'Семестр додано', 'Помилка при додаванні семестру :(')
@@ -244,7 +246,7 @@ const EducationalPlanEdit: React.FC<EducationalPlanEditPropsType> = ({
           removeSubjectSemester({
             id: selectedSubject.id,
             payload: selectedSubject.semester,
-          })
+          }),
         )
 
         createAlertMessage(dispatch, payload, 'Cеместр видалено', 'Помилка при видаленні семестру :(')
@@ -256,108 +258,110 @@ const EducationalPlanEdit: React.FC<EducationalPlanEditPropsType> = ({
 
   return (
     <Dialog open={openEducationalPlanModal} onClose={handleClose}>
-      <div className="educational-plan-edit__top">
-        <DialogTitle className="educational-plan-edit__title">
-          {selectedSubject?.name || 'Навчальна дисципліна'}
-        </DialogTitle>
-        <Typography sx={totalHours !== inPlan || totalHours <= 0 || inPlan <= 0 ? { color: 'red' } : {}}>
-          {`${totalHours} / ${inPlan}`}
-        </Typography>
-      </div>
-      <DialogContent className="educational-plan-edit__box">
-        <div className="educational-plan-edit__input-names">
-          {inputNames.map((el) => (
-            <Typography key={el}>{el}</Typography>
-          ))}
+      <div className="educational-plan-edit__wrapper">
+        <div className="educational-plan-edit__top">
+          <DialogTitle className="educational-plan-edit__title">
+            {selectedSubject?.name || 'Навчальна дисципліна'}
+          </DialogTitle>
+          <Typography sx={totalHours !== inPlan || totalHours <= 0 || inPlan <= 0 ? { color: 'red' } : {}}>
+            {`${totalHours} / ${inPlan}`}
+          </Typography>
         </div>
-        <form className="educational-plan-edit__form-box" onSubmit={handleSubmit(onCreateNewSemester)}>
-          {/*  */}
-          <div className="educational-plan-edit__input-box">
-            <FormControl sx={{ marginTop: '6px' }} fullWidth>
-              <Select
+        <DialogContent className="educational-plan-edit__box">
+          <div className="educational-plan-edit__input-names">
+            {inputNames.map((el) => (
+              <Typography key={el}>{el}</Typography>
+            ))}
+          </div>
+          <form className="educational-plan-edit__form-box" onSubmit={handleSubmit(onCreateNewSemester)}>
+            {/*  */}
+            <div className="educational-plan-edit__input-box">
+              <FormControl sx={{ marginTop: '6px' }} fullWidth>
+                <Select
+                  size="small"
+                  value={selectedDepartmentId}
+                  placeholder="Кафедра"
+                  onChange={(e) => setSelectedDepartmentId(e.target.value as string)}
+                  className="educational-plan-edit__select">
+                  {(sortedDepartments || []).map((el) => (
+                    <MenuItem value={el._id}>
+                      {el.departmentNumber} {el.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
+            {disciplinesForm.map((el) => (
+              <TextField
                 size="small"
-                value={selectedDepartmentId}
-                placeholder="Кафедра"
-                onChange={(e) => setSelectedDepartmentId(e.target.value as string)}
-                className="educational-plan-edit__select"
-              >
-                {(sortedDepartments || []).map((el) => (
-                  <MenuItem value={el._id}>
-                    {el.departmentNumber} {el.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </div>
-          {disciplinesForm.map((el) => (
-            <TextField
-              className="educational-plan-edit__input"
-              key={el.id}
-              margin="dense"
-              variant="outlined"
-              type="number"
-              inputProps={{ maxLength: 3 }}
-              value={el.hours > 0 ? el.hours : ''}
-              {...register(el.id, { maxLength: el.maxLength })}
-              onChange={(e) => onChangeFieldValue(e, el.id)}
+                className="educational-plan-edit__input"
+                key={el.id}
+                margin="dense"
+                variant="outlined"
+                type="number"
+                inputProps={{ maxLength: 3 }}
+                value={el.hours > 0 ? el.hours : ''}
+                {...register(el.id, { maxLength: el.maxLength })}
+                onChange={(e) => onChangeFieldValue(e, el.id)}
+              />
+            ))}
+            <Checkbox
+              {...register('termPaper')}
+              sx={{ mr: 'auto', mt: '6px' }}
+              checked={isTermPaper}
+              onClick={() => setTermPaper(!isTermPaper)}
             />
-          ))}
-          <Checkbox
-            {...register('termPaper')}
-            sx={{ mr: 'auto', mt: '6px' }}
-            checked={isTermPaper}
-            onClick={() => setTermPaper(!isTermPaper)}
-          />
-          {/* individual */}
-          <div className="educational-plan-edit__input-box">
-            <TextField
-              className="educational-plan-edit__input"
-              margin="dense"
-              id="name"
-              variant="outlined"
-              type="number"
-              inputProps={{ maxLength: 3 }}
-              {...register('individual', { maxLength: 3 })}
-              value={individualWork || ''}
-              onChange={(e) => setIndividualWork(Number(e.target.value))}
-            />
-          </div>
-          {/* inPlan */}
-          <div className="educational-plan-edit__input-box">
-            <TextField
-              className="educational-plan-edit__input"
-              margin="dense"
-              id="name"
-              variant="outlined"
-              type="number"
-              inputProps={{ maxLength: 3 }}
-              value={inPlan || ''}
-              {...register('inPlan', { maxLength: 3 })}
-              onChange={(e) => setinPlan(Number(e.target.value))}
-            />
-          </div>
-          <DialogActions sx={{ mt: '20px' }}>
-            <StyledClosedButton onClick={handleClose}>Закрити</StyledClosedButton>
-            <Button
-              type="submit"
-              variant="contained"
-              disabled={
-                totalHours !== inPlan || totalHours <= 0 || inPlan <= 0 || !selectedDepartmentId || isSubmitting
-              }
-            >
-              Зберегти
-            </Button>
-          </DialogActions>
-        </form>
-      </DialogContent>
-      <Button
-        className="educational-plan-edit__remove-btn"
-        onClick={onRemoveSubjectSemester}
-        variant="outlined"
-        color="error"
-      >
-        Видалити
-      </Button>
+            {/* individual */}
+            <div className="educational-plan-edit__input-box">
+              <TextField
+                size="small"
+                className="educational-plan-edit__input"
+                margin="dense"
+                id="name"
+                variant="outlined"
+                type="number"
+                inputProps={{ maxLength: 3 }}
+                {...register('individual', { maxLength: 3 })}
+                value={individualWork || ''}
+                onChange={(e) => setIndividualWork(Number(e.target.value))}
+              />
+            </div>
+            {/* inPlan */}
+            <div className="educational-plan-edit__input-box">
+              <TextField
+                size="small"
+                className="educational-plan-edit__input"
+                margin="dense"
+                id="name"
+                variant="outlined"
+                type="number"
+                inputProps={{ maxLength: 3 }}
+                value={inPlan || ''}
+                {...register('inPlan', { maxLength: 3 })}
+                onChange={(e) => setinPlan(Number(e.target.value))}
+              />
+            </div>
+            <DialogActions sx={{ mt: '20px' }}>
+              <StyledClosedButton onClick={handleClose}>Закрити</StyledClosedButton>
+              <Button
+                type="submit"
+                variant="contained"
+                disabled={
+                  totalHours !== inPlan || totalHours <= 0 || inPlan <= 0 || !selectedDepartmentId || isSubmitting
+                }>
+                Зберегти
+              </Button>
+            </DialogActions>
+          </form>
+        </DialogContent>
+        <Button
+          className="educational-plan-edit__remove-btn"
+          onClick={onRemoveSubjectSemester}
+          variant="outlined"
+          color="error">
+          Видалити
+        </Button>
+      </div>
     </Dialog>
   )
 }

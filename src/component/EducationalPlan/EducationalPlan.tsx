@@ -66,7 +66,7 @@ type Order = 'asc' | 'desc'
 
 function getComparator<Key extends keyof any>(
   order: Order,
-  orderBy: Key
+  orderBy: Key,
 ): (a: { [key in Key]: number | string }, b: { [key in Key]: number | string }) => number {
   return order === 'desc'
     ? (a, b) => descendingComparator(a, b, orderBy)
@@ -182,13 +182,11 @@ function EnhancedTableHead(props: EnhancedTableProps) {
             key={headCell.id}
             align={headCell.numeric ? 'center' : 'left'}
             sortDirection={orderBy === headCell.id ? order : false}
-            sx={{ borderRight: '1px solid rgb(219, 219, 219)', whiteSpace: 'nowrap' }}
-          >
+            sx={{ borderRight: '1px solid rgb(219, 219, 219)', whiteSpace: 'nowrap' }}>
             <TableSortLabel
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}
-            >
+              onClick={createSortHandler(headCell.id)}>
               {headCell.label}
               {orderBy === headCell.id ? (
                 <Box component="span" sx={visuallyHidden}>
@@ -244,7 +242,7 @@ const EducationalPlan = () => {
     if (institution) {
       dispatch(getAllDepartments(institution._id))
     }
-  }, [])
+  }, [institution])
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof Data) => {
     const isAsc = orderBy === property && order === 'asc'
@@ -335,8 +333,7 @@ const EducationalPlan = () => {
                 sx={{ minWidth: 750 }}
                 aria-labelledby="tableTitle"
                 size={dense ? 'small' : 'medium'}
-                className="educational-plan__empty-wrapper"
-              >
+                className="educational-plan__empty-wrapper">
                 <EnhancedTableHead order={order} orderBy={orderBy} onRequestSort={handleRequestSort} />
                 {!plan.subjects.length ? (
                   <div>
@@ -358,7 +355,7 @@ const EducationalPlan = () => {
                             !el.includes('semester_9') &&
                             !el.includes('semester_10') &&
                             !el.includes('semester_11') &&
-                            !el.includes('semester_12')
+                            !el.includes('semester_12'),
                         )
                         const totalHours = semestersKeysArray
                           .map((el) => {
@@ -373,28 +370,24 @@ const EducationalPlan = () => {
                             onClick={() => setSelected(row.name)}
                             tabIndex={-1}
                             key={row.name}
-                            selected={selected === row.name}
-                          >
+                            selected={selected === row.name}>
                             <TableCell
                               component="th"
                               id={labelId}
                               scope="row"
                               className="educational-plan__subject-name"
-                              sx={{ borderRight: '1px solid rgb(219, 219, 219)' }}
-                            >
+                              sx={{ borderRight: '1px solid rgb(219, 219, 219)' }}>
                               <Typography component="p">{row.name}</Typography>
 
                               <div className="educational-plan__icons-wrapper">
                                 <IconButton
                                   className="educational-plan__icon-button"
-                                  onClick={() => onChangeSubjectName(row.name, row._id)}
-                                >
+                                  onClick={() => onChangeSubjectName(row.name, row._id)}>
                                   <EditIcon className="educational-plan__subject-name-edit" />
                                 </IconButton>
                                 <IconButton
                                   className="educational-plan__icon-button"
-                                  onClick={() => onRemoveSubject(row._id)}
-                                >
+                                  onClick={() => onRemoveSubject(row._id)}>
                                   <RemoveIcon className="educational-plan__subject-name-edit" />
                                 </IconButton>
                               </div>
@@ -410,8 +403,7 @@ const EducationalPlan = () => {
                               <TableCell align="center" className="educational-plan__table-cell" key={el}>
                                 <StyledClosedButton
                                   sx={{ width: '100%', minHeight: '37px' }}
-                                  onClick={() => handleOpenModal(row[el], row.name, row._id, el)}
-                                >
+                                  onClick={() => handleOpenModal(row[el], row.name, row._id, el)}>
                                   {row[el] && row[el].inPlan}
                                 </StyledClosedButton>
                               </TableCell>
