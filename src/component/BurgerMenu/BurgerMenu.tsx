@@ -41,7 +41,7 @@ const menuItems = [
   { _id: 4, name: 'Корпуси / Аудиторії', link: '/buildings-and-auditoriums', icon: <BuildingIcon color="info" /> },
   {
     _id: 5,
-    name: 'Остаточне навантаження',
+    name: 'Навантаження',
     link: '/load-distribution-control',
     icon: <BallotOutlinedIcon color="disabled" />,
   },

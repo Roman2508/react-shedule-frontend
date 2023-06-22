@@ -1,25 +1,25 @@
+import moment from 'moment'
 import './LoadDistributionControl.scss'
 import Button from '@mui/material/Button'
-import InputLabel from '@mui/material/InputLabel'
+import { ukUA } from '@mui/x-date-pickers'
 import MenuItem from '@mui/material/MenuItem'
+import InputLabel from '@mui/material/InputLabel'
+import { useAppDispatch } from '../../redux/store'
 import FormControl from '@mui/material/FormControl'
 import React, { Dispatch, SetStateAction } from 'react'
 import { GroupType } from '../../redux/group/groupTypes'
+import { StyledDistributedLoadDatePicker } from '../../theme'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
+import CircularPreloader from '../../component/CircularPreloader'
 import { FacultyType } from '../../redux/faculties/facultiesTypes'
 import { IDistributedLoadSortParams, IDistributedLoadSortType } from './load-distribution.interface'
-import CircularPreloader from '../../component/CircularPreloader'
 import { DepartmentType, TeacherType } from '../../redux/teachersAndDepartment/teachersAndDepartmentTypes'
-import { useAppDispatch } from '../../redux/store'
 import {
   getDistributedLoadBySemester,
   getDistributedTeacherLoad,
 } from '../../redux/distributedLoad/distributedLoadAsyncAction'
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import moment from 'moment'
-import { StyledDistributedLoadDatePicker } from '../../theme'
-import { ukUA } from '@mui/x-date-pickers'
 
 interface ILoadDistributionFilterProps {
   faculties: FacultyType[]
@@ -76,6 +76,18 @@ const LoadDistributionFilter: React.FC<ILoadDistributionFilterProps> = ({
         }))
       }
 
+      if (value === 'department' && departments) {
+        setSortType({ value: 'Кафедра', type: 'department' })
+
+        setSortParams((prev) => ({
+          ...prev,
+          mainItemId: String(departments[0]._id),
+          mainItemName: departments[0].name,
+          secondaryItemId: '',
+          secondaryItemName: '',
+        }))
+      }
+
       if (value === 'group' && groups) {
         setSortType({ value: 'Група', type: 'group' })
         setSortParams((prev) => ({
@@ -127,8 +139,9 @@ const LoadDistributionFilter: React.FC<ILoadDistributionFilterProps> = ({
   }
 
   const onSubmit = () => {
+    const currentShowedYear = moment(sortParams.currentYear).format('YYYY')
+
     if (sortType.type === 'teacher') {
-      const currentShowedYear = moment(sortParams.currentYear).format('YYYY')
       dispatch(getDistributedTeacherLoad({ teacher: sortParams.secondaryItemId, currentShowedYear }))
     }
 
@@ -138,8 +151,12 @@ const LoadDistributionFilter: React.FC<ILoadDistributionFilterProps> = ({
           sortType: sortType.type,
           selectedSemester: sortParams.currentSemester,
           id: sortParams.secondaryItemId,
-        }),
+        })
       )
+    }
+
+    if (sortType.type === 'department') {
+      console.log({ currentShowedYear, department: sortParams.mainItemId })
     }
   }
 
@@ -151,55 +168,41 @@ const LoadDistributionFilter: React.FC<ILoadDistributionFilterProps> = ({
           className="schedule-page__select"
           value={sortType.type}
           label="Sort type"
-          onChange={(e) => handleChange(e, '', 'type')}>
+          onChange={(e) => handleChange(e, '', 'type')}
+        >
           <MenuItem value={'group'}>Група</MenuItem>
           <MenuItem value={'teacher'}>Викладач</MenuItem>
+          <MenuItem value={'department'}>Кафедра (ЦК)</MenuItem>
         </Select>
       </FormControl>
 
       {sortType.type === 'teacher' && (
-        <LocalizationProvider
-          dateAdapter={AdapterMoment}
-          localeText={ukUA.components.MuiLocalizationProvider.defaultProps.localeText}
-          adapterLocale="de">
-          <StyledDistributedLoadDatePicker
-            label={'Виберіть рік'}
-            value={sortParams.currentYear}
-            onChange={(value: any) => setSortParams((prev) => ({ ...prev, currentYear: value }))}
-            minDate={moment('2018', 'YYYY')}
-            maxDate={moment('2041', 'YYYY')}
-            format="YYYY"
-            views={['year']}
-          />
-        </LocalizationProvider>
-      )}
-
-      {sortType.type === 'group' && (
-        <FormControl sx={{ width: '120px', marginRight: '16px' }} fullWidth>
-          <InputLabel>Семестр</InputLabel>
-          <Select
-            className="schedule-page__select"
-            value={sortParams.currentSemester}
-            label="semester"
-            onChange={(e) => handleChange(e, 'currentSemester', 'params')}>
-            {['1', '2', '3', '4', '5', '6', '7', '8'].map((el) => (
-              <MenuItem key={el} value={String(el)}>
-                {el}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      )}
-
-      {sortType.type === 'teacher' && (
         <>
+          <LocalizationProvider
+            dateAdapter={AdapterMoment}
+            localeText={ukUA.components.MuiLocalizationProvider.defaultProps.localeText}
+            adapterLocale="de"
+          >
+            <StyledDistributedLoadDatePicker
+              label={'Виберіть рік'}
+              sx={{ marginRight: '16px' }}
+              value={sortParams.currentYear}
+              onChange={(value: any) => setSortParams((prev) => ({ ...prev, currentYear: value }))}
+              minDate={moment('2018', 'YYYY')}
+              maxDate={moment('2041', 'YYYY')}
+              format="YYYY"
+              views={['year']}
+            />
+          </LocalizationProvider>
+
           <FormControl sx={{ width: '380px', marginRight: '16px' }} fullWidth>
             <InputLabel>Кафедра</InputLabel>
             <Select
               className="schedule-page__select"
               label="Main Item"
               value={sortParams.mainItemId}
-              onChange={handleChangeMainItem}>
+              onChange={handleChangeMainItem}
+            >
               {departments?.map((department) => (
                 <MenuItem key={department._id} value={department._id}>
                   {department.name}
@@ -214,7 +217,8 @@ const LoadDistributionFilter: React.FC<ILoadDistributionFilterProps> = ({
               className="schedule-page__select"
               label="Secondary Item"
               value={sortParams.secondaryItemId}
-              onChange={handleChangeSecondaryItem}>
+              onChange={handleChangeSecondaryItem}
+            >
               {teachers && teachers.length ? (
                 teachers.map((teacher) => {
                   const teacherName = `${teacher.lastName} ${teacher.lastName[0]}.${teacher.middleName[0]}.`
@@ -235,13 +239,30 @@ const LoadDistributionFilter: React.FC<ILoadDistributionFilterProps> = ({
 
       {sortType.type === 'group' && (
         <>
+          <FormControl sx={{ width: '120px', marginRight: '16px' }} fullWidth>
+            <InputLabel>Семестр</InputLabel>
+            <Select
+              className="schedule-page__select"
+              value={sortParams.currentSemester}
+              label="semester"
+              onChange={(e) => handleChange(e, 'currentSemester', 'params')}
+            >
+              {['1', '2', '3', '4', '5', '6', '7', '8'].map((el) => (
+                <MenuItem key={el} value={String(el)}>
+                  {el}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
           <FormControl sx={{ width: '380px', marginRight: '16px' }} fullWidth>
             <InputLabel>Факультет</InputLabel>
             <Select
               className="schedule-page__select"
               label="Main Item"
               value={sortParams.mainItemId}
-              onChange={handleChangeMainItem}>
+              onChange={handleChangeMainItem}
+            >
               {faculties?.map((f) => (
                 <MenuItem key={f._id} value={f._id}>
                   {f.name}
@@ -256,7 +277,8 @@ const LoadDistributionFilter: React.FC<ILoadDistributionFilterProps> = ({
               className="schedule-page__select"
               label="Secondary Item"
               value={sortParams.secondaryItemId}
-              onChange={handleChangeSecondaryItem}>
+              onChange={handleChangeSecondaryItem}
+            >
               {groups ? (
                 groups.map((group) => (
                   <MenuItem key={group._id} value={group._id}>
@@ -266,6 +288,43 @@ const LoadDistributionFilter: React.FC<ILoadDistributionFilterProps> = ({
               ) : (
                 <CircularPreloader />
               )}
+            </Select>
+          </FormControl>
+        </>
+      )}
+
+      {sortType.type === 'department' && (
+        <>
+          <LocalizationProvider
+            dateAdapter={AdapterMoment}
+            localeText={ukUA.components.MuiLocalizationProvider.defaultProps.localeText}
+            adapterLocale="de"
+          >
+            <StyledDistributedLoadDatePicker
+              label={'Виберіть рік'}
+              sx={{ marginRight: '16px' }}
+              value={sortParams.currentYear}
+              onChange={(value: any) => setSortParams((prev) => ({ ...prev, currentYear: value }))}
+              minDate={moment('2018', 'YYYY')}
+              maxDate={moment('2041', 'YYYY')}
+              format="YYYY"
+              views={['year']}
+            />
+          </LocalizationProvider>
+
+          <FormControl sx={{ width: '380px', marginRight: '16px' }} fullWidth>
+            <InputLabel>Кафедра</InputLabel>
+            <Select
+              className="schedule-page__select"
+              label="Main Item"
+              value={sortParams.mainItemId}
+              onChange={handleChangeMainItem}
+            >
+              {departments?.map((department) => (
+                <MenuItem key={department._id} value={department._id}>
+                  {department.name}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </>

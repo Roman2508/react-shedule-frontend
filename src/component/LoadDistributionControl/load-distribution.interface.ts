@@ -10,6 +10,6 @@ export interface IDistributedLoadSortParams {
 }
 
 export interface IDistributedLoadSortType {
-  value: 'Група' | 'Викладач'
-  type: 'group' | 'teacher'
+  value: 'Група' | 'Викладач' | 'Кафедра'
+  type: 'group' | 'teacher' | 'department'
 }

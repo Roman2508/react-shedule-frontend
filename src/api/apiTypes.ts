@@ -349,6 +349,11 @@ export type GetDistributedLoadBySemesterType = {
   id: string
 }
 
+export type GetDistributedDepartmentLoadType = {
+  currentShowedYear: string
+  department: string
+}
+
 /* // distributedLoad */
 
 /* addLessonType */

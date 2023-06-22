@@ -27,6 +27,7 @@ import {
   CreateStreamPayloadType,
   CreateSubgroupsType,
   FetchNewBuildingType,
+  GetDistributedDepartmentLoadType,
   GetDistributedLoadBySemesterType,
   GetDistributedLoadType,
   onCreateAuditoryType,
@@ -364,13 +365,6 @@ export const authAPI = {
   },
 }
 
-export const finalLoadAPI = {
-  getFinalLoad() {
-    return axios.get(`http://localhost:3001/lessons`) // ??????????????????????????
-    // return instanse.get(`/lessons`) // ?????
-  },
-}
-
 export const distributedLoadAPI = {
   updateDistributedLoad(payload: UpdateDistributedLoadType) {
     return instanse.patch('/distributed-load', payload)
@@ -385,6 +379,10 @@ export const distributedLoadAPI = {
   getDistributedLoadBySemester(payload: GetDistributedLoadBySemesterType) {
     const { sortType, selectedSemester, id } = payload
     return instanse.get(`/distributed-semester-load/${sortType}/${selectedSemester}/${id}`)
+  },
+  getDistributedDepartmentLoad(payload: GetDistributedDepartmentLoadType) {
+    const { currentShowedYear, department } = payload
+    return instanse.get(`/distributed-load/department/${currentShowedYear}/${department}`)
   },
   attachTeacher(payload: AttachTeacherPayload) {
     // const id = payload[0]._id

@@ -14,12 +14,15 @@ import { createNewSubject, updateSubjectName } from '../../redux/educationalPlan
 import { selectAuthData } from '../../redux/accountInfo/accountInfoSelector'
 import { useSelector } from 'react-redux'
 import createAlertMessage from '../../utils/createAlertMessage'
+import { Select, MenuItem, InputLabel } from '@mui/material'
+import { DepartmentType } from '../../redux/teachersAndDepartment/teachersAndDepartmentTypes'
+import { selectTeachersAndDepartments } from '../../redux/teachersAndDepartment/teachersAndDepartmentSelector'
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>
   },
-  ref: React.Ref<unknown>,
+  ref: React.Ref<unknown>
 ) {
   return <Slide direction="up" ref={ref} {...props} />
 })
@@ -44,8 +47,11 @@ const EducationalPlanAddSubject: React.FC<EducationalPlanAddSubjectType> = ({
   const dispatch = useAppDispatch()
 
   const { institution } = useSelector(selectAuthData)
+  const { departments } = useSelector(selectTeachersAndDepartments)
 
   const [subjectName, setSubjectName] = React.useState('')
+  const [sortedDepartments, setSortedDepartments] = React.useState<DepartmentType[]>([])
+  const [selectedDepartmentId, setSelectedDepartmentId] = React.useState<null | string>(null)
 
   React.useEffect(() => {
     if (modalRole === 'add') {
@@ -54,6 +60,17 @@ const EducationalPlanAddSubject: React.FC<EducationalPlanAddSubjectType> = ({
       setSubjectName(disciplineName)
     }
   }, [modalRole, disciplineName])
+
+  React.useEffect(() => {
+    if (departments) {
+      setSortedDepartments(() => {
+        const deepCopy: DepartmentType[] = JSON.parse(JSON.stringify(departments))
+        const sortedItems = deepCopy.sort((a, b) => a.departmentNumber - b.departmentNumber)
+
+        return sortedItems
+      })
+    }
+  }, [departments])
 
   const handleClose = () => {
     setOpenAddSubjectModal(false)
@@ -85,21 +102,35 @@ const EducationalPlanAddSubject: React.FC<EducationalPlanAddSubjectType> = ({
   }
 
   return (
-    <Dialog
-      open={openAddSubjectModal}
-      TransitionComponent={Transition}
-      keepMounted
-      onClose={handleClose}
-      aria-describedby="alert-dialog-slide-description">
-      <DialogTitle>{modalRole === 'add' ? 'Додати нову дисципліну' : 'Назва дисципліни'}</DialogTitle>
-      <DialogContent>
-        <FormControl sx={{ width: '100%', minWidth: '400px' }} variant="standard">
+    <Dialog open={openAddSubjectModal} TransitionComponent={Transition} keepMounted onClose={handleClose}>
+      <DialogTitle>{modalRole === 'add' ? 'Додати нову дисципліну' : 'Оновити дисципліну'}</DialogTitle>
+      <DialogContent sx={{ maxWidth: '450px', margin: '0 auto' }}>
+        <FormControl sx={{ width: '400px' }} variant="standard">
           <TextField
             value={subjectName}
             onChange={(e) => setSubjectName(e.target.value)}
+            sx={{ marginBottom: '32px' }}
             label="Назва дисципліни"
             variant="standard"
           />
+        </FormControl>
+
+        <FormControl sx={{ width: '400px' }} variant="standard">
+          <InputLabel>Кафедра (ЦК)</InputLabel>
+          <Select
+            size="small"
+            // label="Кафедра (ЦК)"
+            placeholder="Кафедра (ЦК)"
+            // value={selectedDepartmentId}
+
+            // onChange={(e) => setSelectedDepartmentId(e.target.value as string)}
+          >
+            {(sortedDepartments || []).map((el) => (
+              <MenuItem value={el._id}>
+                {el.departmentNumber} {el.name}
+              </MenuItem>
+            ))}
+          </Select>
         </FormControl>
       </DialogContent>
       <DialogActions>
