@@ -34,6 +34,8 @@ type EducationalPlanAddSubjectType = {
   activeSubjectId: string
   openAddSubjectModal: boolean
   setOpenAddSubjectModal: (value: boolean) => void
+  selectedDepartmentId: string | null
+  setSelectedDepartmentId: React.Dispatch<React.SetStateAction<string | null>>
 }
 
 const EducationalPlanAddSubject: React.FC<EducationalPlanAddSubjectType> = ({
@@ -43,6 +45,8 @@ const EducationalPlanAddSubject: React.FC<EducationalPlanAddSubjectType> = ({
   activeSubjectId,
   openAddSubjectModal,
   setOpenAddSubjectModal,
+  selectedDepartmentId,
+  setSelectedDepartmentId,
 }) => {
   const dispatch = useAppDispatch()
 
@@ -50,38 +54,27 @@ const EducationalPlanAddSubject: React.FC<EducationalPlanAddSubjectType> = ({
   const { departments } = useSelector(selectTeachersAndDepartments)
 
   const [subjectName, setSubjectName] = React.useState('')
-  const [sortedDepartments, setSortedDepartments] = React.useState<DepartmentType[]>([])
-  const [selectedDepartmentId, setSelectedDepartmentId] = React.useState<null | string>(null)
 
   React.useEffect(() => {
     if (modalRole === 'add') {
       setSubjectName('')
+      setSelectedDepartmentId('')
     } else if (modalRole === 'update') {
       setSubjectName(disciplineName)
     }
   }, [modalRole, disciplineName])
-
-  React.useEffect(() => {
-    if (departments) {
-      setSortedDepartments(() => {
-        const deepCopy: DepartmentType[] = JSON.parse(JSON.stringify(departments))
-        const sortedItems = deepCopy.sort((a, b) => a.departmentNumber - b.departmentNumber)
-
-        return sortedItems
-      })
-    }
-  }, [departments])
 
   const handleClose = () => {
     setOpenAddSubjectModal(false)
   }
 
   const onAddNewSubject = async () => {
-    if (institution) {
+    if (institution && selectedDepartmentId) {
       const data = {
         planId,
         institutionId: institution._id,
         name: subjectName,
+        departmentId: selectedDepartmentId,
       }
       const { payload } = await dispatch(createNewSubject(data))
       createAlertMessage(dispatch, payload, 'Дисципліну додано', 'Помилка при додаванні дисципліни :(')
@@ -91,14 +84,17 @@ const EducationalPlanAddSubject: React.FC<EducationalPlanAddSubjectType> = ({
   }
 
   const onChangeSubjectName = async () => {
-    const updateSubjectNamePayload = {
-      id: activeSubjectId,
-      name: subjectName,
+    if (selectedDepartmentId) {
+      const updateSubjectNamePayload = {
+        id: activeSubjectId,
+        name: subjectName,
+        departmentId: selectedDepartmentId,
+      }
+      const { payload } = await dispatch(updateSubjectName(updateSubjectNamePayload))
+      createAlertMessage(dispatch, payload, 'Дисципліну оновлено', 'Помилка при оноленні дисципліни :(')
+      handleClose()
+      setSubjectName('')
     }
-    const { payload } = await dispatch(updateSubjectName(updateSubjectNamePayload))
-    createAlertMessage(dispatch, payload, 'Назву дисципліни оновлено', 'Помилка при оноленні назви дисципліни :(')
-    handleClose()
-    setSubjectName('')
   }
 
   return (
@@ -119,14 +115,12 @@ const EducationalPlanAddSubject: React.FC<EducationalPlanAddSubjectType> = ({
           <InputLabel>Кафедра (ЦК)</InputLabel>
           <Select
             size="small"
-            // label="Кафедра (ЦК)"
             placeholder="Кафедра (ЦК)"
-            // value={selectedDepartmentId}
-
-            // onChange={(e) => setSelectedDepartmentId(e.target.value as string)}
+            value={selectedDepartmentId || ''}
+            onChange={(e) => setSelectedDepartmentId(e.target.value as string)}
           >
-            {(sortedDepartments || []).map((el) => (
-              <MenuItem value={el._id}>
+            {(departments || []).map((el) => (
+              <MenuItem value={el._id} key={el._id}>
                 {el.departmentNumber} {el.name}
               </MenuItem>
             ))}

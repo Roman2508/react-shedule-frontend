@@ -20,6 +20,7 @@ import {
 } from '../../redux/distributedLoad/distributedLoadAsyncAction'
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import { getGroupLoadByDepartment } from '../../redux/group/groupAsyncAction'
 
 interface ILoadDistributionFilterProps {
   faculties: FacultyType[]
@@ -156,7 +157,7 @@ const LoadDistributionFilter: React.FC<ILoadDistributionFilterProps> = ({
     }
 
     if (sortType.type === 'department') {
-      console.log({ currentShowedYear, department: sortParams.mainItemId })
+      dispatch(getGroupLoadByDepartment({ currentShowedYear, department: sortParams.mainItemId }))
     }
   }
 

@@ -14,7 +14,7 @@ export const updateDistributedLoad = createAsyncThunk(
   async (payload: UpdateDistributedLoadType) => {
     const { data } = await distributedLoadAPI.updateDistributedLoad(payload)
     return data
-  },
+  }
 )
 
 export const getDistributedLoad = createAsyncThunk(
@@ -22,7 +22,7 @@ export const getDistributedLoad = createAsyncThunk(
   async (payload: GetDistributedLoadType) => {
     const { data } = await distributedLoadAPI.getDistributedLoad(payload)
     return data
-  },
+  }
 )
 
 export const getDistributedTeacherLoad = createAsyncThunk(
@@ -30,7 +30,7 @@ export const getDistributedTeacherLoad = createAsyncThunk(
   async (payload: { teacher: string; currentShowedYear: string }) => {
     const { data } = await distributedLoadAPI.getDistributedTeacherLoad(payload)
     return data
-  },
+  }
 )
 
 export const getDistributedLoadBySemester = createAsyncThunk<
@@ -46,7 +46,7 @@ export const attachTeacher = createAsyncThunk(
   async (payload: AttachTeacherPayload) => {
     const { data } = await distributedLoadAPI.attachTeacher(payload)
     return data
-  },
+  }
 )
 
 export const updateStudentsCount = createAsyncThunk(
@@ -54,5 +54,5 @@ export const updateStudentsCount = createAsyncThunk(
   async (payload: UpdateStudentsCountType) => {
     const { data } = await distributedLoadAPI.updateStudentsCount(payload)
     return data
-  },
+  }
 )

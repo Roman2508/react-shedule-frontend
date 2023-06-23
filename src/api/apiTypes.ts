@@ -29,11 +29,18 @@ export type removeSubjectSemesterType = {
 export type createNewSubjectType = {
   name: string
   planId: string
+  departmentId: string
+}
+
+export type UpdateEdPlanNameType = {
+  id: string
+  name: string
 }
 
 export type updateSubjectNameType = {
   id: string
   name: string
+  departmentId: string
 }
 
 export type CreateEducationPlanGroupPayload = {
@@ -349,10 +356,7 @@ export type GetDistributedLoadBySemesterType = {
   id: string
 }
 
-export type GetDistributedDepartmentLoadType = {
-  currentShowedYear: string
-  department: string
-}
+
 
 /* // distributedLoad */
 

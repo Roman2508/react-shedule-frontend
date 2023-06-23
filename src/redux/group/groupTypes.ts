@@ -26,6 +26,7 @@ export type GroupLoadType = {
 
 export type GroupLoadItemType = {
   _id: string
+  departmentId: string
   groupId: string
   stream: null
   subgroups: null

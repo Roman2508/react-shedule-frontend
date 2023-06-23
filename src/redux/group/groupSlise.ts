@@ -1,4 +1,4 @@
-import { GroupType, SubgroupsType } from './groupTypes'
+import { GroupLoadItemType, GroupType, SubgroupsType } from './groupTypes'
 import { createSlice } from '@reduxjs/toolkit'
 import { AppLoadingStatusTypes } from '../appTypes'
 import {
@@ -8,6 +8,7 @@ import {
   createSubgroups,
   getAllFacultyGroups,
   getGroupById,
+  getGroupLoadByDepartment,
   getGroups,
   getSubgroups,
   removeGroup,
@@ -26,6 +27,7 @@ type GroupInitialStateType = {
   fullTimeGroups: GroupType[] | null
   selectedGroup: GroupType | null
   subgroupsList: SubgroupsType[]
+  departmentLoad: GroupLoadItemType[] | null
   loadingStatus: AppLoadingStatusTypes
 }
 
@@ -33,6 +35,7 @@ const initialState: GroupInitialStateType = {
   partTimeGroups: null,
   fullTimeGroups: null,
   selectedGroup: null,
+  departmentLoad: null,
   subgroupsList: [],
   loadingStatus: AppLoadingStatusTypes.NEVER,
 }
@@ -123,6 +126,18 @@ const groupSlise = createSlice({
       state.loadingStatus = AppLoadingStatusTypes.SUCCESS
     })
     builder.addCase(getGroupById.rejected, (state) => {
+      state.loadingStatus = AppLoadingStatusTypes.ERROR
+    })
+
+    /* getGroupLoadByDepartment */
+    builder.addCase(getGroupLoadByDepartment.pending, (state) => {
+      state.loadingStatus = AppLoadingStatusTypes.LOADING
+    })
+    builder.addCase(getGroupLoadByDepartment.fulfilled, (state, { payload }) => {
+      state.departmentLoad = payload
+      state.loadingStatus = AppLoadingStatusTypes.SUCCESS
+    })
+    builder.addCase(getGroupLoadByDepartment.rejected, (state) => {
       state.loadingStatus = AppLoadingStatusTypes.ERROR
     })
 
@@ -271,7 +286,7 @@ const groupSlise = createSlice({
     builder.addCase(removeSpecializationSubject.fulfilled, (state, action) => {
       if (state.selectedGroup) {
         const newSpecializationsSubjects = state.selectedGroup.specializationsSubjects.filter(
-          (el) => el._id !== action.payload._id,
+          (el) => el._id !== action.payload._id
         )
 
         state.selectedGroup.specializationsSubjects = newSpecializationsSubjects

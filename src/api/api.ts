@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 // require('dotenv')
 import { AuditoriumsType } from '../redux/buildingsAndAuditoriums/buildingsAndAuditoriumsTypes'
 import {
@@ -6,7 +6,7 @@ import {
   EducationalPlanSubjectTypes,
   EducationalPlanType,
 } from '../redux/educationalPlan/educationalPlanTypes'
-import { SpecializationSubjectsType } from '../redux/group/groupTypes'
+import { GroupLoadItemType, SpecializationSubjectsType } from '../redux/group/groupTypes'
 import { lessonsType, RemoveStreamLessonType } from '../redux/lessons/lessonsTypes'
 import {
   addDepartmentPayloadType,
@@ -27,7 +27,6 @@ import {
   CreateStreamPayloadType,
   CreateSubgroupsType,
   FetchNewBuildingType,
-  GetDistributedDepartmentLoadType,
   GetDistributedLoadBySemesterType,
   GetDistributedLoadType,
   onCreateAuditoryType,
@@ -60,6 +59,7 @@ import {
   UpdateTermsOfStudyPayloadType,
 } from './apiTypes'
 import { LoginDataType, RegisterDataType } from '../redux/accountInfo/accountInfoTypes'
+import { DistributedLoadSubjectsType } from '../redux/distributedLoad/distributedLoadTypes'
 
 const instanse = axios.create({
   baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:4444/' : 'https://timetable-server.onrender.com/',
@@ -115,8 +115,8 @@ export const educationalPlansAPI = {
   removeSubject(id: string) {
     return instanse.delete(`subjectsList/${id}`)
   },
-  updateSubjectName(id: string, name: string) {
-    return instanse.patch(`subjectsList/${id}/name`, { name })
+  updateSubjectName(id: string, name: string, departmentId: string) {
+    return instanse.patch(`subjectsList/name-and-department/${id}`, { name, departmentId })
   },
 }
 
@@ -306,6 +306,10 @@ export const groupLoadAPI = {
   getGroupLoad(id: string) {
     return instanse.get(`/group-load/${id}`)
   },
+  getGroupLoadByDepartment(payload: { currentShowedYear: string; department: string }) {
+    const { currentShowedYear, department } = payload
+    return instanse.get<null, AxiosResponse<GroupLoadItemType[]>>(`groups/load/${currentShowedYear}/${department}`)
+  },
 }
 
 export const lessonsAPI = {
@@ -379,10 +383,6 @@ export const distributedLoadAPI = {
   getDistributedLoadBySemester(payload: GetDistributedLoadBySemesterType) {
     const { sortType, selectedSemester, id } = payload
     return instanse.get(`/distributed-semester-load/${sortType}/${selectedSemester}/${id}`)
-  },
-  getDistributedDepartmentLoad(payload: GetDistributedDepartmentLoadType) {
-    const { currentShowedYear, department } = payload
-    return instanse.get(`/distributed-load/department/${currentShowedYear}/${department}`)
   },
   attachTeacher(payload: AttachTeacherPayload) {
     // const id = payload[0]._id

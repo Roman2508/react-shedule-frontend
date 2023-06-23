@@ -8,6 +8,7 @@ import {
   fetchChangeSubjectHoursType,
   removeEducationPlanType,
   removeSubjectSemesterType,
+  UpdateEdPlanNameType,
   updateSubjectNameType,
 } from '../../api/apiTypes'
 import { EducationalPlanGroupsType, EducationalPlanSubjectTypes, EducationalPlanType } from './educationalPlanTypes'
@@ -18,7 +19,7 @@ export const fetchEducationalPlans = createAsyncThunk(
   async (institutionId: string) => {
     const { data } = await educationalPlansAPI.getEducationPlansGroup(institutionId)
     return data
-  },
+  }
 )
 
 export const createNewEducationPlanGroup = createAsyncThunk(
@@ -26,7 +27,7 @@ export const createNewEducationPlanGroup = createAsyncThunk(
   async (payload: CreateEducationPlanGroupPayload) => {
     const { data } = await educationalPlansAPI.createNewEducationPlanGroup(payload)
     return data as EducationalPlanGroupsType
-  },
+  }
 )
 
 export const removeEducationPlanGroup = createAsyncThunk(
@@ -34,15 +35,15 @@ export const removeEducationPlanGroup = createAsyncThunk(
   async (id: number) => {
     const { data } = await educationalPlansAPI.removeEducationPlansGroup(id)
     return data
-  },
+  }
 )
 export const changeEducationPlanGroupName = createAsyncThunk(
   'educationalPlans/changeEducationPlanGroupName',
-  async (payload: updateSubjectNameType) => {
+  async (payload: UpdateEdPlanNameType) => {
     const { id, name } = payload
     const { data } = await educationalPlansAPI.changeEducationPlansGroupName(id, name)
     return data
-  },
+  }
 )
 
 /* EducationPlan */
@@ -53,7 +54,7 @@ export const createNewEducationPlan = createAsyncThunk(
     // const { name, categoryId } = payload
     const { data } = await educationalPlansAPI.createNewEducationPlan(payload)
     return data as EducationalPlanType
-  },
+  }
 )
 
 export const fetchEducationalPlansById = createAsyncThunk(
@@ -61,7 +62,7 @@ export const fetchEducationalPlansById = createAsyncThunk(
   async (id: string) => {
     const { data } = await educationalPlansAPI.getPlanById(id)
     return data
-  },
+  }
 )
 
 export const removeEducationPlan = createAsyncThunk('educationalPlans/removeEducationPlan', async (id: number) => {
@@ -74,7 +75,7 @@ export const changeEducationPlanName = createAsyncThunk(
   async (payload: changeEducationPlanNameType) => {
     const { data } = await educationalPlansAPI.changeEducationPlanName(payload)
     return data
-  },
+  }
 )
 
 /* Subjects */
@@ -86,7 +87,7 @@ export const fetchChangeSubjectHours = createAsyncThunk(
 
     const { data } = await educationalPlansAPI.changeSubjectHours(id, { [semester]: payload })
     return data
-  },
+  }
 )
 
 export const removeSubjectSemester = createAsyncThunk(
@@ -94,7 +95,7 @@ export const removeSubjectSemester = createAsyncThunk(
   async (payload: removeSubjectSemesterType) => {
     const { data } = await educationalPlansAPI.removeSubjectSemester(payload.id, payload.payload /* , payload.planId */)
     return data
-  },
+  }
 )
 
 export const createNewSubject = createAsyncThunk(
@@ -102,7 +103,7 @@ export const createNewSubject = createAsyncThunk(
   async (payload: createNewSubjectType) => {
     const { data } = await educationalPlansAPI.createNewSubject(payload)
     return data as EducationalPlanSubjectTypes
-  },
+  }
 )
 
 export const removeSubject = createAsyncThunk('educationalPlans/removeSubject', async (id: string) => {
@@ -113,8 +114,8 @@ export const removeSubject = createAsyncThunk('educationalPlans/removeSubject', 
 export const updateSubjectName = createAsyncThunk(
   'educationalPlans/updateSubjectName',
   async (payload: updateSubjectNameType) => {
-    const { id, name } = payload
-    const { data } = await educationalPlansAPI.updateSubjectName(id, name)
+    const { id, name, departmentId } = payload
+    const { data } = await educationalPlansAPI.updateSubjectName(id, name, departmentId)
     return data
-  },
+  }
 )

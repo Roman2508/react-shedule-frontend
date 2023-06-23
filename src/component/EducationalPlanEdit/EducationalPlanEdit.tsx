@@ -13,14 +13,7 @@ import { SubjectType } from '../../redux/educationalPlan/educationalPlanTypes'
 import { useForm } from 'react-hook-form'
 import { useAppDispatch } from '../../redux/store'
 import { fetchChangeSubjectHours, removeSubjectSemester } from '../../redux/educationalPlan/educationalPlanAsyncAction'
-import { useSelector } from 'react-redux'
-import { selectEducationalPlan } from '../../redux/educationalPlan/educationalPlanSelector'
 import createAlertMessage from '../../utils/createAlertMessage'
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material'
-import { selectTeachersAndDepartments } from '../../redux/teachersAndDepartment/teachersAndDepartmentSelector'
-import { DepartmentType } from '../../redux/teachersAndDepartment/teachersAndDepartmentTypes'
-// import * as yup from 'yup'
-// import { yupResolver } from '@hookform/resolvers/yup'
 
 type EducationalPlanEditPropsType = {
   selectedSubject: { id: number; name: string; hours: SubjectType; semester: string } | null
@@ -62,7 +55,6 @@ const disciplinesFormInitialState = [
 ]
 
 const inputNames = [
-  'Кафедра (циклова комісія)',
   'Лекції',
   'Практичні',
   'Лабораторні',
@@ -94,13 +86,10 @@ const EducationalPlanEdit: React.FC<EducationalPlanEditPropsType> = ({
   const isSubject = selectedSubject?.hours !== null
 
   const dispatch = useAppDispatch()
-  const { departments } = useSelector(selectTeachersAndDepartments)
 
   const [inPlan, setinPlan] = React.useState(0)
   const [isTermPaper, setTermPaper] = React.useState<boolean>()
   const [individualWork, setIndividualWork] = React.useState(0)
-  const [sortedDepartments, setSortedDepartments] = React.useState<DepartmentType[]>([])
-  const [selectedDepartmentId, setSelectedDepartmentId] = React.useState<null | string>(null)
   const [disciplinesForm, setDisciplinesForm] = React.useState(disciplinesFormInitialState)
 
   const {
@@ -155,10 +144,6 @@ const EducationalPlanEdit: React.FC<EducationalPlanEditPropsType> = ({
         if (selectedSubject?.hours.individual) {
           setIndividualWork(selectedSubject.hours.individual)
         }
-
-        if (selectedSubject.hours.departmentId) {
-          setSelectedDepartmentId(selectedSubject.hours.departmentId)
-        }
       }
     }
 
@@ -167,17 +152,6 @@ const EducationalPlanEdit: React.FC<EducationalPlanEditPropsType> = ({
       setIndividualWork(0)
     }
   }, [selectedSubject])
-
-  React.useEffect(() => {
-    if (departments) {
-      setSortedDepartments(() => {
-        const deepCopy: DepartmentType[] = JSON.parse(JSON.stringify(departments))
-        const sortedItems = deepCopy.sort((a, b) => a.departmentNumber - b.departmentNumber)
-
-        return sortedItems
-      })
-    }
-  }, [departments])
 
   const onClearInputsValue = () => {
     setDisciplinesForm((prev) => {
@@ -190,7 +164,7 @@ const EducationalPlanEdit: React.FC<EducationalPlanEditPropsType> = ({
   }
 
   const onCreateNewSemester = async () => {
-    if (selectedSubject !== null && selectedDepartmentId !== null) {
+    if (selectedSubject !== null) {
       const changeSubjectHoursPayload: SubjectType = {
         lectures: disciplinesForm.find((el) => el.id === 'lectures')?.hours || 0,
         practical: disciplinesForm.find((el) => el.id === 'practical')?.hours || 0,
@@ -201,7 +175,6 @@ const EducationalPlanEdit: React.FC<EducationalPlanEditPropsType> = ({
         inPlan: inPlan || 0,
         individual: individualWork || 0,
         termPaper: isTermPaper || false,
-        departmentId: selectedDepartmentId, // ????
       }
 
       const { payload } = await dispatch(
@@ -209,7 +182,7 @@ const EducationalPlanEdit: React.FC<EducationalPlanEditPropsType> = ({
           id: selectedSubject.id,
           payload: changeSubjectHoursPayload,
           semester: selectedSubject.semester,
-        }),
+        })
       )
 
       createAlertMessage(dispatch, payload, 'Семестр додано', 'Помилка при додаванні семестру :(')
@@ -246,7 +219,7 @@ const EducationalPlanEdit: React.FC<EducationalPlanEditPropsType> = ({
           removeSubjectSemester({
             id: selectedSubject.id,
             payload: selectedSubject.semester,
-          }),
+          })
         )
 
         createAlertMessage(dispatch, payload, 'Cеместр видалено', 'Помилка при видаленні семестру :(')
@@ -274,23 +247,6 @@ const EducationalPlanEdit: React.FC<EducationalPlanEditPropsType> = ({
             ))}
           </div>
           <form className="educational-plan-edit__form-box" onSubmit={handleSubmit(onCreateNewSemester)}>
-            {/*  */}
-            <div className="educational-plan-edit__input-box">
-              <FormControl sx={{ marginTop: '6px' }} fullWidth>
-                <Select
-                  size="small"
-                  value={selectedDepartmentId}
-                  placeholder="Кафедра"
-                  onChange={(e) => setSelectedDepartmentId(e.target.value as string)}
-                  className="educational-plan-edit__select">
-                  {(sortedDepartments || []).map((el) => (
-                    <MenuItem value={el._id}>
-                      {el.departmentNumber} {el.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </div>
             {disciplinesForm.map((el) => (
               <TextField
                 size="small"
@@ -347,8 +303,9 @@ const EducationalPlanEdit: React.FC<EducationalPlanEditPropsType> = ({
                 type="submit"
                 variant="contained"
                 disabled={
-                  totalHours !== inPlan || totalHours <= 0 || inPlan <= 0 || !selectedDepartmentId || isSubmitting
-                }>
+                  totalHours !== inPlan || totalHours <= 0 || inPlan <= 0 || isSubmitting /* || !selectedDepartmentId */
+                }
+              >
                 Зберегти
               </Button>
             </DialogActions>
@@ -358,7 +315,8 @@ const EducationalPlanEdit: React.FC<EducationalPlanEditPropsType> = ({
           className="educational-plan-edit__remove-btn"
           onClick={onRemoveSubjectSemester}
           variant="outlined"
-          color="error">
+          color="error"
+        >
           Видалити
         </Button>
       </div>

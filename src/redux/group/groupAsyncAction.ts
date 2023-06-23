@@ -1,6 +1,6 @@
 import { GroupType, SpecializationSubjectsType } from './groupTypes'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { groupsAPI } from '../../api/api'
+import { groupLoadAPI, groupsAPI } from '../../api/api'
 import {
   CreateGroupPayloadType,
   CreateGroupSpecializationType,
@@ -17,6 +17,14 @@ export const getGroups = createAsyncThunk('groups/getGroups', async (specialtyId
   const { data } = await groupsAPI.getGroups(specialtyId)
   return data
 })
+
+export const getGroupLoadByDepartment = createAsyncThunk(
+  'distributedLoad/getDistributedDepartmentLoad',
+  async (payload: { currentShowedYear: string; department: string }) => {
+    const { data } = await groupLoadAPI.getGroupLoadByDepartment(payload)
+    return data
+  }
+)
 
 export const getAllFacultyGroups = createAsyncThunk('groups/getAllFacultyGroups', async (facultieId: string) => {
   const { data } = await groupsAPI.getAllFacultyGroups(facultieId)
@@ -54,7 +62,7 @@ export const createGroupSpecialization = createAsyncThunk(
   async (payload: CreateGroupSpecializationType) => {
     const { data } = await groupsAPI.createGroupSpecialization(payload)
     return data
-  },
+  }
 )
 
 export const removeGroupSpecialization = createAsyncThunk(
@@ -63,7 +71,7 @@ export const removeGroupSpecialization = createAsyncThunk(
     const { data } = await groupsAPI.removeGroupSpecialization(payload)
 
     return data
-  },
+  }
 )
 
 export const updateGroupSpecialization = createAsyncThunk(
@@ -71,7 +79,7 @@ export const updateGroupSpecialization = createAsyncThunk(
   async (payload: UpdateGroupSpecializationType) => {
     const { data } = await groupsAPI.updateGroupSpecialization(payload)
     return data
-  },
+  }
 )
 /* // specialization */
 
@@ -81,7 +89,7 @@ export const addSubjectSpecialization = createAsyncThunk(
   async (payload: SpecializationSubjectsType) => {
     const { data } = await groupsAPI.addSubjectSpecialization(payload)
     return data
-  },
+  }
 )
 
 export const removeSpecializationSubject = createAsyncThunk(
@@ -89,7 +97,7 @@ export const removeSpecializationSubject = createAsyncThunk(
   async (payload: RemoveGroupSpecializationType) => {
     const { data } = await groupsAPI.removeSpecializationSubject(payload)
     return data
-  },
+  }
 )
 
 export const updateSpecializationSubjects = createAsyncThunk(
@@ -97,7 +105,7 @@ export const updateSpecializationSubjects = createAsyncThunk(
   async (payload: UpdateSpecializationSubjectsType) => {
     const { data } = await groupsAPI.updateSpecializationSubjects(payload)
     return data
-  },
+  }
 )
 /* // specializationSubjects */
 

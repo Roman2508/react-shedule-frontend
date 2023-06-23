@@ -56,6 +56,7 @@ export interface EducationalPlanSubjectTypes {
   _id: string
   planId: string
   name: string
+  departmentId: string
   totalHour: 0
   semester_1: SubjectType | null
   semester_2: SubjectType | null
@@ -75,7 +76,6 @@ export interface EducationalPlanSubjectTypes {
 }
 
 export interface SubjectType {
-  departmentId: string // ????
   lectures: number
   practical: number
   laboratory: number
