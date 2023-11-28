@@ -52,6 +52,7 @@ const SelectEducationalPlan: React.FC<SelectEducationalPlanPropsType> = ({
   }
 
   const onChangePlan = (p: EducationalPlanType) => {
+    console.log(p)
     onChangeGroupInfo('EducationPlanId', String(p._id))
     setSelectedPlanName(p.name)
   }

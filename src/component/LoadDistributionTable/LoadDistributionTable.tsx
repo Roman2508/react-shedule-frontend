@@ -37,7 +37,7 @@ type Order = 'asc' | 'desc'
 
 function getComparator<Key extends keyof any>(
   order: Order,
-  orderBy: Key,
+  orderBy: Key
 ): (a: { [key in Key]: number | string }, b: { [key in Key]: number | string }) => number {
   return order === 'desc'
     ? (a, b) => descendingComparator(a, b, orderBy)
@@ -102,11 +102,13 @@ function EnhancedTableHead(props: EnhancedTableProps) {
             key={headCell.id}
             align={headCell.numeric ? 'left' : 'center'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
-            sortDirection={orderBy === headCell.id ? order : false}>
+            sortDirection={orderBy === headCell.id ? order : false}
+          >
             <TableSortLabel
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}>
+              onClick={createSortHandler(headCell.id)}
+            >
               {headCell.label}
               {orderBy === headCell.id ? (
                 <Box component="span" sx={visuallyHidden}>
@@ -156,6 +158,8 @@ const LoadDistributionTable: React.FC<LoadDistributionTablePropsType> = ({
     setPage(0)
   }
 
+  console.log(distributedLoad)
+
   if (distributedLoad === null && loadingStatus === AppLoadingStatusTypes.LOADING) {
     return (
       <div style={{ textAlign: 'center', padding: '32px 0' }}>
@@ -197,12 +201,14 @@ const LoadDistributionTable: React.FC<LoadDistributionTablePropsType> = ({
                     tabIndex={-1}
                     key={`${row.name}${row.semester}`}
                     selected={isItemSelected}
-                    sx={isHide ? { display: 'none' } : { cursor: 'pointer' }}>
+                    sx={isHide ? { display: 'none' } : { cursor: 'pointer' }}
+                  >
                     <TableCell
                       component="th"
                       id={labelId}
                       scope="row"
-                      sx={{ padding: '5px 0 5px 10px !important', fontSize: '16px' }}>
+                      sx={{ padding: '5px 0 5px 10px !important', fontSize: '16px' }}
+                    >
                       {row.name}
                       {row.specialization ? ` (${row.specialization.name})` : ''}
                     </TableCell>

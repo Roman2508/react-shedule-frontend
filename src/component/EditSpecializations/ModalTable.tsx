@@ -99,7 +99,8 @@ const ModalTable: React.FC<ModalTablePropsType> = ({ groupId, specializationList
                   <TableCell
                     key={headCell.id}
                     align={headCell.numeric ? 'center' : 'left'}
-                    padding={headCell.disablePadding ? 'none' : 'normal'}>
+                    padding={headCell.disablePadding ? 'none' : 'normal'}
+                  >
                     {headCell.label}
                   </TableCell>
                 ))}
@@ -118,12 +119,14 @@ const ModalTable: React.FC<ModalTablePropsType> = ({ groupId, specializationList
                   <td className="edit-specializations__actions">
                     <IconButton
                       sx={{ minWidth: 'auto', padding: '5px', marginRight: '5px' }}
-                      onClick={() => onClickUpdateButton(row.name, row._id)}>
+                      onClick={() => onClickUpdateButton(row.name, row._id)}
+                    >
                       <EditIcon />
                     </IconButton>
                     <IconButton
                       sx={{ minWidth: 'auto', padding: '5px' }}
-                      onClick={() => onRemoveSpecialization(row._id)}>
+                      onClick={() => onRemoveSpecialization(row._id)}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </td>
@@ -138,12 +141,15 @@ const ModalTable: React.FC<ModalTablePropsType> = ({ groupId, specializationList
           variant="contained"
           className="edit-specializations__add-button"
           onClick={buttonType === 'add' ? onAddSpecialization : onUpdateSpecialization}
-          disabled={text.length === 0}>
+          disabled={text.length === 0}
+          size="small"
+        >
           <span>{buttonType === 'add' ? 'Додати' : 'Оновити'}</span>
           {buttonType === 'add' && <AddIcon sx={{ width: 16, height: 16 }} />}
         </Button>
 
         <TextField
+          size="small"
           variant="outlined"
           inputRef={inputRef}
           value={text}

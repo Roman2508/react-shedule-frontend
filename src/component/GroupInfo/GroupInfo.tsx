@@ -256,43 +256,44 @@ const GroupInfo: React.FC<GroupInfoPropsType> = ({
   })
 
   const onUpdateGroup = handleSubmit(async () => {
-    if (window.confirm('Ви дійсно хочете оновити групу?')) {
-      if (selectedGroup) {
-        const payload = { ...selectedGroup, ...groupInfoValues }
+    if (!window.confirm('Ви дійсно хочете оновити групу?')) return
 
-        const { EducationPlanId, ...rest } = payload
+    if (!selectedGroup) return
 
-        if (selectedGroup.EducationPlanId !== groupInfoValues.EducationPlanId) {
-          const plansArray = plans?.map((el) => el.plans)
+    const payload = { ...selectedGroup, ...groupInfoValues }
 
-          if (plansArray) {
-            // @ts-ignore
-            const allPlans = [].concat.apply([], plansArray)
-            // @ts-ignore
-            const load = allPlans.find(
-              (el: EducationalPlanType) => String(el._id) === String(groupInfoValues.EducationPlanId)
-            ).subjects
+    const { EducationPlanId, ...rest } = payload
 
-            if (load && selectedGroupId) {
-              const loadData = {
-                groupId: selectedGroupId,
-                planId: groupInfoValues.EducationPlanId,
-                load,
-              }
+    if (selectedGroup.EducationPlanId !== groupInfoValues.EducationPlanId) {
+      const plansArray = plans?.map((el) => el.plans)
 
-              const { payload } = await dispatch(updateGroupInfo(rest))
-              dispatch(updateGroupLoad(loadData))
-              createAlertMessage(dispatch, payload, 'Групу оновлено', 'Помилка при оновленні групи :(')
-            }
+      if (plansArray) {
+        // @ts-ignore
+        const allPlans = [].concat.apply([], plansArray)
+        // @ts-ignore
+        const load = allPlans.find(
+          (el: EducationalPlanType) => String(el._id) === String(groupInfoValues.EducationPlanId)
+        ).subjects
+
+        if (load && selectedGroupId) {
+          const loadData = {
+            groupId: selectedGroupId,
+            planId: groupInfoValues.EducationPlanId,
+            load,
           }
-        } else {
+
           const { payload } = await dispatch(updateGroupInfo(rest))
+          dispatch(updateGroupLoad(loadData))
           createAlertMessage(dispatch, payload, 'Групу оновлено', 'Помилка при оновленні групи :(')
         }
-        handleClose()
-        onClearInputsValue()
       }
+    } else {
+      const { payload } = await dispatch(updateGroupInfo(rest))
+      createAlertMessage(dispatch, payload, 'Групу оновлено', 'Помилка при оновленні групи :(')
     }
+
+    handleClose()
+    onClearInputsValue()
   }) // ???????
 
   return (

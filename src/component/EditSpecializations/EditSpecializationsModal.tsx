@@ -30,13 +30,15 @@ const EditSpecializationsModal: React.FC<EditSpecializationsModalPropsType> = ({
       open={openSpecializationsModal}
       onClose={handleClose}
       aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description">
+      aria-describedby="alert-dialog-description"
+    >
       <DialogTitle id="alert-dialog-title">Редагування спеціалізованих підгруп</DialogTitle>
       <DialogContent>
         {/* specialization list table */}
         <ModalTable groupId={groupId} specializationList={specializationList} />
         {/* // specialization list table */}
       </DialogContent>
+      
       <DialogActions>
         <StyledClosedButton variant="outlined" onClick={handleClose}>
           Закрити

@@ -1,4 +1,4 @@
-import { ListSubjectType } from "./createListOfSubjects"
+import { ListSubjectType } from './createListOfSubjects'
 
 export type Order = 'asc' | 'desc'
 
@@ -14,7 +14,7 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
 
 export function getComparator<Key extends keyof any>(
   order: Order,
-  orderBy: Key,
+  orderBy: Key
 ): (a: { [key in Key]: number | string }, b: { [key in Key]: number | string }) => number {
   return order === 'desc'
     ? (a, b) => descendingComparator(a, b, orderBy)
@@ -30,6 +30,7 @@ export function tableSort<T>(array: readonly T[], comparator: (a: T, b: T) => nu
     }
     return a[1] - b[1]
   })
+
   return stabilizedThis.map((el) => el[0])
 }
 

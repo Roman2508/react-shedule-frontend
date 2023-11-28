@@ -486,7 +486,7 @@ const SchedulePage: React.FC<SchedulePagePropsType> = ({}) => {
               // Можливо, якщо в потоці більше 2 груп, розклад одної буде перезаписувати іншу !!!!!
             }
           })
-        }),
+        })
       )
     } else {
       dispatch(clearCurrentGroupLessons())
@@ -549,7 +549,7 @@ const SchedulePage: React.FC<SchedulePagePropsType> = ({}) => {
   React.useEffect(() => {
     if (distributedLoad) {
       const selectedStreamInfo = selectedDistributedLoad.find(
-        (el) => el.name === selected.data?.name && el.type === selected.data?.type,
+        (el) => el.name === selected.data?.name && el.type === selected.data?.type
       )
       ///////////////////////////////////////////////////
       if (selectedStreamInfo) {
@@ -569,7 +569,7 @@ const SchedulePage: React.FC<SchedulePagePropsType> = ({}) => {
       const semester = calcCurrentSemester(
         showedSemester,
         selectedGroupYearsOfAdmission,
-        userData.settings.selectedSemester,
+        userData.settings.selectedSemester
       )
 
       if (semester) {
@@ -587,7 +587,7 @@ const SchedulePage: React.FC<SchedulePagePropsType> = ({}) => {
             id: selectedGroupSchedule.groupId,
             type: activeLessonsFilter.type,
             institutionId: institution._id,
-          }),
+          })
         )
       }
     }
@@ -598,7 +598,7 @@ const SchedulePage: React.FC<SchedulePagePropsType> = ({}) => {
             id: selectedTeacherSchedule.teacherId,
             type: activeLessonsFilter.type,
             institutionId: institution._id,
-          }),
+          })
         )
       }
     }
@@ -609,7 +609,7 @@ const SchedulePage: React.FC<SchedulePagePropsType> = ({}) => {
             id: selectedAuditorySchedule.auditoryId,
             type: activeLessonsFilter.type,
             institutionId: institution._id,
-          }),
+          })
         )
       }
     }
@@ -622,7 +622,7 @@ const SchedulePage: React.FC<SchedulePagePropsType> = ({}) => {
         const newDistributedLoad = createSelectedDistributedLoad(
           distributedLoad.load,
           selectedSemester,
-          selectedGroupSchedule.groupName,
+          selectedGroupSchedule.groupName
         )
 
         setSelectedDistributedLoad(newDistributedLoad)
@@ -638,13 +638,13 @@ const SchedulePage: React.FC<SchedulePagePropsType> = ({}) => {
           getDistributedTeacherLoad({
             currentShowedYear: institution.settings.currentShowedYear,
             teacher: selectedTeacherSchedule.teacherId,
-          }),
+          })
         )
 
         const newDistributedLoad = createSelectedDistributedLoad(
           payload,
           selectedSemester,
-          selectedGroupSchedule.groupName,
+          selectedGroupSchedule.groupName
         )
 
         setSelectedDistributedLoad(newDistributedLoad)
@@ -767,7 +767,8 @@ const SchedulePage: React.FC<SchedulePagePropsType> = ({}) => {
             <StyledCopyLessonsButton
               variant="contained"
               disabled={activeLessonsFilter.type !== 'groupId'}
-              onClick={() => setOpenCopyTheScheduleModal(true)}>
+              onClick={() => setOpenCopyTheScheduleModal(true)}
+            >
               {/* Копіювання розкладу */}
               <ContentCopyIcon />
             </StyledCopyLessonsButton>
@@ -846,12 +847,13 @@ const SchedulePage: React.FC<SchedulePagePropsType> = ({}) => {
           {/* SUBJECTS LIST */}
           <Paper className="schedule-page__subjects">
             {/* Schedule Table */}
-            {loadingStatus === AppLoadingStatusTypes.LOADING || !selectedDistributedLoad.length ? (
+            {loadingStatus === AppLoadingStatusTypes.LOADING && !selectedDistributedLoad.length ? (
               <div
                 style={{
                   padding: '32px 0',
                   textAlign: 'center',
-                }}>
+                }}
+              >
                 <CircularProgress size={38} />
               </div>
             ) : (
@@ -885,7 +887,8 @@ const SchedulePage: React.FC<SchedulePagePropsType> = ({}) => {
                 <Paper
                   key={el[0].data.unix()}
                   variant="outlined"
-                  className={`schedule-page__day-item ${isCurrentDay(el[0].data) && 'current-day'}`}>
+                  className={`schedule-page__day-item ${isCurrentDay(el[0].data) && 'current-day'}`}
+                >
                   {el[0].data.format('dddd ')}
                   {el[0].data.format('DD.MM')}
                 </Paper>

@@ -115,8 +115,6 @@ const EditSubgroupsTable: React.FC<EditSubgroupsPropsType> = ({ groupLoad, subgr
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - subjectList.length) : 0
 
-  console.log(subjects)
-
   return (
     <>
       <EditSubgroupsModal
@@ -168,7 +166,8 @@ const EditSubgroupsTable: React.FC<EditSubgroupsPropsType> = ({ groupLoad, subgr
                         aria-checked={isItemSelected}
                         tabIndex={-1}
                         key={row._id}
-                        selected={isItemSelected}>
+                        selected={isItemSelected}
+                      >
                         <TableCell padding="checkbox">
                           <Checkbox
                             color="primary"
@@ -183,7 +182,8 @@ const EditSubgroupsTable: React.FC<EditSubgroupsPropsType> = ({ groupLoad, subgr
                           id={labelId}
                           scope="row"
                           padding="none"
-                          className="edit-subgroups__subject-name">
+                          className="edit-subgroups__subject-name"
+                        >
                           {row.name}
                         </TableCell>
                         <TableCell align="right">{row.semester}</TableCell>
@@ -213,7 +213,8 @@ const EditSubgroupsTable: React.FC<EditSubgroupsPropsType> = ({ groupLoad, subgr
                   <TableRow
                     style={{
                       height: (dense ? 33 : 53) * emptyRows,
-                    }}>
+                    }}
+                  >
                     <TableCell colSpan={6} />
                   </TableRow>
                 )}
