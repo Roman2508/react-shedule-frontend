@@ -1,25 +1,25 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { useAppDispatch } from './redux/store'
-import { CssBaseline, ThemeProvider, useTheme } from '@mui/material'
-import { Routes, Route, useNavigate } from 'react-router-dom'
+import React from "react"
+import { useSelector } from "react-redux"
+import { useAppDispatch } from "./redux/store"
+import { Routes, Route, useNavigate } from "react-router-dom"
+import { CssBaseline, ThemeProvider, useTheme } from "@mui/material"
 
-import Home from './Pages/Home/Home'
-import Streams from './Pages/Streams/Streams'
-import Header from './component/Header/Header'
-import AuthPage from './Pages/AuthPage/AuthPage'
-import { ColorModeContext } from './TogleColorMode'
-import SettingsPage from './Pages/Settings/SettingsPage'
-import SchedulePage from './Pages/SchedulePage/SchedulePage'
-import LoadDistribution from './Pages/LoadDistribution/LoadDistribution'
-import { selectAuthData } from './redux/accountInfo/accountInfoSelector'
-import EducationalPlans from './Pages/EducationalPlans/EducationalPlans'
-import EducationalPlan from './component/EducationalPlan/EducationalPlan'
-import { fetchInstitution, fetchMe } from './redux/accountInfo/accountInfoAsyncActions'
-import TeachersAndDepartments from './Pages/TeachersAndDepartments/TeachersAndDepartments'
-import LoadDistributionControl from './Pages/LoadDistributionControl/LoadDistributionControl'
-import BuildingsAndAuditoriums from './Pages/BuildingsAndAuditoriums/BuildingsAndAuditoriums'
-import ViewSchedulePage from './Pages/ViewSchedulePage/ViewSchedulePage'
+import Home from "./Pages/Home/Home"
+import Streams from "./Pages/Streams/Streams"
+import Header from "./component/Header/Header"
+import AuthPage from "./Pages/AuthPage/AuthPage"
+import { ColorModeContext } from "./TogleColorMode"
+import SettingsPage from "./Pages/Settings/SettingsPage"
+import SchedulePage from "./Pages/SchedulePage/SchedulePage"
+import LoadDistribution from "./Pages/LoadDistribution/LoadDistribution"
+import { selectAuthData } from "./redux/accountInfo/accountInfoSelector"
+import EducationalPlans from "./Pages/EducationalPlans/EducationalPlans"
+import ViewSchedulePage from "./Pages/ViewSchedulePage/ViewSchedulePage"
+import EducationalPlan from "./component/EducationalPlan/EducationalPlan"
+import { fetchInstitution, fetchMe } from "./redux/accountInfo/accountInfoAsyncActions"
+import TeachersAndDepartments from "./Pages/TeachersAndDepartments/TeachersAndDepartments"
+import LoadDistributionControl from "./Pages/LoadDistributionControl/LoadDistributionControl"
+import BuildingsAndAuditoriums from "./Pages/BuildingsAndAuditoriums/BuildingsAndAuditoriums"
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -34,14 +34,14 @@ const App: React.FC = () => {
   React.useEffect(() => {
     const fetchData = async () => {
       if (!userData) {
-        if (globalThis.localStorage.getItem('token')) {
+        if (globalThis.localStorage.getItem("token")) {
           const { payload } = await dispatch(fetchMe())
 
           if (payload) {
             dispatch(fetchInstitution(payload.institutionId))
           }
         } else {
-          navigate('/auth')
+          navigate("/auth")
         }
       }
     }

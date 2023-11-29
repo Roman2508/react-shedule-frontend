@@ -1,43 +1,49 @@
-import React from 'react'
-import Grid from '@mui/material/Grid'
-import Paper from '@mui/material/Paper'
-import { useSelector } from 'react-redux'
-import Button from '@mui/material/Button'
-import Divider from '@mui/material/Divider'
-import Tooltip from '@mui/material/Tooltip'
-import TextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
-import FilterIcon from '@mui/icons-material/TuneOutlined'
-import ClearIcon from '@mui/icons-material/CancelOutlined'
-import CircularProgress from '@mui/material/CircularProgress'
-import AddIcon from '@mui/icons-material/ArrowCircleLeftOutlined'
-import ConfirmIcon from '@mui/icons-material/CheckOutlined'
-import ClearAllIcon from '@mui/icons-material/CleaningServicesOutlined'
-import AddAllIcon from '@mui/icons-material/KeyboardDoubleArrowLeftOutlined'
+import React from "react"
+import Grid from "@mui/material/Grid"
+import Paper from "@mui/material/Paper"
+import { useSelector } from "react-redux"
+import Button from "@mui/material/Button"
+import Divider from "@mui/material/Divider"
+import Tooltip from "@mui/material/Tooltip"
+import TextField from "@mui/material/TextField"
+import Typography from "@mui/material/Typography"
+import IconButton from "@mui/material/IconButton"
+import FilterIcon from "@mui/icons-material/TuneOutlined"
+import ClearIcon from "@mui/icons-material/CancelOutlined"
+import CircularProgress from "@mui/material/CircularProgress"
+import AddIcon from "@mui/icons-material/ArrowCircleLeftOutlined"
+import ConfirmIcon from "@mui/icons-material/CheckOutlined"
+import ClearAllIcon from "@mui/icons-material/CleaningServicesOutlined"
+import AddAllIcon from "@mui/icons-material/KeyboardDoubleArrowLeftOutlined"
 
-import './LoadDistribution.scss'
-import reactLogo from '../../assets/table.svg'
-import { useAppDispatch } from '../../redux/store'
-import { AttachTeacherType } from '../../api/apiTypes'
-import { selectAlerts } from '../../redux/appSelectors'
-import AlertMessage from '../../component/AlertMessage'
-import { setShowError } from '../../redux/alerts/alertsSlise'
-import { getGroups } from '../../redux/group/groupAsyncAction'
-import createAlertMessage from '../../utils/createAlertMessage'
-import TheachersList from '../../component/TeachersList/TeachersList'
-import { selectFaculties } from '../../redux/faculties/facultiesSelectors'
-import { selectAuthData } from '../../redux/accountInfo/accountInfoSelector'
-import { getAllFaculties } from '../../redux/faculties/facultiesAsyncAction'
-import { attachTeacher, updateStudentsCount } from '../../redux/distributedLoad/distributedLoadAsyncAction'
-import { clearDistributedLoad } from '../../redux/distributedLoad/distributedLoadSlise'
-import { TeacherType } from '../../redux/teachersAndDepartment/teachersAndDepartmentTypes'
-import { selectDistributedLoad } from '../../redux/distributedLoad/distributedLoadSelector'
-import LoadDistributionTable from '../../component/LoadDistributionTable/LoadDistributionTable'
-import { getAllDepartments } from '../../redux/teachersAndDepartment/teachersAndDepartmentAsyncAction'
-import { selectTeachersAndDepartments } from '../../redux/teachersAndDepartment/teachersAndDepartmentSelector'
-import LoadDistributionGroupFilter from '../../component/LoadDistributionGroupFilter/LoadDistributionGroupFilter'
-import { DistributedLoadSubjectsType, DistributedSubjectsType } from '../../redux/distributedLoad/distributedLoadTypes'
+import "./LoadDistribution.scss"
+import reactLogo from "../../assets/table.svg"
+import { useAppDispatch } from "../../redux/store"
+import { AttachTeacherType } from "../../api/apiTypes"
+import { selectAlerts } from "../../redux/appSelectors"
+import AlertMessage from "../../component/AlertMessage"
+import { setShowError } from "../../redux/alerts/alertsSlise"
+import { getGroups } from "../../redux/group/groupAsyncAction"
+import createAlertMessage from "../../utils/createAlertMessage"
+import TheachersList from "../../component/TeachersList/TeachersList"
+import { selectFaculties } from "../../redux/faculties/facultiesSelectors"
+import { selectAuthData } from "../../redux/accountInfo/accountInfoSelector"
+import { getAllFaculties } from "../../redux/faculties/facultiesAsyncAction"
+import {
+  attachTeacher,
+  updateStudentsCount,
+} from "../../redux/distributedLoad/distributedLoadAsyncAction"
+import { clearDistributedLoad } from "../../redux/distributedLoad/distributedLoadSlise"
+import { TeacherType } from "../../redux/teachersAndDepartment/teachersAndDepartmentTypes"
+import { selectDistributedLoad } from "../../redux/distributedLoad/distributedLoadSelector"
+import LoadDistributionTable from "../../component/LoadDistributionTable/LoadDistributionTable"
+import { getAllDepartments } from "../../redux/teachersAndDepartment/teachersAndDepartmentAsyncAction"
+import { selectTeachersAndDepartments } from "../../redux/teachersAndDepartment/teachersAndDepartmentSelector"
+import LoadDistributionGroupFilter from "../../component/LoadDistributionGroupFilter/LoadDistributionGroupFilter"
+import {
+  DistributedLoadSubjectsType,
+  DistributedSubjectsType,
+} from "../../redux/distributedLoad/distributedLoadTypes"
 
 type StudentsCountPropsType = {
   subjectType: string
@@ -59,15 +65,15 @@ const LoadDistribution = () => {
 
   const [subjectTypes, setSubjectTypes] = React.useState<DistributedSubjectsType[]>([])
 
-  const [currentFaculty, setCurrentFaculty] = React.useState('')
-  const [currentSpecialty, setCurrentSpecialty] = React.useState('')
-  const [currentGroup, setCurrentGroup] = React.useState('')
+  const [currentFaculty, setCurrentFaculty] = React.useState("")
+  const [currentSpecialty, setCurrentSpecialty] = React.useState("")
+  const [currentGroup, setCurrentGroup] = React.useState("")
 
-  const [currentGroupName, setCurrentGroupName] = React.useState('')
+  const [currentGroupName, setCurrentGroupName] = React.useState("")
 
   const [openFilterModal, setOpenFilterModal] = React.useState(false)
 
-  const [toggleEditTeacher, setToggleEditTeacher] = React.useState<'create' | 'remove'>('create')
+  const [toggleEditTeacher, setToggleEditTeacher] = React.useState<"create" | "remove">("create")
 
   const [studentsCount, setStudentsCount] = React.useState<StudentsCountPropsType[]>([])
 
@@ -94,9 +100,20 @@ const LoadDistribution = () => {
 
   React.useEffect(() => {
     if (selected !== null) {
-      // @ts-ignore
-      const { _id, name, semester, specialization, __v, groupId, institutionId, currentShowedYear, ...subject } =
-        selected
+      const {
+        _id,
+        name,
+        semester,
+        specialization,
+        // @ts-ignore
+        __v,
+        groupId,
+        // @ts-ignore
+        institutionId,
+        // @ts-ignore
+        currentShowedYear,
+        ...subject
+      } = selected
 
       // @ts-ignore
       setSubjectTypes(() => {
@@ -106,13 +123,20 @@ const LoadDistribution = () => {
         const res = keys.map((el) => {
           let type
 
-          if (el.includes('lectures')) type = 'Лекції'
-          if (el.includes('practical')) type = 'Практичні'
-          if (el.includes('laboratory')) type = 'Лабораторні'
-          if (el.includes('seminars')) type = 'Семінари'
-          if (el.includes('exams')) type = 'Екзамени'
-          // @ts-ignore
-          return [{ ...subject[el as keyof DistributedLoadSubjectsType], type, subjectType: el, subjectId: _id }]
+          if (el.includes("lectures")) type = "Лекції"
+          if (el.includes("practical")) type = "Практичні"
+          if (el.includes("laboratory")) type = "Лабораторні"
+          if (el.includes("seminars")) type = "Семінари"
+          if (el.includes("exams")) type = "Екзамени"
+          return [
+            {
+              // @ts-ignore
+              ...subject[el as keyof DistributedLoadSubjectsType],
+              type,
+              subjectType: el,
+              subjectId: _id,
+            },
+          ]
         })
 
         return res.flat(2)
@@ -164,10 +188,15 @@ const LoadDistribution = () => {
         }
 
         const { payload } = await dispatch(
-          attachTeacher({ data: attachTeacherPayload, currentGroupId: String(selected?.groupId) }),
+          attachTeacher({ data: attachTeacherPayload, currentGroupId: String(selected?.groupId) })
         )
 
-        createAlertMessage(dispatch, payload, 'Викладача прикріплено', 'Помилка при прикріпленні викладача :(')
+        createAlertMessage(
+          dispatch,
+          payload,
+          "Викладача прикріплено",
+          "Помилка при прикріпленні викладача :("
+        )
 
         if (payload) {
           setSelected(payload)
@@ -189,17 +218,25 @@ const LoadDistribution = () => {
         }
 
         const { payload } = await dispatch(
-          attachTeacher({ data: [attachTeachertPayload], currentGroupId: String(selected?.groupId) }),
+          attachTeacher({
+            data: [attachTeachertPayload],
+            currentGroupId: String(selected?.groupId),
+          })
         )
 
-        createAlertMessage(dispatch, payload, 'Викладача прикріплено', 'Помилка при прикріпленні викладача :(')
+        createAlertMessage(
+          dispatch,
+          payload,
+          "Викладача прикріплено",
+          "Помилка при прикріпленні викладача :("
+        )
 
         if (payload) {
           setSelected(payload)
         }
       }
     } else {
-      createAlertMessage(dispatch, false, '', 'Виберіть викладача!')
+      createAlertMessage(dispatch, false, "", "Виберіть викладача!")
     }
   }
 
@@ -241,16 +278,21 @@ const LoadDistribution = () => {
       })
 
       const { payload } = await dispatch(
-        attachTeacher({ data: data.flat(), currentGroupId: String(selected?.groupId) }),
+        attachTeacher({ data: data.flat(), currentGroupId: String(selected?.groupId) })
       )
 
-      createAlertMessage(dispatch, payload, 'Викладача прикріплено', 'Помилка при прикріпленні викладача :(')
+      createAlertMessage(
+        dispatch,
+        payload,
+        "Викладача прикріплено",
+        "Помилка при прикріпленні викладача :("
+      )
 
       if (payload) {
         setSelected(payload)
       }
     } else {
-      createAlertMessage(dispatch, false, 'Викладача прикріплено', 'Виберіть викладача!')
+      createAlertMessage(dispatch, false, "Викладача прикріплено", "Виберіть викладача!")
     }
   }
 
@@ -271,10 +313,15 @@ const LoadDistribution = () => {
     }
 
     const { payload } = await dispatch(
-      attachTeacher({ data: [attachTeacherPayload], currentGroupId: String(selected?.groupId) }),
+      attachTeacher({ data: [attachTeacherPayload], currentGroupId: String(selected?.groupId) })
     )
 
-    createAlertMessage(dispatch, payload, 'Викладача відкріплено', 'Помилка при відкріпленні викладача :(')
+    createAlertMessage(
+      dispatch,
+      payload,
+      "Викладача відкріплено",
+      "Помилка при відкріпленні викладача :("
+    )
 
     if (payload) {
       setSelected(payload)
@@ -318,9 +365,16 @@ const LoadDistribution = () => {
       }
     })
 
-    const { payload } = await dispatch(attachTeacher({ data: data.flat(), currentGroupId: String(selected?.groupId) }))
+    const { payload } = await dispatch(
+      attachTeacher({ data: data.flat(), currentGroupId: String(selected?.groupId) })
+    )
 
-    createAlertMessage(dispatch, payload, 'Викладача відкріплено', 'Помилка при відкріпленні викладача :(')
+    createAlertMessage(
+      dispatch,
+      payload,
+      "Викладача відкріплено",
+      "Помилка при відкріпленні викладача :("
+    )
 
     if (payload) {
       setSelected(payload)
@@ -353,9 +407,14 @@ const LoadDistribution = () => {
       }
 
       const { payload } = await dispatch(updateStudentsCount(updateStudentsCountPayload))
-      createAlertMessage(dispatch, payload, 'Кількість студентів оновлено', 'Помилка при оновленні кількості студентів')
+      createAlertMessage(
+        dispatch,
+        payload,
+        "Кількість студентів оновлено",
+        "Помилка при оновленні кількості студентів"
+      )
     } else {
-      createAlertMessage(dispatch, null, '', 'Виберіть групу')
+      createAlertMessage(dispatch, null, "", "Виберіть групу")
     }
   }
 
@@ -386,14 +445,18 @@ const LoadDistribution = () => {
 
       <Grid container spacing={2} className="load-distribution">
         <Grid item xs={4}>
-          <Paper sx={{ mb: '16px' }} className="load-distribution__box">
+          <Paper sx={{ mb: "16px" }} className="load-distribution__box">
             <div className="load-distribution__groups-top">
               <Typography className="load-distribution__title" align="center">
                 {/* {`Розподіл навантаження групи ${currentGroupName}`} */}
-                {currentGroupName ? `Група ${currentGroupName}` : 'Розподіл навантаження'}
+                {currentGroupName ? `Група ${currentGroupName}` : "Розподіл навантаження"}
               </Typography>
               <Tooltip title="Вибрати групу">
-                <IconButton color="primary" className="load-distribution__groups-filter" onClick={handleClickOpen}>
+                <IconButton
+                  color="primary"
+                  className="load-distribution__groups-filter"
+                  onClick={handleClickOpen}
+                >
                   <FilterIcon />
                 </IconButton>
               </Tooltip>
@@ -411,9 +474,9 @@ const LoadDistribution = () => {
         {/*  */}
 
         <Grid item xs={4}>
-          <Paper sx={{ mb: '16px' }} className="load-distribution__box">
+          <Paper sx={{ mb: "16px" }} className="load-distribution__box">
             <Typography className="load-distribution__title" align="center">
-              {selected ? selected.name : 'Виберіть дисципліну'}
+              {selected ? selected.name : "Виберіть дисципліну"}
             </Typography>
             <Divider />
             <div className="load-distribution__icons-box">
@@ -423,15 +486,15 @@ const LoadDistribution = () => {
                 </IconButton>
               </Tooltip>
 
-              {toggleEditTeacher === 'create' ? (
+              {toggleEditTeacher === "create" ? (
                 <Tooltip title="Відкріпити викладача">
-                  <IconButton color="error" onClick={() => setToggleEditTeacher('remove')}>
+                  <IconButton color="error" onClick={() => setToggleEditTeacher("remove")}>
                     <ClearIcon />
                   </IconButton>
                 </Tooltip>
               ) : (
                 <Tooltip title="Прикріпити викладача">
-                  <IconButton color="primary" onClick={() => setToggleEditTeacher('create')}>
+                  <IconButton color="primary" onClick={() => setToggleEditTeacher("create")}>
                     <AddIcon />
                   </IconButton>
                 </Tooltip>
@@ -455,10 +518,11 @@ const LoadDistribution = () => {
                         key={index}
                         className="load-distribution__subjects-type"
                         align="center"
-                        sx={{ whiteSpace: 'nowrap' }}>
+                        sx={{ whiteSpace: "nowrap" }}
+                      >
                         {el.type}
-                        {el.stream ? ` (${el.stream?.name})` : ''}
-                        {el.subgroupNumber ? ` (п.${el.subgroupNumber})` : ''}
+                        {el.stream ? ` (${el.stream?.name})` : ""}
+                        {el.subgroupNumber ? ` (п.${el.subgroupNumber})` : ""}
                       </Typography>
                     )
                   })
@@ -470,22 +534,24 @@ const LoadDistribution = () => {
                 {subjectTypes.length ? (
                   subjectTypes.map((el: DistributedSubjectsType, index) => {
                     return (
-                      <div style={{ whiteSpace: 'nowrap' }} key={index}>
+                      <div style={{ whiteSpace: "nowrap" }} key={index}>
                         <TextField
+                          size="small"
                           className="load-distribution__input"
                           variant="outlined"
                           value={
                             el.teacher !== null
                               ? `${el.teacher?.lastName} ${el.teacher?.firstName[0]}.${el.teacher?.middleName[0]}.`
-                              : ''
+                              : ""
                           }
                         />
-                        {toggleEditTeacher === 'create' ? (
+                        {toggleEditTeacher === "create" ? (
                           <Tooltip title="Прикріпити вибраного викладача">
                             <IconButton
                               color="primary"
                               className="load-distribution__input-button"
-                              onClick={() => onAttachTeacher(el)}>
+                              onClick={() => onAttachTeacher(el)}
+                            >
                               <AddIcon />
                             </IconButton>
                           </Tooltip>
@@ -494,7 +560,8 @@ const LoadDistribution = () => {
                             <IconButton
                               color="error"
                               className="load-distribution__input-button"
-                              onClick={() => onUnattachTeacher(el)}>
+                              onClick={() => onUnattachTeacher(el)}
+                            >
                               <ClearIcon />
                             </IconButton>
                           </Tooltip>
@@ -522,10 +589,11 @@ const LoadDistribution = () => {
                         key={index}
                         className="load-distribution__subjects-type"
                         align="center"
-                        sx={{ whiteSpace: 'nowrap' }}>
+                        sx={{ whiteSpace: "nowrap" }}
+                      >
                         {el.type}
-                        {el.stream ? ` (${el.stream?.name})` : ''}
-                        {el.subgroupNumber ? ` (п.${el.subgroupNumber})` : ''}
+                        {el.stream ? ` (${el.stream?.name})` : ""}
+                        {el.subgroupNumber ? ` (п.${el.subgroupNumber})` : ""}
                       </Typography>
                     )
                   })}
@@ -538,12 +606,19 @@ const LoadDistribution = () => {
                       className="load-distribution__student-count-input"
                       variant="outlined"
                       type="number"
+                      size="small"
                       onChange={(e) => changeStudentsCount(el.subjectType, e.target.value)}
                       value={el.students}
                     />
 
-                    <Tooltip title="Оновити" onClick={() => onUpdateStudentsCount(el.subjectType, el.students)}>
-                      <IconButton color="primary" className="load-distribution__student-count-update-btn">
+                    <Tooltip
+                      title="Оновити"
+                      onClick={() => onUpdateStudentsCount(el.subjectType, el.students)}
+                    >
+                      <IconButton
+                        color="primary"
+                        className="load-distribution__student-count-update-btn"
+                      >
                         <ConfirmIcon />
                       </IconButton>
                     </Tooltip>
